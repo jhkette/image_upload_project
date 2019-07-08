@@ -14,7 +14,7 @@
 
 include_once './includes/config.php';
 // Include the HTML header
-include_once './includes/head.html';
+// include_once './includes/head.html';
 
 // Check if the form has been submitted...
 if (isset($_POST['singlefileupload'])) {
@@ -29,7 +29,7 @@ if (isset($_POST['singlefileupload'])) {
 	}
 	else{
 	if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-	$updir = dirname(__FILE__).'/uploads/';
+	$updir = $config['upload_dir'];
 	$upfilename = basename($_FILES['userfile']['name']);
 	$newname = $updir.$upfilename;
 	$tmpname = $_FILES['userfile']['tmp_name'];
@@ -68,10 +68,18 @@ if (isset($_POST['singlefileupload'])) {
 
 
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>BBK ITApps - Building Web Applications using MySQL and PHP: Uploading Files</title>
+    </head>
+    <body>
+
 
         <h1>Upload a file:</h1>
 
-		<!-- Make form submit to the current page... NB: always escape REQUEST_URI/PHP_SELF!!! -->
+		
         <form enctype="multipart/form-data" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
             <div>
                 <label for="fileinput">Upload a file:</label>
