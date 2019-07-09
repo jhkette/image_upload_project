@@ -1,5 +1,5 @@
 <?php 
-require_once './includes/config.php';
+require './includes/config.php';
 
 
 // autoload classes
@@ -9,4 +9,3 @@ function autoloader($class){
 // call autoloader function
 spl_autoload_register('autoloader');
 
-?>
