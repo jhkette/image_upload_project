@@ -1,26 +1,12 @@
 <?php
-function img_resize($in_img_file, $out_img_file, $req_width, $req_height, $quality=90) {
+// thie file type is checked in the control view class so we do not need to check it here. 
+function img_resize($in_img_file, $out_img_file, $req_width, $req_height, $quality=100) {
 
 // Get image file details
 list($width, $height, $type, $attr) = getimagesize($in_img_file);
+$src = @imagecreatefromjpeg($in_img_file);
 
-// Open file according to file type
-if (isset($type)) {
-    switch ($type) {
-        case IMAGETYPE_JPEG:
-            $src = @imagecreatefromjpeg($in_img_file);
-            break;
-        case IMAGETYPE_PNG:
-            $src = @imagecreatefrompng($in_img_file);
-            break;
-        case IMAGETYPE_GIF:
-            $src = @imagecreatefromgif($in_img_file);
-            break;
-        default:
-            $error = "Image is not a gif, png or jpeg.";
-            return array(false, $error);
-    }
-    
+// Open file according to file type    
     // Check if image is smaller (in both directions) than required image
     if ($width < $req_width and $height < $req_height) {
         // Use original image dimensions
@@ -54,10 +40,6 @@ if (isset($type)) {
 
     // Return an array of values, including the new width and height
     return array(true, "Resize successful", $new_width, $new_height);
-} else {
-// Return only the bool and an error message
-    $error = "Problem opening image.";
-    return array(false, $error);
 }
-}
+
 ?>

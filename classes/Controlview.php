@@ -42,24 +42,19 @@ class Controlview
             $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
         
             if ($ext != "jpg") {
-                echo 'only text file should be uploaded';
+                echo 'only jpg file should be uploaded';
             } elseif ($_FILES['userfile']['type'] != "image/jpeg") {
                 echo 'Not the correct mime type ';
             } else {
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                    $uploadedFile = $_FILES['userfile']['tmp_name']; 
-                    echo $uploadedFile;
-                    // print_r($sourceProperties = getimagesize($uploadedFile));
-
-                   
-                   
+                    $uploadedFile = $_FILES['userfile']['tmp_name'];    
                     $updir = $this->config['upload_dir'];
                     $filename = $_FILES['userfile']['name'];
                     $fileonly = pathinfo($filename);
                     img_resize($uploadedFile, $this->config['thumbs'].$fileonly['filename'].'_small.jpg', 200, 200);
                     echo'<h1>' .$filename . '</h1>';
                     $upfilename = basename($_FILES['userfile']['name']);
-                   
+                    img_resize($uploadedFile, $this->config['upload_dir'].$fileonly['filename'].'_main.jpg', 600, 600);
                     
                     $newname = $updir . $upfilename;
                  
