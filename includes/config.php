@@ -23,6 +23,7 @@ $config['app_dir'] = dirname(dirname(__FILE__));
  * Using an absolute path to the upload dir can help circumvent security restrictions on some servers
  */
 $config['upload_dir'] = $config['app_dir'] . '/uploads/';
+$config['thumbs'] = $config['app_dir'] . '/thumbs/';
 
 
 

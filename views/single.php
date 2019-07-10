@@ -23,6 +23,7 @@ require './includes/imageform.php';
 
 $form -> submitForm();
 
+
 // Check if the form has been submitted...
 
 

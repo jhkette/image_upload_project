@@ -37,6 +37,7 @@ class Controlview
     {   
     
         if (isset($_POST['singlefileupload'])) {
+            print_r($_POST);
             print_r($_FILES['userfile']);
             $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
         
@@ -54,7 +55,8 @@ class Controlview
                    
                     $updir = $this->config['upload_dir'];
                     $filename = $_FILES['userfile']['name'];
-                    img_resize($uploadedFile, $this->config['upload_dir'].'racoon_small.jpg', 200, 200);
+                    $fileonly = pathinfo($filename);
+                    img_resize($uploadedFile, $this->config['thumbs'].$fileonly['filename'].'_small.jpg', 200, 200);
                     echo'<h1>' .$filename . '</h1>';
                     $upfilename = basename($_FILES['userfile']['name']);
                    

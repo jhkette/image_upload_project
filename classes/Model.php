@@ -13,6 +13,23 @@ class Model extends Database
 
         $this->disconnect();
     }
+
+
+    public function addPost($data){
+        $this->connect();
+        $this->db->query('INSERT INTO photos (id, title, description_p, width, height ) VALUES(:title, :user_id, :body)');
+        // Bind values
+       
+
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+        
+    }
+
 }
 
 ?>
