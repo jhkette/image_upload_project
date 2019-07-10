@@ -1,5 +1,5 @@
 <?php
-// require_once './includes/config.php';
+require_once './includes/functions.php';
 
 
 class Controlview 
@@ -46,10 +46,24 @@ class Controlview
                 echo 'Not the correct mime type ';
             } else {
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+                    $uploadedFile = $_FILES['userfile']['tmp_name']; 
+                    echo $uploadedFile;
+                    // print_r($sourceProperties = getimagesize($uploadedFile));
+
+                   
+                   
                     $updir = $this->config['upload_dir'];
+                    $filename = $_FILES['userfile']['name'];
+                    img_resize($uploadedFile, $this->config['upload_dir'].'racoon_small.jpg', 200, 200);
+                    echo'<h1>' .$filename . '</h1>';
                     $upfilename = basename($_FILES['userfile']['name']);
+                   
+                    
                     $newname = $updir . $upfilename;
+                 
+                  
                     $tmpname = $_FILES['userfile']['tmp_name'];
+                  
                     if (move_uploaded_file($tmpname, $newname)) {
                         echo 'File successfully uploaded';
                     } else {
