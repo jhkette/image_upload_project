@@ -40,14 +40,7 @@ class Controlview extends Model
             print_r($_POST);
         
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $data['filename'] = $_FILES['userfile']['name'];
-            $data['description'] = $_POST['description'];
-            $data['title'] = $_POST['title'];
-
-
-
-            
-
+           
             $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
         
             if ($ext != "jpg") {
@@ -56,6 +49,19 @@ class Controlview extends Model
                 echo 'Not the correct mime type ';
             } else {
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+
+                    if(empty($_POST['title'])){
+                        $data['title_err'] = 'Please enter title';
+                    }
+
+                    if(empty($_POST['description'])){
+                        $data['description_err'] = 'Please enter description';     
+                    }
+                    
+                    if(empty($data['title_err']) && empty($data['body_err'])){
+                  
+                    $data['description'] = $_POST['description'];
+                    $data['title'] = $_POST['title'];
                    
                     $uploadedFile = $_FILES['userfile']['tmp_name'];    
                     $updir = $this->config['upload_dir'];
@@ -95,6 +101,8 @@ class Controlview extends Model
                         }
                     }
                 }
+            }
+            
             }
         }
     }
