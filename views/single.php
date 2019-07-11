@@ -16,12 +16,18 @@
 
 $form = new Controlview($config);
 
-$form -> printForm();
+$data = $form -> validateForm();
 
+$form -> printForm();
 
 require './includes/imageform.php';
 
 $form -> submitForm();
+
+
+
+
+print_r($data);
 
 
 // Check if the form has been submitted...

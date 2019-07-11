@@ -14,6 +14,10 @@ Sought out database connection - on submit add value to database.
 
 
 Error messages
+sepertate submit form and vlidatae form
+add validate form method to variable 
+print r variable to see if working
+
 
 
 

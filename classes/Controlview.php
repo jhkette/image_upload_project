@@ -1,5 +1,5 @@
 <?php
-require_once './includes/functions.php';
+require_once './helpers/imageresize.php';
 
 
 class Controlview extends Model
@@ -38,6 +38,7 @@ class Controlview extends Model
     
         if (isset($_POST['singlefileupload'])) {
             print_r($_POST);
+            print_r($_FILES['userfile']);
         
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
            
@@ -58,7 +59,9 @@ class Controlview extends Model
                         $data['description_err'] = 'Please enter description';     
                     }
                     
-                    if(empty($data['title_err']) && empty($data['body_err'])){
+                    if(isset($data['title_err']) || isset($data['description_err'])){
+                        return $data;
+                    }
                   
                     $data['description'] = $_POST['description'];
                     $data['title'] = $_POST['title'];
@@ -67,11 +70,12 @@ class Controlview extends Model
                     $updir = $this->config['upload_dir'];
                     $filename = $_FILES['userfile']['name'];
                     list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+                    $data['filename'] = $filename;
                     $data['width'] = $width;
                     $data['height'] = $height;
 
                     $this->addPost($data); 
-                    echo '<h2>' .$width .' '. $height .'  '. $type .' '. $attr .' '. 'this is from getimagesize</h2>';
+                 
                     $fileonly = pathinfo($filename);
                     img_resize($uploadedFile, $this->config['thumbs'].$fileonly['filename'].'_small.jpg', 200, 200);
                     echo'<h1>' .$filename . '</h1>';
@@ -105,8 +109,40 @@ class Controlview extends Model
             
             }
         }
+    
+
+   public function validateForm(){
+    if (isset($_POST['singlefileupload'])) {
+        $data = [];
+        $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+        
+        if ($ext != "jpg") {
+            $data['ext'] = 'only jpg file should be uploaded';
+        } elseif ($_FILES['userfile']['type'] != "image/jpeg") {
+            $data['mime'] = 'Not the correct mime type ';
+        } else {
+            
+            if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+            
+
+                if(empty($_POST['title'])){
+                    $data['title_err'] = 'Please enter title';
+                }else{
+                    $data['title'] = $_POST['title'];
+                }
+
+                if(empty($_POST['description'])){
+                    $data['description_err'] = 'Please enter description';     
+                }else{
+                    $data['description'] = $_POST['description'];
+                }
+
+            }
+        }
+        return $data;
     }
-   
+
+   }
 
 
     public function printForm ()
