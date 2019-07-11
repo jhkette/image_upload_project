@@ -22,7 +22,7 @@ $form -> printForm();
 
 require './includes/imageform.php';
 
-$form -> submitForm();
+$value = $form -> submitForm();
 
 
 

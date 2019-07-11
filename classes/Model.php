@@ -22,8 +22,10 @@ class Model extends Database
         $filename = $data['filename'];
         $height = $data['height'];
         $width = $data['width'];
+        $imgmain = $data['file_main'];
+        $imgthumb = $data['file_thumb'];
         $this->connect();
-        $sql = "INSERT INTO photos (file_info, title, description_p, width, height ) VALUES('$filename', '$title', '$description',  '$height',  '$width')";
+        $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
         $insert = $this->conn->query($sql);
         if ($insert === false) {
             // echo $this->language['error_data'];
