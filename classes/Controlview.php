@@ -2,7 +2,7 @@
 require_once './includes/functions.php';
 
 
-class Controlview 
+class Controlview extends Model
 
 
 {
@@ -38,7 +38,16 @@ class Controlview
     
         if (isset($_POST['singlefileupload'])) {
             print_r($_POST);
-            print_r($_FILES['userfile']);
+        
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data['filename'] = $_FILES['userfile']['name'];
+            $data['description'] = $_POST['description'];
+            $data['title'] = $_POST['title'];
+
+
+
+            
+
             $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
         
             if ($ext != "jpg") {
@@ -47,9 +56,16 @@ class Controlview
                 echo 'Not the correct mime type ';
             } else {
                 if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+                   
                     $uploadedFile = $_FILES['userfile']['tmp_name'];    
                     $updir = $this->config['upload_dir'];
                     $filename = $_FILES['userfile']['name'];
+                    list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+                    $data['width'] = $width;
+                    $data['height'] = $height;
+
+                    $this->addPost($data); 
+                    echo '<h2>' .$width .' '. $height .'  '. $type .' '. $attr .' '. 'this is from getimagesize</h2>';
                     $fileonly = pathinfo($filename);
                     img_resize($uploadedFile, $this->config['thumbs'].$fileonly['filename'].'_small.jpg', 200, 200);
                     echo'<h1>' .$filename . '</h1>';

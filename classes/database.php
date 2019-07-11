@@ -23,10 +23,10 @@ class Database
     // connect method
     public function connect()
     {
-        $this->host = $this->config['DB_HOST'];
-        $this->username = $this->config['DB_USER'];
-        $this->password = $this->config['DB_PASS'];
-        $this->db = $this->config['DB_NAME'];
+        $this->host = 'localhost';
+        $this->username = 'root';
+        $this->password = 'Gue55wh0';
+        $this->db = 'fmaproject';
 
         $this->conn = new mysqli(
             $this->host,
@@ -38,6 +38,9 @@ class Database
         if ($this->conn->connect_errno) {
             echo $this->language['error_db'];
             exit($this->conn->connect_error);
+        }
+        else{
+            echo '<h1>connected<h1>';
         }
     }
     // close database connection

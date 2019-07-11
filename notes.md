@@ -6,6 +6,13 @@ model class - interacts with database, controls views - that means the index vie
 views - sends data to view
 
 
+Sought out database connection - on submit add value to database.
+-- need to make model and control view sub class of database
+-- get data from post array superglobal
+-- sanitize data 
+-- add to database 
+
+
 
 
 

@@ -14,22 +14,27 @@ class Model extends Database
         $this->disconnect();
     }
 
-
-    public function addPost($data){
+    public function addPost($data)
+    {
+        echo 'add post function called';
+        $title = $data['title'];
+        $description = $data['description'];
+        $filename = $data['filename'];
+        $height = $data['height'];
+        $width = $data['width'];
         $this->connect();
-        $this->db->query('INSERT INTO photos (id, title, description_p, width, height ) VALUES(:title, :user_id, :body)');
-        // Bind values
-       
-
-        // Execute
-        if($this->db->execute()){
-          return true;
+        $sql = "INSERT INTO photos (file_info, title, description_p, width, height ) VALUES('$filename', '$title', '$description',  '$height',  '$width')";
+        $insert = $this->conn->query($sql);
+        if ($insert === false) {
+            // echo $this->language['error_data'];
+            $this->disconnect();
         } else {
-          return false;
+            echo '<h1>Data added</h1>';
+            // $insert -> free();
+            $this->disconnect();
         }
-        
+        // Bind values
     }
-
 }
 
 ?>
