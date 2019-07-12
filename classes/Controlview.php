@@ -122,6 +122,9 @@ class Controlview extends Model
                 $data['image_err'] = null;
             }
             }
+            else{
+                $data['image_err'] = 'Please upload an image';
+            }
 
           
                 // if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {

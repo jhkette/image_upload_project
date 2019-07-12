@@ -17,12 +17,12 @@
 $form = new Controlview($config);
 
 
-// $data=[];
+$data=[];
 
 $form -> printForm();
-
+if (isset($_POST['singlefileupload'])) { 
 $data = $form -> validateForm();
-
+}
 
 
 require './includes/imageform.php';
