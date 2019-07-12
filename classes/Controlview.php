@@ -1,5 +1,6 @@
 <?php
 require_once './helpers/imageresize.php';
+require_once './helpers/printtemplate.php';
 
 class Controlview extends Model
 {
@@ -19,12 +20,15 @@ class Controlview extends Model
         // $content = '';
         // $content .= printTemplate($values, $replacements, $header);
         $data = $this->getAllPhotos();
-        // $lorem = './templates/lorem.html';
-        // $content .= file_get_contents($lorem);
+        $list = './templates/thumbnail.html';
+        $tpl = file_get_contents($list);
+        $values = ['[+title+]', '[+description+]', '[+name+]'];
+        $content = printTemplateArray($values, $data, $tpl);
+
         // $footer = './templates/footer.html';
         // $content .= file_get_contents($footer);
 
-        return $data;
+        return $content;
     }
 
     protected function getForm()
@@ -83,7 +87,7 @@ class Controlview extends Model
                 $data['description'] = $_POST['description'];
                 $data['title'] = $_POST['title'];
                 $data['file_main'] = $fileonly['filename'] . '_main.jpg';
-                $data['file_thumb'] = $fileonly['filename'] . '_thumb.jpg';
+                $data['file_thumb'] = $fileonly['filename'] . '_small.jpg';
                
                 if (move_uploaded_file($uploadedFile, $newname)) {
                     // we are only updating database if the file is uploaded succssfully.
@@ -164,6 +168,11 @@ class Controlview extends Model
     public function printForm()
     {
         echo $this->getForm();
+    }
+
+    public function printIndex()
+    {
+        echo $this->getIndex();
     }
 }
 ?>

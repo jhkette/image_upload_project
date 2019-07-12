@@ -41,7 +41,7 @@ class Model extends Database
 
     public function getAllPhotos(){
         $this->connect();
-        $sql = "SELECT id, title, description_p, file_thumb
+        $sql = "SELECT title, description_p, file_thumb
         FROM photos";
         $data;
         $results = $this->conn->query($sql);
