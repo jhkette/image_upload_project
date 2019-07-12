@@ -38,7 +38,7 @@ class Controlview extends Model
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
                
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
-
+                // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
                 
                 
@@ -101,13 +101,25 @@ class Controlview extends Model
     {
         if (isset($_POST['singlefileupload'])) {
             $data = [];
-            $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
-
+            
+            
+            if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+            $uploadedFile = $_FILES['userfile']['tmp_name'];
+            list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+          
+            if($type != IMAGETYPE_JPEG){
+                $data['image_err'] = 'This file is not the correct mime type. only jpg file should be uploaded';
+            }
+            if(!is_numeric($height)){
+                $data['image_err'] = 'This is not a file that can be processed';
+            }
             if ($ext != "jpg") {
-                $data['ext'] = 'only jpg file should be uploaded';
-            } elseif ($_FILES['userfile']['type'] != "image/jpeg") {
-                $data['mime'] = 'Not the correct mime type ';
-            } else {
+                $data['image_err'] = 'This is not the correct file extension';
+            }
+            }
+
+          
                 // if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
 
                 if (empty($_POST['title'])) {
@@ -123,7 +135,7 @@ class Controlview extends Model
                 }
 
                 // }
-            }
+         
             return $data;
         }
     }
