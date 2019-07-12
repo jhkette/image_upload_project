@@ -32,7 +32,12 @@ class Controlview extends Model
     }
     public function getImage($id){
         $data = $this->getImageData($id);
-        print_r($data);
+        $list = './templates/mainimage.html';
+        $tpl = file_get_contents($list);
+        $values = ['[+name+]','[+title+]', '[+description+]' ];
+        $content = printTemplateArray($values, $data, $tpl);
+        
+        return $content;
         
 
        
@@ -184,6 +189,11 @@ class Controlview extends Model
     public function printIndex()
     {
         echo $this->getIndex();
+    }
+
+    public function printMainImage($id)
+    {
+        echo $this->getImage($id);
     }
 }
 ?>

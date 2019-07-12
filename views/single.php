@@ -14,7 +14,7 @@
 // with __FILE__ when used in the include file
 
 $form = new Controlview($config);
-
+// instantiate data variable
 $data = [];
 
 $form->printForm();
@@ -23,15 +23,12 @@ if (isset($_POST['singlefileupload'])) {
 }
 
 require './includes/imageform.php';
-if (empty($data['description_err']) &&
+if (empty($data['description_err']) &&  //check data error values are empty (ie form is valid)
     empty($data['title_err']) &&
-    empty($data['image_err'])) {
-     
-    $form->submitForm();
+    empty($data['image_err'])){ 
+    $form->submitForm(); // Then submit form
 }
 
-print_r($data);
 
-// Check if the form has been submitted...
 
 ?>

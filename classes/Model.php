@@ -8,6 +8,7 @@ class Model extends Database
     }
 
     public function getImageData($id){
+        $data =[];
         $id = (int)$id;
         // echo $id;
         $this->connect();
