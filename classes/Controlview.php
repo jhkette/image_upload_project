@@ -30,18 +30,14 @@ class Controlview extends Model
 
         return $content;
     }
+
     public function getImage($id){
         $data = $this->getImageData($id);
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
         $values = ['[+name+]','[+title+]', '[+description+]' ];
-        $content = printTemplateArray($values, $data, $tpl);
-        
-        return $content;
-        
-
-       
-        
+        $content = printTemplateArray($values, $data, $tpl);    
+        return $content;  
     }
 
     protected function getForm()
@@ -57,18 +53,18 @@ class Controlview extends Model
 
     public function submitForm()
     {
-        if (isset($_POST['singlefileupload'])) {
-            
-            // these two variable are used throuout file upload 
-            // and database update method
-            $uploadedFile = $_FILES['userfile']['tmp_name'];
-            $filename = $_FILES['userfile']['name'];
-             
-            // sanitise string
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if (isset($_POST['singlefileupload'])) {  
+          
 
             // if the file is uploaded
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+
+                /* these two variable are used throuout file upload 
+                and database update method so assigning them to variables here. */
+                $uploadedFile = $_FILES['userfile']['tmp_name'];
+                $filename = $_FILES['userfile']['name'];   
+                // sanitise string
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
                 // this is needed to create new filenames for main and thumb image directo
@@ -90,12 +86,7 @@ class Controlview extends Model
                     600,
                     600
                 );
-                $updir = $this->config['upload_dir'];
-                $upfilename = basename($_FILES['userfile']['name']);
-                $newname = $updir . $upfilename;
-
-                $uploadedFile = $_FILES['userfile']['tmp_name'];
-                
+               
                 $data['filename'] = $filename;
                 $data['width'] = $width;
                 $data['height'] = $height;
@@ -103,10 +94,14 @@ class Controlview extends Model
                 $data['title'] = $_POST['title'];
                 $data['file_main'] = $fileonly['filename'] . '_main.jpg';
                 $data['file_thumb'] = $fileonly['filename'] . '_small.jpg';
+
+                $updir = $this->config['upload_dir'];
+                $upfilename = basename($_FILES['userfile']['name']);
+                $newname = $updir . $upfilename;
                
                 if (move_uploaded_file($uploadedFile, $newname)) {
-                    // we are only updating database if the file is uploaded succssfully.
-                    // the data is added in the model class method 'addpost'
+                    /* we are only updating database if the file is uploaded succssfully.
+                     the data is added in the model class method 'addpost' */
                     $this->addPost($data);
                    
                 } else {
@@ -134,49 +129,39 @@ class Controlview extends Model
     {
         if (isset($_POST['singlefileupload'])) {
             $data = [];
-            
-            
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
                 $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
-            $uploadedFile = $_FILES['userfile']['tmp_name'];
-            list($width, $height, $type, $attr) = getimagesize($uploadedFile);
-          
-            if($type != IMAGETYPE_JPEG){
-                $data['image_err'] = 'This file is not the correct mime type. only jpg file should be uploaded';
-            }
-            elseif ($ext != "jpg") {
-                $data['image_err'] = 'This is not the correct file extension';
-            }
-            elseif(!is_numeric($height)){
-                $data['image_err'] = 'This is not a file that can be processed';
-            }
-          
-            else{
-                // image is ok so assign null to image_err value 
-                $data['image_err'] = null;
-            }
+                $uploadedFile = $_FILES['userfile']['tmp_name'];
+                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+            
+                if($type != IMAGETYPE_JPEG){
+                    $data['image_err'] = 'This file is not the correct mime type. only jpg file should be uploaded';
+                }
+                elseif ($ext != "jpg") {
+                    $data['image_err'] = 'This is not the correct file extension';
+                }
+                elseif(!is_numeric($height)){
+                    $data['image_err'] = 'This is not a file that can be processed';
+                }
+            
+                else{ // image is ok so assign null to image_err value 
+                    $data['image_err'] = null;
+                }
             }
             else{
                 $data['image_err'] = 'Please upload an image';
             }
-
-          
-                // if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-
-                if (empty($_POST['title'])) {
+            if (empty($_POST['title'])) {
                     $data['title_err'] = 'Please enter title';
-                } else {
-                    $data['title'] = $_POST['title'];
-                }
+            } else {
+                $data['title'] = $_POST['title'];
+            }
 
-                if (empty($_POST['description'])) {
-                    $data['description_err'] = 'Please enter description';
-                } else {
-                    $data['description'] = $_POST['description'];
-                }
-
-                // }
-         
+            if (empty($_POST['description'])) {
+                $data['description_err'] = 'Please enter description';
+            } else {
+                $data['description'] = $_POST['description'];
+            }         
             return $data;
         }
     }

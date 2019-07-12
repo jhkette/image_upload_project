@@ -1,22 +1,19 @@
 FMA plans
 
-config - db variables, time vairables
-database class -  connect to database return connection . also disconnects
-model class - interacts with database, controls views - that means the index view, the submit form view, and individial photo view
-views - sends data to view
-
-DONE
-Sought out database connection - on submit add value to database.
--- need to make model and control view sub class of database
--- get data from post array superglobal
--- sanitize data 
--- add to database 
+- tidy up index page - check GET value - the if else needs to be clearer
+- tidy up main imagage functions in controller and possibly in model
+- tidy up index page functions in controller and possibly in model
+- further checking of form validation, and form submission in controller (poss also model)
+- 
 
 
-Error messages
-sepertate submit form and vlidatae form
-add validate form method to variable 
-print r variable to see if working
+
+
+big things
+- Json web serivce
+- try catch throughout
+- Add some css - look at flickr?  
+
 
 
 

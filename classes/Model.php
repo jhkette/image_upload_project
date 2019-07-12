@@ -36,7 +36,8 @@ class Model extends Database
     }
 
     public function addPost($data)
-    {
+    {   
+        // USE LIST MAYBE??... TO SHORTEN 
         $title = $data['title'];
         $description = $data['description'];
         $filename = $data['filename'];
@@ -51,8 +52,6 @@ class Model extends Database
             // echo $this->language['error_data'];
             $this->disconnect();
         } else {
-            
-            echo '<h1>Data added</h1>';
             // $insert -> free();
             $this->disconnect();
 
