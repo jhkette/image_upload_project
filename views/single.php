@@ -26,6 +26,7 @@ require './includes/imageform.php';
 if (empty($data['description_err']) &&
     empty($data['title_err']) &&
     empty($data['image_err'])) {
+     
     $form->submitForm();
 }
 

@@ -23,6 +23,7 @@ class Database
     // connect method
     public function connect()
     {
+      
         $this->host = 'localhost';
         $this->username = 'root';
         $this->password = 'Gue55wh0';
@@ -39,6 +40,7 @@ class Database
             echo $this->language['error_db'];
             exit($this->conn->connect_error);
         } else {
+            print_r($this->config);
             echo '<h1>connected<h1>';
         }
     }

@@ -31,9 +31,10 @@ $config['main'] = $config['app_dir'] . '/main/';
 
 /* DB variables */
 $config['DB_HOST'] = 'localhost';
-$config['DB_NAME'] = 'fmaproject';
 $config['DB_USER'] = 'root';
 $config['DB_PASS'] = 'Gue55wh0';
+$config['DB_NAME'] = 'fmaproject';
+
 
 /* Set the default timezone ;*/
 date_default_timezone_set('Europe/London');

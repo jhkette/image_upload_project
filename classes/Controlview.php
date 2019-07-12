@@ -22,13 +22,17 @@ class Controlview extends Model
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
-        $values = ['[+title+]', '[+description+]', '[+name+]'];
+        $values = ['[+id+]','[+title+]', '[+description+]', '[+name+]'];
         $content = printTemplateArray($values, $data, $tpl);
 
         // $footer = './templates/footer.html';
         // $content .= file_get_contents($footer);
 
         return $content;
+    }
+    public function getImage($id){
+        echo 'AN IMAGE my image id is'.  $id;
+        
     }
 
     protected function getForm()
@@ -137,6 +141,7 @@ class Controlview extends Model
             }
           
             else{
+                // image is ok so assign null to image_err value 
                 $data['image_err'] = null;
             }
             }

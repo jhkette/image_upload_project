@@ -30,6 +30,7 @@ class Model extends Database
             // echo $this->language['error_data'];
             $this->disconnect();
         } else {
+            
             echo '<h1>Data added</h1>';
             // $insert -> free();
             $this->disconnect();
@@ -41,7 +42,7 @@ class Model extends Database
 
     public function getAllPhotos(){
         $this->connect();
-        $sql = "SELECT title, description_p, file_thumb
+        $sql = "SELECT id, title, description_p, file_thumb
         FROM photos";
         $data;
         $results = $this->conn->query($sql);
