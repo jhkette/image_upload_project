@@ -24,6 +24,7 @@ $config['app_dir'] = dirname(dirname(__FILE__));
  */
 $config['upload_dir'] = $config['app_dir'] . '/uploads/';
 $config['thumbs'] = $config['app_dir'] . '/thumbs/';
+$config['main'] = $config['app_dir'] . '/main/';
 
 
 

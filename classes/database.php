@@ -38,8 +38,7 @@ class Database
         if ($this->conn->connect_errno) {
             echo $this->language['error_db'];
             exit($this->conn->connect_error);
-        }
-        else{
+        } else {
             echo '<h1>connected<h1>';
         }
     }

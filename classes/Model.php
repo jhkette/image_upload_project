@@ -16,7 +16,6 @@ class Model extends Database
 
     public function addPost($data)
     {
-        echo 'add post function called';
         $title = $data['title'];
         $description = $data['description'];
         $filename = $data['filename'];
@@ -34,8 +33,10 @@ class Model extends Database
             echo '<h1>Data added</h1>';
             // $insert -> free();
             $this->disconnect();
+
+            header('Location: /');
         }
-        // Bind values
+     
     }
 }
 

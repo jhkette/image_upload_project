@@ -16,13 +16,19 @@
 
 $form = new Controlview($config);
 
-$data = $form -> validateForm();
+
+// $data=[];
 
 $form -> printForm();
 
-require './includes/imageform.php';
+$data = $form -> validateForm();
 
-$value = $form -> submitForm();
+
+
+require './includes/imageform.php';
+if(empty($data['description_err']) && empty($data['title_err'])){
+$form -> submitForm();
+}
 
 
 
