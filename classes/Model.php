@@ -7,6 +7,26 @@ class Model extends Database
         $this->disconnect();
     }
 
+    public function getImageData($id){
+        $id = (int)$id;
+        // echo $id;
+        $this->connect();
+        $sql = "SELECT file_main, title, description_p FROM photos WHERE id = $id";
+        // echo $sql;
+        $results = $this->conn->query($sql);
+        if ($results === false) {
+            echo 'error';
+            $this->disconnect();
+        } else {
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $results -> free();
+            $this->disconnect();
+            return $data;
+        }
+    }
+
     protected function getUpload()
     {
         $this->connect();

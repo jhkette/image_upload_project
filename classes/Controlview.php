@@ -31,7 +31,11 @@ class Controlview extends Model
         return $content;
     }
     public function getImage($id){
-        echo 'AN IMAGE my image id is'.  $id;
+        $data = $this->getImageData($id);
+        print_r($data);
+        
+
+       
         
     }
 
@@ -43,6 +47,8 @@ class Controlview extends Model
         $content .= $header;
         return $content;
     }
+
+    
 
     public function submitForm()
     {
