@@ -7,13 +7,11 @@
         <label for="fileinput">Upload a file:</label>
         <!-- "name" of input (userfile) will be the "key" in $_FILES -->
         <input name="userfile" type="file" value="<?php if (isset($data['file'])) {echo htmlentities($data['file']);}  ?>" id="fileinput" />
-        <?php if (isset($data['image_err'])) {echo 'Incorrect file type';}  ?>
+        <?php if (isset($data['image_err'])) {echo $data['image_err'];}  ?>
      
         
     </div>
-    <div>
-        <input type="submit" value="Upload File" name="singlefileupload" />
-    </div>
+   
     <div class="field">
         <div class="adduserforminput">
             <label for="title">Title</label>
@@ -29,6 +27,9 @@
        </div>
            <!--echo error message if firstname error is set  -->
         <?php if (isset($data['description_err'])) {echo '<p> Please enter your first name </p>';} ?>
+        <div>
+        <input type="submit" value="Upload File" name="singlefileupload" />
+       </div>
      </div>
 </form>
 <?php

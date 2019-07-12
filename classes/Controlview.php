@@ -111,11 +111,15 @@ class Controlview extends Model
             if($type != IMAGETYPE_JPEG){
                 $data['image_err'] = 'This file is not the correct mime type. only jpg file should be uploaded';
             }
-            if(!is_numeric($height)){
+            elseif ($ext != "jpg") {
+                $data['image_err'] = 'This is not the correct file extension';
+            }
+            elseif(!is_numeric($height)){
                 $data['image_err'] = 'This is not a file that can be processed';
             }
-            if ($ext != "jpg") {
-                $data['image_err'] = 'This is not the correct file extension';
+          
+            else{
+                $data['image_err'] = null;
             }
             }
 
