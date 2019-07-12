@@ -10,8 +10,21 @@ class Controlview extends Model
         $this->config = $config;
     }
     // Function to get index page information
-    protected function getIndex()
+    public function getIndex()
     {
+        // $headerhtml = './templates/header.html';
+        // $header = file_get_contents($headerhtml);
+        // $values = array('[+title+]', '[+heading+]');
+        // // $replacements = array($this->phrases['home_title'], $this->phrases['home_heading'], 'current');
+        // $content = '';
+        // $content .= printTemplate($values, $replacements, $header);
+        $data = $this->getAllPhotos();
+        // $lorem = './templates/lorem.html';
+        // $content .= file_get_contents($lorem);
+        // $footer = './templates/footer.html';
+        // $content .= file_get_contents($footer);
+
+        return $data;
     }
 
     protected function getForm()
@@ -22,6 +35,7 @@ class Controlview extends Model
         $content .= $header;
         return $content;
     }
+
     public function submitForm()
     {
         if (isset($_POST['singlefileupload'])) {

@@ -13,31 +13,24 @@
 // Note: file is included with absolute path to avoid strange behaviour
 // with __FILE__ when used in the include file
 
-
 $form = new Controlview($config);
 
+$data = [];
 
-$data=[];
-
-$form -> printForm();
-if (isset($_POST['singlefileupload'])) { 
-$data = $form -> validateForm();
+$form->printForm();
+if (isset($_POST['singlefileupload'])) {
+    $data = $form->validateForm();
 }
-
 
 require './includes/imageform.php';
-if(empty($data['description_err']) && empty($data['title_err']) &&  empty($data['image_err'])){
-$form -> submitForm();
+if (empty($data['description_err']) &&
+    empty($data['title_err']) &&
+    empty($data['image_err'])) {
+    $form->submitForm();
 }
-
-
-
 
 print_r($data);
 
-
 // Check if the form has been submitted...
-
-
 
 ?>

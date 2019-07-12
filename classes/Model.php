@@ -38,6 +38,27 @@ class Model extends Database
         }
      
     }
+
+    public function getAllPhotos(){
+        $this->connect();
+        $sql = "SELECT id, title, description_p, file_thumb
+        FROM photos";
+        $data;
+        $results = $this->conn->query($sql);
+
+        if ($results === false) {
+            echo $this->language['error_data'];
+            $this->disconnect();
+        } else {
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $results -> free();
+            $this->disconnect();
+            return $data;
+        }
+
+    }
 }
 
 ?>
