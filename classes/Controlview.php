@@ -69,22 +69,8 @@ class Controlview extends Model
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
                 
-                
-                img_resize(
-                    $uploadedFile,
-                    $this->config['thumbs'] .
-                        $fileonly['filename'].'_small.jpg',
-                    200,
-                    200
-                );
-                img_resize(
-                    $uploadedFile,
-                    $this->config['main'] .
-                        $fileonly['filename'] .
-                        '_main.jpg',
-                    600,
-                    600
-                );
+                img_resize($uploadedFile,$this->config['thumbs'] .$fileonly['filename'].'_small.jpg',200,200);
+                img_resize($uploadedFile,$this->config['main'] .$fileonly['filename'] .'_main.jpg',600,600);
                 $data =[ 
                   'filename' => $filename,
                   'width' => $width,

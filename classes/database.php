@@ -41,7 +41,7 @@ class Database
             exit($this->conn->connect_error);
         } else {
             print_r($this->config);
-            echo '<h1>connected<h1>';
+           
         }
     }
     // close database connection
