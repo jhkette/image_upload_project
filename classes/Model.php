@@ -9,11 +9,9 @@ class Model extends Database
 
     public function getImageData($id){
         $data =[];
-        $id = (int)$id;
-        // echo $id;
         $this->connect();
         $sql = "SELECT file_main, title, description_p FROM photos WHERE id = $id";
-        // echo $sql;
+    
         $results = $this->conn->query($sql);
         if ($results === false) {
             echo 'error';
@@ -46,8 +44,7 @@ class Model extends Database
         $imgmain = $data['file_main'];
         $imgthumb = $data['file_thumb'];
         $this->connect();
-        $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
-        VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
+        $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
         $insert = $this->conn->query($sql);
         if ($insert === false) {
             // echo $this->language['error_data'];

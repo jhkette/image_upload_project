@@ -55,7 +55,6 @@ class Controlview extends Model
     {
         if (isset($_POST['singlefileupload'])) {  
           
-
             // if the file is uploaded
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
 
@@ -143,7 +142,6 @@ class Controlview extends Model
                 elseif(!is_numeric($height)){
                     $data['image_err'] = 'This is not a file that can be processed';
                 }
-            
                 else{ // image is ok so assign null to image_err value 
                     $data['image_err'] = null;
                 }

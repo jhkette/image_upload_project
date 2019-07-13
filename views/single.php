@@ -18,9 +18,9 @@ $form = new Controlview($config);
 $data = [];
 
 $form->printForm();
-if (isset($_POST['singlefileupload'])) {
-    $data = $form->validateForm();
-}
+    if (isset($_POST['singlefileupload'])) {
+        $data = $form->validateForm();
+    }
 
 require './includes/imageform.php';
 if (empty($data['description_err']) &&  //check data error values are empty (ie form is valid)

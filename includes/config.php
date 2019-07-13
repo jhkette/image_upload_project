@@ -22,9 +22,9 @@ $config['app_dir'] = dirname(dirname(__FILE__));
  * Absolute path to directory where uploaded files will be stored
  * Using an absolute path to the upload dir can help circumvent security restrictions on some servers
  */
-$config['upload_dir'] = $config['app_dir'] . '/uploads/';
-$config['thumbs'] = $config['app_dir'] . '/thumbs/';
-$config['main'] = $config['app_dir'] . '/main/';
+$config['upload_dir'] = $config['app_dir'] . 'images/uploads/';
+$config['thumbs'] = $config['app_dir'] . 'images/thumbs/';
+$config['main'] = $config['app_dir'] . 'images/main/';
 
 
 

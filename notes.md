@@ -15,6 +15,7 @@ FMA plans
           'password_err' => '',
           'confirm_password_err' => ''
         ];
+- put all images in one folder -> then subfolders
 
 
 
