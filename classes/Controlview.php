@@ -85,15 +85,16 @@ class Controlview extends Model
                     600,
                     600
                 );
-               
-                $data['filename'] = $filename;
-                $data['width'] = $width;
-                $data['height'] = $height;
-                $data['description'] = $_POST['description'];
-                $data['title'] = $_POST['title'];
-                $data['file_main'] = $fileonly['filename'] . '_main.jpg';
-                $data['file_thumb'] = $fileonly['filename'] . '_small.jpg';
-
+                $data =[ 
+                  'filename' => $filename,
+                  'width' => $width,
+                  'height' => $height,
+                  'description' => trim($_POST['description']),
+                  'title' => trim($_POST['title']),
+                  'file_main'  => $fileonly['filename'] . '_main.jpg',
+                  'file_thumb' => $fileonly['filename'] . '_small.jpg'
+                ];
+             
                 $updir = $this->config['upload_dir'];
                 $upfilename = basename($_FILES['userfile']['name']);
                 $newname = $updir . $upfilename;

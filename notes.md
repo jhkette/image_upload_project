@@ -1,6 +1,6 @@
 FMA plans
 
-- tidy up index page - check GET value - the if else needs to be clearer
+- tidy up index page - check GET value - the if else needs to be clearer DONE ?
 - tidy up main imagage functions in controller and possibly in model
 - tidy up index page functions in controller and possibly in model
 - further checking of form validation, and form submission in controller (poss also model)
@@ -15,7 +15,7 @@ FMA plans
           'password_err' => '',
           'confirm_password_err' => ''
         ];
-- put all images in one folder -> then subfolders
+- put all images in one folder -> then subfolders DONE
 
 
 
