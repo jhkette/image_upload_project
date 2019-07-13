@@ -40,6 +40,7 @@ class Database
             echo $this->language['error_db'];
             exit($this->conn->connect_error);
         } else {
+            return $this->conn;
             print_r($this->config);
            
         }

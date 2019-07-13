@@ -11,7 +11,7 @@ class Model extends Database
         $data =[];
         $this->connect();
         // escape mysqli string
-        $id = $mysqli->real_escape_string($id);
+        $id = mysqli_real_escape_string($this->conn, $id);
         $sql = "SELECT file_main, title, description_p FROM photos WHERE id = $id";
     
         $results = $this->conn->query($sql);
@@ -36,16 +36,15 @@ class Model extends Database
     }
 
     public function addPost($data)
-    {   
-        // USE LIST MAYBE??... TO SHORTEN 
-        $title = mysqli_real_escape_string($data['title']);
-        $description = mysqli_real_escape_string($data['description']);
-        $filename = mysqli_real_escape_string($data['filename']);
-        $height = mysqli_real_escape_string($data['height']);
-        $width = mysqli_real_escape_string($data['width']);
-        $imgmain = mysqli_real_escape_string($data['file_main']);
-        $imgthumb = mysqli_real_escape_string($data['file_thumb']);
-        $this->connect();
+    {   $this->connect();
+        $title = mysqli_real_escape_string($this->conn, $data['title']);
+        $description = mysqli_real_escape_string($this->conn, $data['description']);
+        $filename = mysqli_real_escape_string($this->conn, $data['filename']);
+        $height = mysqli_real_escape_string($this->conn, $data['height']);
+        $width = mysqli_real_escape_string($this->conn, $data['width']);
+        $imgmain = mysqli_real_escape_string($this->conn, $data['file_main']);
+        $imgthumb = mysqli_real_escape_string($this->conn, $data['file_thumb']);
+        
         $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
         $insert = $this->conn->query($sql);
         if ($insert === false) {
