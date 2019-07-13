@@ -39,11 +39,12 @@ class Database
         if ($this->conn->connect_errno) {
             echo $this->language['error_db'];
             exit($this->conn->connect_error);
-        } else {
-            return $this->conn;
-            print_r($this->config);
+        } 
+        // else {
+        //     return $this->conn;
+        //     print_r($this->config);
            
-        }
+        // }
     }
     // close database connection
     public function disconnect()

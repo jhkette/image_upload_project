@@ -35,7 +35,7 @@ class Controlview extends Model
         $data = $this->getImageData($id);
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
-        $values = ['[+name+]','[+title+]', '[+description+]' ];
+        $values = ['[+name+]','[+title+]', '[+description+]','[+download+]' ];
         $content = printTemplateArray($values, $data, $tpl);    
         return $content;  
     }

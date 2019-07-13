@@ -12,7 +12,7 @@ class Model extends Database
         $this->connect();
         // escape mysqli string
         $id = mysqli_real_escape_string($this->conn, $id);
-        $sql = "SELECT file_main, title, description_p FROM photos WHERE id = $id";
+        $sql = "SELECT file_main, title, description_p, file_info FROM photos WHERE id = $id";
     
         $results = $this->conn->query($sql);
         if ($results === false) {
