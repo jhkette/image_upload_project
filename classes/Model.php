@@ -80,6 +80,28 @@ class Model extends Database
         }
 
     }
+
+    public function getBookJson($id=64){
+        $data =[];
+        $this->connect();
+        // escape mysqli string
+        $id = mysqli_real_escape_string($this->conn, $id);
+        $sql = "SELECT file_info, title, description_p, height, width FROM photos WHERE id = $id";
+    
+        $results = $this->conn->query($sql);
+        if ($results === false) {
+            echo 'error';
+            $this->disconnect();
+        } else {
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $results -> free();
+            $this->disconnect();
+            return $data;
+        }
+    }
+
 }
 
 ?>

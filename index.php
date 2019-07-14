@@ -1,14 +1,18 @@
  <?php
  require_once './bootstrap.php';
 
- if (!isset($_GET['page']) && !isset($_GET['image'])) {
+ if (!isset($_GET['page']) && !isset($_GET['image']) && !isset($_GET['json'])) {
      $id = 'home'; // display home page
  } 
- if (isset($_GET['page']) && !isset($_GET['image'])) {
+ if (isset($_GET['page']) && !isset($_GET['image']) && !isset($_GET['json'])) {
      $id = $_GET['page']; // else requested page
  }
 
- if (!isset($_GET['image'])) {
+//  if (isset(!$_GET['page']) && !isset($_GET['image']) && isset($_GET['json'])) {
+//     $id = $_GET['']; // else requested page
+// }
+
+ if (isset($_GET['page'])) {
      switch ($id) {
          case 'home':
              include 'views/home.php';
@@ -27,4 +31,8 @@
  if (isset($_GET['image'])) {
      include 'views/image.php';
  }
+
+ if (isset($_GET['json'])) {
+    include 'views/json.php';
+}
  ?> 

@@ -71,6 +71,7 @@ class Controlview extends Model
                 
                 img_resize($uploadedFile,$this->config['thumbs'] .$fileonly['filename'].'_small.jpg',200,200);
                 img_resize($uploadedFile,$this->config['main'] .$fileonly['filename'] .'_main.jpg',600,600);
+                // define data array indexes to send to model method 'addPost'
                 $data =[ 
                   'filename' => $filename,
                   'width' => $width,
@@ -133,22 +134,30 @@ class Controlview extends Model
                     $data['image_err'] = null;
                 }
             }
+            // if image is not upload - instruct user to upload it
             else{
                 $data['image_err'] = 'Please upload an image';
             }
             if (empty($_POST['title'])) {
                     $data['title_err'] = 'Please enter title';
             } else {
-                $data['title'] = $_POST['title'];
+                $data['title'] = htmlentities($_POST['title']);
             }
 
             if (empty($_POST['description'])) {
                 $data['description_err'] = 'Please enter description';
             } else {
-                $data['description'] = $_POST['description'];
+                $data['description'] = htmlentities($_POST['description']);
             }         
             return $data;
         }
+    }
+
+    public function json(){
+        $data = $this->getBookJson();
+        $newdata= json_encode($data);
+        return $newdata;
+
     }
 
     public function printForm()
@@ -164,6 +173,10 @@ class Controlview extends Model
     public function printMainImage($id)
     {
         echo $this->getImage($id);
+    }
+
+    public function printjson(){
+        echo $this->json();
     }
 }
 ?>

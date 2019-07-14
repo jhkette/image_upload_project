@@ -1,5 +1,6 @@
 <?php
 require './includes/config.php';
+require './includes/cookie.php';
 
 // autoload classes
 function autoloader($class)
