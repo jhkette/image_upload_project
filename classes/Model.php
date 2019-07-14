@@ -81,11 +81,12 @@ class Model extends Database
 
     }
 
-    public function getBookJson($id=64){
+    public function getBookJson($id){
         $data =[];
         $this->connect();
         // escape mysqli string
         $id = mysqli_real_escape_string($this->conn, $id);
+      
         $sql = "SELECT file_info, title, description_p, height, width FROM photos WHERE id = $id";
     
         $results = $this->conn->query($sql);

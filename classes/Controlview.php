@@ -153,8 +153,8 @@ class Controlview extends Model
         }
     }
 
-    public function json(){
-        $data = $this->getBookJson();
+    public function json($id){
+        $data = $this->getBookJson($id);
         $newdata= json_encode($data);
         return $newdata;
 
@@ -175,8 +175,8 @@ class Controlview extends Model
         echo $this->getImage($id);
     }
 
-    public function printjson(){
-        echo $this->json();
+    public function printjson($id){
+        echo $this->json($id);
     }
 }
 ?>
