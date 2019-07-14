@@ -37,7 +37,7 @@ class Model extends Database
 
     public function addPost($data)
     {   $this->connect();
-        try { 
+        
             $title = mysqli_real_escape_string($this->conn, $data['title']);
             $description = mysqli_real_escape_string($this->conn, $data['description']);
             $filename = mysqli_real_escape_string($this->conn, $data['filename']);
@@ -45,7 +45,7 @@ class Model extends Database
             $width = mysqli_real_escape_string($this->conn, $data['width']);
             $imgmain = mysqli_real_escape_string($this->conn, $data['file_main']);
             $imgthumb = mysqli_real_escape_string($this->conn, $data['file_thumb']);
-            
+        try { 
             $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
             $insert = $this->conn->query($sql);
             if ($insert === false) {

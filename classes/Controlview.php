@@ -4,12 +4,6 @@ require_once './helpers/printtemplate.php';
 
 class Controlview extends Model
 {
-    private $config;
-
-    public function __construct($config)
-    {
-        $this->config = $config;
-    }
     // Function to get index page information
     public function getIndex()
     {
@@ -49,58 +43,45 @@ class Controlview extends Model
         $content .= $header;
         return $content;
     }
-
     public function submitForm()
     {
-        if (isset($_POST['singlefileupload'])) {
+        if (isset($_POST['singlefileupload'])) {  
+          
             // if the file is uploaded
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                /* these two variable are used throuout file upload
-                 and database update method so assigning them to variables here. */
+                /* these two variable are used throuout file upload 
+                and database update method so assigning them to variables here. */
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
-                $filename = $_FILES['userfile']['name'];
+                $filename = $_FILES['userfile']['name'];   
                 // sanitise string
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-                list($width, $height, $type, $attr) = getimagesize(
-                    $uploadedFile
-                );
+               
+                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
-
-                img_resize(
-                    $uploadedFile,
-                    $this->config['thumbs'] .
-                        $fileonly['filename'] .
-                        '_small.jpg',
-                    200,
-                    200
-                );
-                img_resize(
-                    $uploadedFile,
-                    $this->config['main'] . $fileonly['filename'] . '_main.jpg',
-                    600,
-                    600
-                );
+                
+                img_resize($uploadedFile, $this->config['thumbs'].$fileonly['filename'].'_small.jpg',200,200);
+                img_resize($uploadedFile, $this->config['main'].$fileonly['filename'] .'_main.jpg',600,600);
                 // define data array indexes to send to model method 'addPost'
-                $data = [
-                    'filename' => $filename,
-                    'width' => $width,
-                    'height' => $height,
-                    'description' => trim($_POST['description']),
-                    'title' => trim($_POST['title']),
-                    'file_main' => $fileonly['filename'] . '_main.jpg',
-                    'file_thumb' => $fileonly['filename'] . '_small.jpg'
+                $data =[ 
+                  'filename' => $filename,
+                  'width' => $width,
+                  'height' => $height,
+                  'description' => trim($_POST['description']),
+                  'title' => trim($_POST['title']),
+                  'file_main'  => $fileonly['filename'] . '_main.jpg',
+                  'file_thumb' => $fileonly['filename'] . '_small.jpg'
                 ];
-
+             
                 $updir = $this->config['upload_dir'];
                 $upfilename = basename($_FILES['userfile']['name']);
                 $newname = $updir . $upfilename;
-
+               
                 if (move_uploaded_file($uploadedFile, $newname)) {
                     /* we are only updating database if the file is uploaded succssfully.
                      the data is added in the model class method 'addpost' */
                     $this->addPost($data);
+                   
                 } else {
                     echo 'File upload failed';
                     $error = $_FILES['userfile']['error'];
@@ -119,6 +100,7 @@ class Controlview extends Model
             }
         }
     }
+
 
     // this needs to be changed - tidy else ifs so they make sense - we need
     // to just check main aspects of form before it is submitted

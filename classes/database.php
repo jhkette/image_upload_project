@@ -9,41 +9,48 @@ class.
 */
 class Database
 {
-    private $config;
+    protected $config;
 
     protected $conn;
     protected $language;
 
     // contructor takes language and databse config as parameter
-    public function __construct($phrases, $config)
+    public function __construct($config)
     {
-        $this->phrases = $phrases;
+        // $this->phrases = $phrases;
         $this->config = $config;
     }
     // connect method
     public function connect()
     {
-        $this->host = 'localhost';
-        $this->username = 'root';
-        $this->password = 'Gue55wh0';
-        $this->db = 'fmaproject';
+        try{
+            $this->host = 'localhost';
+            $this->username = 'root';
+            $this->password = 'Gue55wh0';
+            $this->db = 'fmaproject';
 
-        $this->conn = new mysqli(
-            $this->host,
-            $this->username,
-            $this->password,
-            $this->db
-        );
+            $this->conn = new mysqli(
+                $this->host,
+                $this->username,
+                $this->password,
+                $this->db
+            );
 
-        if ($this->conn->connect_errno) {
-            echo $this->language['error_db'];
-            exit($this->conn->connect_error);
+            if ($this->conn->connect_errno) {
+               
+                exit($this->conn->connect_error);
+                throw new Exception('Database connection error');
+                // throw new exception?..
+            }
         }
-        // else {
-        //     return $this->conn;
-        //     print_r($this->config);
+        catch (mysqli_sql_exception $ex) {
+			echo 'mysql error'. $ex ->getMessage();
+	    }
+	    catch (Exception $ex){
+		    echo 'General exception raised'. $ex ->getMessage();
 
-        // }
+	    }
+
     }
     // close database connection
     public function disconnect()
