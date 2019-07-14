@@ -44,11 +44,12 @@ class Database
             }
         }
         catch (mysqli_sql_exception $ex) {
-			echo 'mysql error'. $ex ->getMessage();
+            echo 'mysql error'. $ex ->getMessage();
+            exit();
 	    }
 	    catch (Exception $ex){
-		    echo 'General exception raised'. $ex ->getMessage();
-
+            echo 'General exception raised'. $ex ->getMessage();
+            exit();
 	    }
 
     }

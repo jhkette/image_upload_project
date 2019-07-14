@@ -77,6 +77,9 @@ class Controlview extends Model
                 $upfilename = basename($_FILES['userfile']['name']);
                 $newname = $updir . $upfilename;
                
+                // https://stackoverflow.com/questions/933081/try-catch-statement-in-php-where-the-file-does-not-upload
+                //try doing above ...
+
                 if (move_uploaded_file($uploadedFile, $newname)) {
                     /* we are only updating database if the file is uploaded succssfully.
                      the data is added in the model class method 'addpost' */

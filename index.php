@@ -8,10 +8,6 @@
      $id = $_GET['page']; // else requested page
  }
 
-//  if (isset(!$_GET['page']) && !isset($_GET['image']) && isset($_GET['json'])) {
-//     $id = $_GET['']; // else requested page
-// }
-
 
 if ((!isset($_GET['image'])) && (!isset($_GET['json'])))  {
      switch ($id) {
@@ -19,7 +15,7 @@ if ((!isset($_GET['image'])) && (!isset($_GET['json'])))  {
              include 'views/home.php';
              break;
          case 'upload':
-             include 'views/single.php';
+             include 'views/upload.php';
              break;
          case 'test':
              include 'views/test.php';

@@ -103,9 +103,9 @@ class Model extends Database
        
         $this->connect();
         // escape mysqli string
-        try { 
+       
             $id = mysqli_real_escape_string($this->conn, $id);
-        
+            try { 
             $sql = "SELECT file_info, title, description_p, height, width FROM photos WHERE id = $id";
         
             $results = $this->conn->query($sql);
