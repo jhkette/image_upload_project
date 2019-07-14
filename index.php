@@ -12,7 +12,8 @@
 //     $id = $_GET['']; // else requested page
 // }
 
- if (isset($_GET['page'])) {
+
+if ((!isset($_GET['image'])) && (!isset($_GET['json'])))  {
      switch ($id) {
          case 'home':
              include 'views/home.php';

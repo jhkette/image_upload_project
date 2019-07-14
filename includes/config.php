@@ -11,7 +11,7 @@ define('URLROOT', 'http://localhost:3000');
  * HOE - Uploading Files: configuration settings
  *
  */
-
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 /**
  * Absolute path to application root directory (one level above current dir)
  * Tip: using dynamically generated absolute paths makes the app more portable.
