@@ -6,41 +6,55 @@ class Controlview extends Model
 {
     // Function to get index page information
     public function getIndex()
-    {
-        // $headerhtml = './templates/header.html';
-        // $header = file_get_contents($headerhtml);
-        // $values = array('[+title+]', '[+heading+]');
-        // // $replacements = array($this->phrases['home_title'], $this->phrases['home_heading'], 'current');
-        // $content = '';
-        // $content .= printTemplate($values, $replacements, $header);
+    {  
+        $content ='';
+      
+        $header = './templates/header.html';
+        $content .= file_get_contents($header);
+
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
         $values = ['[+id+]', '[+title+]', '[+description+]', '[+name+]'];
-        $content = printTemplateArray($values, $data, $tpl);
-
-        // $footer = './templates/footer.html';
-        // $content .= file_get_contents($footer);
+        $content .= printTemplateArray($values, $data, $tpl);
+        $footer = './templates/footer.html';
+        $content .= file_get_contents($footer);
 
         return $content;
     }
 
     public function getImage($id)
-    {
+
+
+    {   
+        $content ='';
+        $header = './templates/header.html';
+        $content .= file_get_contents($header);
         $data = $this->getImageData($id);
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
         $values = ['[+name+]', '[+title+]', '[+description+]', '[+download+]'];
         $content = printTemplateArray($values, $data, $tpl);
+        $footer = './templates/footer.html';
+        $content .= file_get_contents($footer);
         return $content;
     }
 
-    protected function getForm()
+    protected function getHeaderForm()
     {
         $content = '';
         $headerhtml = './templates/header.html';
         $header = file_get_contents($headerhtml);
         $content .= $header;
+        return $content;
+    }
+
+    protected function getFooterForm()
+    {
+        $content = '';
+        $footer = './templates/footer.html';
+        $content = file_get_contents($footer);
+     
         return $content;
     }
     public function submitForm()
@@ -156,14 +170,19 @@ class Controlview extends Model
 
     public function json($id)
     {
-        $data = $this->getBookJson($id);
+        $data = $this->getPhotoJson($id);
         $newdata = json_encode($data);
         return $newdata;
     }
 
-    public function printForm()
+    public function header()
     {
-        echo $this->getForm();
+        echo $this->getHeaderForm();
+    }
+
+    public function footer()
+    {
+        echo $this->getFooterForm();
     }
 
     public function printIndex()
@@ -175,7 +194,8 @@ class Controlview extends Model
     {
         echo $this->getImage($id);
     }
-
+    
+    // check this do you need to echo
     public function printjson($id)
     {
         echo $this->json($id);

@@ -5,7 +5,7 @@ $form = new Controlview($config);
 // instantiate data variable
 $data = [];
 
-$form->printForm();
+$form->header();
     if (isset($_POST['singlefileupload'])) {
         $data = $form->validateForm();
     }
@@ -17,6 +17,8 @@ if (empty($data['description_err']) &&
     // only submit form if there are no errors
     $form->submitForm(); 
 }
+
+$form->footer();
 
 
 

@@ -22,8 +22,9 @@ FMA plans
 
 big things
 - Json web serivce DONE
-- try catch throughout
+- try catch throughout doneish...
 - Add some css - look at flickr?  
+- add language variables
 
 
 

@@ -35,17 +35,11 @@ class Database
                 $this->password,
                 $this->db
             );
-
-            if ($this->conn->connect_errno) {
-               
-                exit($this->conn->connect_error);
-                throw new Exception('Database connection error');
-                // throw new exception?..
-            }
         }
         catch (mysqli_sql_exception $ex) {
             echo 'mysql error'. $ex ->getMessage();
             exit();
+          
 	    }
 	    catch (Exception $ex){
             echo 'General exception raised'. $ex ->getMessage();

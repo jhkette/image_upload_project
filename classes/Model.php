@@ -98,7 +98,7 @@ class Model extends Database
 
     }
 
-    public function getBookJson($id){
+    public function getPhotoJson($id){
         $data =[];
        
         $this->connect();
