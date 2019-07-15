@@ -16,6 +16,7 @@ FMA plans
           'confirm_password_err' => ''
         ]; DONE
 - put all images in one folder -> then subfolders DONE
+- add congig to DB
 
 
 

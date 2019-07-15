@@ -24,10 +24,10 @@ class Database
     public function connect()
     {
         try {
-            $this->host = 'localhost';
-            $this->username = 'root';
-            $this->password = 'Gue55wh0';
-            $this->db = 'fmaproject';
+            $this->host = $this->config['DB_HOST'];
+            $this->username = $this->config['DB_USER'];
+            $this->password = $this->config['DB_PASS'];
+            $this->db = $this->config['DB_NAME'];
 
             $this->conn = new mysqli(
                 $this->host,
