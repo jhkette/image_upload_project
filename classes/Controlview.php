@@ -62,6 +62,8 @@ class Controlview extends Model
                  and database update method so assigning them to variables here. */
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
                 $filename = $_FILES['userfile']['name'];
+
+               
                 // sanitise string
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -76,8 +78,8 @@ class Controlview extends Model
                     $this->config['thumbs'] .
                         $fileonly['filename'] .
                         '_small.jpg',
-                    200,
-                    200
+                    150,
+                    150
                 );
                 img_resize(
                     $uploadedFile,
@@ -132,12 +134,12 @@ class Controlview extends Model
     {
         if (isset($_POST['singlefileupload'])) {
             $data = [];
+            // the file is uploaded - peform checks on it
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                $ext = pathinfo(
-                    $_FILES['userfile']['name'],
-                    PATHINFO_EXTENSION
-                );
-                $uploadedFile = $_FILES['userfile']['tmp_name'];
+                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
+                $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
+                $filename = $_FILES['userfile']['name'];  // get actual file name
+                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model)
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
 
                 if ($type != IMAGETYPE_JPEG) {
@@ -149,12 +151,15 @@ class Controlview extends Model
                 } elseif (!is_numeric($height)) {
                     $data['image_err'] =
                         'This is not a file that can be processed';
-                } else {
+                } elseif(sizeof($fileCheck) != 0){
+                    $data['image_err'] = 'This image name is already in use';
+                } 
+                else {
                     // image is ok so assign null to image_err value
                     $data['image_err'] = null;
                 }
             }
-            // if image is not upload - instruct user to upload it
+            // the image is not uploaded - instruct user to upload it
             else {
                 $data['image_err'] = 'Please upload an image';
             }

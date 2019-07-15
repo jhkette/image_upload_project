@@ -3,7 +3,7 @@
  ?>
 <h1>Upload a file:</h1>	
 <form enctype="multipart/form-data" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
-    <div>
+    <div class="fieldinput">
         <label for="fileinput">Upload a file:</label>
         <!-- "name" of input (userfile) will be the "key" in $_FILES -->
         <input name="userfile" type="file" value="<?php if (isset($data['file'])) {echo htmlentities($data['file']);}  ?>" id="fileinput" />
@@ -13,22 +13,22 @@
     </div>
    
     <div class="field">
-        <div class="adduserforminput">
+        <div class="fieldinput">
             <label for="title">Title</label>
             <input type="text" value="<?php if (isset($data['title'])) {echo htmlentities($data['title']);} ?>" name="title" id="title" />
-       </div>
+        </div>
            <!--echo error message if firstname error is set  -->
         <?php if (isset($data['title_err'])) {echo '<p> Please enter a title for the image</p>';} ?>
     </div>
     <div class="field">
-        <div class="adduserforminput">
+       <div class="fieldinput">
             <label for="description">description</label>
             <input type="textarea" value="<?php if (isset($data['description'])) {echo htmlentities($data['description']);} ?>" name="description" id="description" />
        </div>
            <!--echo error message if firstname error is set  -->
         <?php if (isset($data['description_err'])) {echo '<p> Please enter a description for the image</p>';} ?>
     <div>
-     <div>   
+    <div class="fieldinput">
         <input type="submit" value="Upload File" name="singlefileupload" />
       
     </div>

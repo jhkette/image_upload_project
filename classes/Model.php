@@ -1,7 +1,7 @@
 <?php
 class Model extends Database
 {
-    public function getImageData($id)
+    protected function getImageData($id)
     {
         $data = [];
         $this->connect();
@@ -30,7 +30,7 @@ class Model extends Database
         }
     }
 
-    public function addPost($data)
+    protected function addPost($data)
     {
         $this->connect();
 
@@ -42,7 +42,8 @@ class Model extends Database
         $imgmain = mysqli_real_escape_string($this->conn, $data['file_main']);
         $imgthumb = mysqli_real_escape_string($this->conn, $data['file_thumb']);
         try {
-            $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
+            $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
+            VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
             $insert = $this->conn->query($sql);
             if ($insert === false) {
                 $this->disconnect();
@@ -58,7 +59,7 @@ class Model extends Database
         }
     }
 
-    public function getAllPhotos()
+    protected function getAllPhotos()
     {
         $this->connect();
         try {
@@ -85,7 +86,7 @@ class Model extends Database
         }
     }
 
-    public function getPhotoJson($id)
+    protected function getPhotoJson($id)
     {
         $data = [];
 
@@ -97,6 +98,36 @@ class Model extends Database
             $sql = "SELECT file_info, title, description_p, height, width 
             FROM photos 
             WHERE id = $id";
+            $results = $this->conn->query($sql);
+            if ($results === false) {
+                $this->disconnect();
+            } else {
+                while ($row = $results->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                $results->free();
+                $this->disconnect();
+                return $data;
+            }
+        } catch (mysqli_sql_exception $ex) {
+            echo 'mysql error' . $ex->getMessage();
+        } catch (Exception $ex) {
+            echo 'General exception raised' . $ex->getMessage();
+        }
+    }
+    protected function checkFileName($file)
+    {
+        $data = [];
+
+        $this->connect();
+        // escape mysqli string
+
+        $file = mysqli_real_escape_string($this->conn, $file);
+
+        try {
+            $sql =  "SELECT file_info as fileI
+            FROM photos 
+            WHERE file_info = '$file'";
             $results = $this->conn->query($sql);
             if ($results === false) {
                 $this->disconnect();

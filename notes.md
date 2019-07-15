@@ -16,14 +16,15 @@ FMA plans
           'confirm_password_err' => ''
         ]; DONE
 - put all images in one folder -> then subfolders DONE
-- add congig to DB
+- add congig to DB DONE
+- people can't add same filename
 
 
 
 
 big things
 - Json web serivce DONE
-- try catch throughout doneish...
+- try catch throughout DONE...(double check)
 - Add some css - look at flickr?  
 - add language variables
 
