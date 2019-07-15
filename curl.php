@@ -11,18 +11,22 @@
 //     CURLOPT_USERAGENT => 'Sample cURL Request'
 // ));
 
-$my_curl = curl_init();
-$url = 'http://localhost:8080/index.php?json=67';
-// Send the request & save response to $resp
-curl_setopt($my_curl, CURLOPT_URL, $url);
-curl_setopt($my_curl, CURLOPT_RETURNTRANSFER, true);
-$result = curl_exec($my_curl);
-if ($result) {
-    echo $result;
-} else {
-echo 'cURL failed'; }
-curl_close($my_curl);
 
+
+
+//step1
+$cSession = curl_init(); 
+//step2
+curl_setopt($cSession,CURLOPT_URL,"http://localhost:8080/index.php?json=67");
+curl_setopt($cSession,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($cSession,CURLOPT_HEADER, false); 
+//step3
+$result=curl_exec($cSession);
+
+//step4
+curl_close($cSession);
+//step5
+echo $result;
 
 
 

@@ -23,7 +23,7 @@ class Database
     // connect method
     public function connect()
     {
-        try{
+        try {
             $this->host = 'localhost';
             $this->username = 'root';
             $this->password = 'Gue55wh0';
@@ -35,17 +35,13 @@ class Database
                 $this->password,
                 $this->db
             );
+        } catch (mysqli_sql_exception $ex) {
+            echo 'mysql error' . $ex->getMessage();
+            exit();
+        } catch (Exception $ex) {
+            echo 'General exception raised' . $ex->getMessage();
+            exit();
         }
-        catch (mysqli_sql_exception $ex) {
-            echo 'mysql error'. $ex ->getMessage();
-            exit();
-          
-	    }
-	    catch (Exception $ex){
-            echo 'General exception raised'. $ex ->getMessage();
-            exit();
-	    }
-
     }
     // close database connection
     public function disconnect()

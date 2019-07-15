@@ -24,7 +24,5 @@ function printTemplate($values, $replacements, $file){
     return $new_message = str_replace($values, $replacements, $file);
 }
 
-/* This function takes an array of data as anargument and changes  $replacement['duration'] to a mm:ss time format */
-
 
 ?>
