@@ -183,7 +183,8 @@ class Controlview extends Model
             if (empty($data)) {
                 return 'This photo is not in the database.';
             } else {
-                // I'm using try catch to catch any error when json encodes data
+                // I'm using try catch block here in case there is any particular
+                // problem with json_encode -ing the data. 
                 try {
                     $newdata = json_encode($data);
                     if (json_last_error() == JSON_ERROR_NONE) {
