@@ -18,18 +18,19 @@
             <input type="text" value="<?php if (isset($data['title'])) {echo htmlentities($data['title']);} ?>" name="title" id="title" />
        </div>
            <!--echo error message if firstname error is set  -->
-        <?php if (isset($data['title_err'])) {echo '<p> Please enter your first name </p>';} ?>
-     </div>
+        <?php if (isset($data['title_err'])) {echo '<p> Please enter a title for the image</p>';} ?>
+    </div>
     <div class="field">
         <div class="adduserforminput">
             <label for="description">description</label>
             <input type="textarea" value="<?php if (isset($data['description'])) {echo htmlentities($data['description']);} ?>" name="description" id="description" />
        </div>
            <!--echo error message if firstname error is set  -->
-        <?php if (isset($data['description_err'])) {echo '<p> Please enter your first name </p>';} ?>
-        <div>
+        <?php if (isset($data['description_err'])) {echo '<p> Please enter a description for the image</p>';} ?>
+    <div>
+     <div>   
         <input type="submit" value="Upload File" name="singlefileupload" />
-       </div>
-     </div>
+      
+    </div>
 </form>
 <?php
