@@ -150,7 +150,7 @@ main {
        width: 90%;
        margin: auto;
        display: grid; 
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+       grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
         grid-auto-rows: 200px;
         grid-column-gap: 0px;
         grid-row-gap: 0px; 
@@ -165,4 +165,9 @@ header {
 nav ul {
     display: inline;
     display: flex;
+}
+
+.thumbnail {
+    column-width: 250px;
+    display: inline-block;
 }
