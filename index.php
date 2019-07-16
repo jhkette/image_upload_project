@@ -1,5 +1,4 @@
- <?php
- require_once './bootstrap.php';
+ <?php require_once './bootstrap.php';
 
  if (!isset($_GET['page']) && !isset($_GET['image']) && !isset($_GET['json'])) {
      $id = 'home'; // display home page

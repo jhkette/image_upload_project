@@ -13,10 +13,19 @@ try {
 }
 
 require  $config_file_path;
-
-
-
 require './includes/cookie.php';
+
+try {
+    // if the config array is empty or it doesn't exist - the programme cannot run - so I am throwing an exception. 
+    if (empty($config) || (!$config))
+    {
+      throw new Exception("Config variables not found");
+    }
+    // continue execution of the bootstrapping phase
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die();
+}
 
 // autoload classes
 function autoloader($class)

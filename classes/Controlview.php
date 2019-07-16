@@ -10,6 +10,8 @@ class Controlview extends Model
         $content = '';
         $header = './templates/header.html';
         $content .= file_get_contents($header);
+        $banner = './templates/banner.html';
+        $content .= file_get_contents($banner);
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
@@ -40,8 +42,9 @@ class Controlview extends Model
     {
         $content = '';
         $headerhtml = './templates/header.html';
-        $header = file_get_contents($headerhtml);
-        $content .= $header;
+        $content .= file_get_contents($headerhtml);
+        $banner = './templates/banner.html';
+        $content .= file_get_contents($banner);
         return $content;
     }
 
