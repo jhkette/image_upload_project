@@ -125,7 +125,7 @@ html {
 @font-face {
     font-family: Inter;
     src: url("../fonts/Inter-Medium.woff2") format("woff2"),
-      url("../fonts/Inter-Medium.woff") format("woff");
+      url("./fonts/Inter-Medium.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -140,6 +140,29 @@ html {
     font-display: swap;
   }
 
-  body{
-      font-family: Inter-regular, Helvetica, Arial;
-  }
+ul li {
+    list-style: none;
+}
+ body{
+     font-family: Inter-regular, Helvetica, Arial;
+ } 
+main {
+       width: 90%;
+       margin: auto;
+       display: grid; 
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+        grid-auto-rows: 200px;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px; 
+     
+}
+
+header {
+    width: 90%;
+    margin: auto;
+}
+
+nav ul {
+    display: inline;
+    display: flex;
+}
