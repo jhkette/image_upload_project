@@ -1,5 +1,21 @@
 <?php
-require './includes/config.php';
+try {
+    // init bootstrapping phase
+    $config_file_path = "./includes/config.php";
+    if (!file_exists($config_file_path))
+    {
+      throw new Exception("Configuration file not found.");
+    }
+    // continue execution of the bootstrapping phase
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die();
+}
+
+require  $config_file_path;
+
+
+
 require './includes/cookie.php';
 
 // autoload classes

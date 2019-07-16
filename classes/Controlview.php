@@ -73,20 +73,7 @@ class Controlview extends Model
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
 
-                img_resize(
-                    $uploadedFile,
-                    $this->config['thumbs'] .
-                        $fileonly['filename'] .
-                        '_small.jpg',
-                    150,
-                    150
-                );
-                img_resize(
-                    $uploadedFile,
-                    $this->config['main'] . $fileonly['filename'] . '_main.jpg',
-                    600,
-                    600
-                );
+             
                 // define data array indexes to send to model method 'addPost'
                 $data = [
                     'filename' => $filename,
@@ -104,11 +91,27 @@ class Controlview extends Model
 
                 // https://stackoverflow.com/questions/933081/try-catch-statement-in-php-where-the-file-does-not-upload
                 //try doing above ...
-
-                if (move_uploaded_file($uploadedFile, $newname)) {
+                $small = img_resize(
+                    $uploadedFile,
+                    $this->config['thumbs'] .
+                        $fileonly['filename'] .
+                        '_small.jpg',
+                    150,
+                    150
+                );
+                $medium = img_resize(
+                    $uploadedFile,
+                    $this->config['main'] . $fileonly['filename'] . '_main.jpg',
+                    600,
+                    600
+                );
+                $move = move_uploaded_file($uploadedFile, $newname);
+                if ($move) {
+                
                     /* we are only updating database if the file is uploaded succssfully.
                      the data is added in the model class method 'addpost' */
                     $this->addPost($data);
+                  
                 } else {
                     echo 'File upload failed';
                     $error = $_FILES['userfile']['error'];
