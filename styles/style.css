@@ -147,7 +147,7 @@ ul li {
      font-family: Inter-regular, Helvetica, Arial;
  } 
 main {
-       width: 90%;
+       width: 85%;
        margin: auto;
        display: grid; 
        grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
@@ -157,17 +157,47 @@ main {
      
 }
 
-header {
-    width: 90%;
+.header-container {
+    width: 85%;
     margin: auto;
+    display: flex;
+    align-content: center;
+    padding-top: .95rem;
+
+}
+header{
+    background-color: #1f1f21;
+    height: 2.75rem;
 }
 
 nav ul {
     display: inline;
     display: flex;
+    margin-left: 3rem;
 }
 
+nav ul li {
+    margin-left: 1rem;
+ 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.main {
+    margin-top: 4rem;
+}
+h1{
+    color: white;
+}
 .thumbnail {
     column-width: 250px;
     display: inline-block;
+}
+
+.mainimage-container{
+    display: flex;
+
 }
