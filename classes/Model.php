@@ -121,7 +121,6 @@ class Model extends Database
 
         $this->connect();
         // escape mysqli string
-
         $file = mysqli_real_escape_string($this->conn, $file);
 
         try {

@@ -5,12 +5,9 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 define('URLROOT', 'http://localhost:3000');
-/**
- * Building Web Applications using MySQL and PHP (W1)
- *
- * HOE - Uploading Files: configuration settings
- *
- */
+
+
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 /**
  * Absolute path to application root directory (one level above current dir)

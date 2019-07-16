@@ -17,7 +17,7 @@ FMA plans
         ]; DONE
 - put all images in one folder -> then subfolders DONE
 - add congig to DB DONE
-- people can't add same filename
+- people can't add same filename DONE
 
 
 

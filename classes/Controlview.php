@@ -25,7 +25,8 @@ class Controlview extends Model
     {
         $content = '';
         $header = './templates/header.html';
-        $content .= file_get_contents($header);
+        $html = file_get_contents($header);
+        $content .= $html;
         $data = $this->getImageData($id);
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);

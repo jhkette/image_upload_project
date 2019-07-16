@@ -6,9 +6,9 @@ $form = new Controlview($config);
 $data = [];
 
 $form->header();
-    if (isset($_POST['singlefileupload'])) {
-        $data = $form->validateForm();
-    }
+if (isset($_POST['singlefileupload'])) {
+    $data = $form->validateForm();
+}
 
 require './includes/imageform.php';
 if (empty($data['description_err']) &&  

@@ -7,9 +7,7 @@
         <label for="fileinput">Upload a file:</label>
         <!-- "name" of input (userfile) will be the "key" in $_FILES -->
         <input name="userfile" type="file" value="<?php if (isset($data['file'])) {echo htmlentities($data['file']);}  ?>" id="fileinput" />
-        <?php if (isset($data['image_err'])) {echo $data['image_err'];}  ?>
-     
-        
+        <?php if (isset($data['image_err'])) {echo $data['image_err'];}  ?>     
     </div>
    
     <div class="field">
