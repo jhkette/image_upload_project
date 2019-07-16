@@ -105,8 +105,9 @@ class Controlview extends Model
                     600,
                     600
                 );
+                print_r($medium);
                 $move = move_uploaded_file($uploadedFile, $newname);
-                if ($move) {
+                if ($move && $medium[0] && $small[0]) {
                 
                     /* we are only updating database if the file is uploaded succssfully.
                      the data is added in the model class method 'addpost' */
@@ -119,7 +120,7 @@ class Controlview extends Model
                         echo 'file upload failed size exceeded';
                     } elseif ($error == UPLOAD_ERR_FORM_SIZE) {
                         echo 'file upload faoiles form size exceeded';
-                    } elseif ($error == UPLOAD_ERR_PARIAL) {
+                    } elseif ($error == UPLOAD_ERR_PARTIAL) {
                         echo 'File upload failed - partial uplaod';
                     } elseif ($error == UPLOAD_ERR_NO_FILE) {
                         echo 'No file uploade';
