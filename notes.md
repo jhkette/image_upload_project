@@ -24,6 +24,7 @@ FMA plans
 
 big things
 - Json web serivce DONE
+- JSON IS DONE BUT CHECK IT CAN BE RECIEVED USING CURL
 - try catch throughout DONE...(double check)
 - Add some css - look at flickr?  
 - add language variables
