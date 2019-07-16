@@ -25,13 +25,12 @@ class Controlview extends Model
     {
         $content = '';
         $header = './templates/header.html';
-        $html = file_get_contents($header);
-        $content .= $html;
+        $content .=  file_get_contents($header);
         $data = $this->getImageData($id);
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
         $values = ['[+name+]','[+title+]','[+description+]','[+download+]','[+id+]'];
-        $content = printTemplateArray($values, $data, $tpl);
+        $content .= printTemplateArray($values, $data, $tpl);
         $footer = './templates/footer.html';
         $content .= file_get_contents($footer);
         return $content;
