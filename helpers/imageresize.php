@@ -1,4 +1,7 @@
 <?php
+
+// CHECK ALL THIS
+
 // thie file type is checked in the control view class so we do not need to check it here. 
 // i'm adding a default parameter of 100 - this could be changed.
 function img_resize($in_img_file, $out_img_file, $req_width, $req_height, $quality=100) {

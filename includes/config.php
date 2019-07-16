@@ -16,8 +16,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $config['app_dir'] = dirname(dirname(__FILE__));
  
 /**
- * Absolute path to directory where uploaded files will be stored
- * Using an absolute path to the upload dir can help circumvent security restrictions on some servers
+ * Absolute path to directories where uploaded files will be stored
  */
 $config['upload_dir'] = $config['app_dir'] . '/images/uploads/';
 $config['thumbs'] = $config['app_dir'] . '/images/thumbs/';

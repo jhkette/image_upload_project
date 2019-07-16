@@ -135,18 +135,18 @@ class Controlview extends Model
         }
     }
 
-    // this needs to be changed - tidy else ifs so they make sense - we need
-    // to just check main aspects of form before it is submitted
+   
     public function validateForm()
     {
         if (isset($_POST['singlefileupload'])) {
             $data = [];
             // the file is uploaded - peform checks on it
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+
                 $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
                 $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
                 $filename = $_FILES['userfile']['name'];  // get actual file name
-                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model)
+                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
 
                 if ($type != IMAGETYPE_JPEG) {

@@ -136,12 +136,19 @@ main {
        display: grid; 
        grid-template-columns: repeat( auto-fit, minmax(150px, 1fr) );
         grid-auto-rows: 200px;
-        grid-column-gap: 25px;
-        grid-row-gap: 25px; 
+        grid-column-gap: 5px;
+        grid-row-gap: 5px; 
        
      
 }
 
+.thumbnail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 150px;
+    font-size: 1.2rem;
+}
 .banner{
     background-image: url('../images/pictures/paris.jpg');
     background-repeat: no-repeat;
@@ -149,7 +156,7 @@ main {
     overflow: hidden;
     width: 100%;
     background-position: center;
-    height: 18rem;
+    height: 13rem;
     /* background-color: rgba(255, 255, 255, 0); */
 }
 
@@ -175,7 +182,9 @@ nav ul {
 
 nav ul li {
     margin-left: 1.5rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    position: relative;
+    font-weight: 100;
  
 }
 
@@ -185,31 +194,40 @@ nav ul li a {
 }
 
 
-nav ul li a:after {    
+nav ul li a:after { 
+      
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
     display: block;
+
     height: 2px;
+    
     left: 50%;
     position: absolute;
-    background: #fff;
+    background: #0090dc;
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
+    bottom: -7px;
   }
   nav ul li a:hover:after { 
     width: 100%; 
     left: 0; 
   }
 
-.main {
-    margin-top: 4rem;
+
+.main-container{
+   padding-top: 4rem;
+   background-color: #f7f7f7;
+   width: 100%;
+   min-height: 90vh;
 }
 h1{
     color: white;
-   font-family: 'Poppins', sans-serif;
-   font-size: 3rem;
-   font-weight: 900;
+    font-family: 'Codystar', cursive;
+   font-size: 2.45rem;
+   font-weight: 600;
+ 
 }
 /* 
 h1::first-letter { 
@@ -225,12 +243,12 @@ h1 a{
     color: white;
     text-decoration: none;
 }
-.thumbnail {
-    column-width: 250px;
-    display: inline-block;
-}
+
 
 .mainimage-container{
     display: flex;
 
+}
+strong {
+    font-weight: 900;
 }

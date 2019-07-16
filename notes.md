@@ -28,11 +28,11 @@ big things
 - try catch throughout DONE...(double check)
 - Add some css - look at flickr?  
 - add language variables
+- look at 500px for styling
 
 
-
-
-
+// useful for try catch
+https://code.tutsplus.com/tutorials/php-exceptions-try-catch-for-error-handling--cms-32013
 
 
 
