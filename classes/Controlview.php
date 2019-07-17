@@ -149,21 +149,21 @@ class Controlview extends Model
                 $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
 
-                if ($type != IMAGETYPE_JPEG) {
+                if ($type != IMAGETYPE_JPEG) { //type is from getimagesize array - it is the mime type
                     $data['image_err'] =
                         'This file is not the correct mime type. only jpg file should be uploaded';
-                } elseif ($ext != "jpg") {
+                } elseif ($ext != "jpg") {  // this is from pathinfoextension
                     $data['image_err'] =
                         'This is not the correct file extension';
-                } elseif (!is_numeric($height)) {
+                } elseif (!is_numeric($height)) { // cheking height returns a number - this again helps ensure it is an image. 
                     $data['image_err'] =
                         'This is not a file that can be processed';
-                } elseif(sizeof($fileCheck) != 0){
+                } elseif(sizeof($fileCheck) != 0){ // checking the filename has not already been used. 
                     $data['image_err'] = 'This image name is already in use';
                 } 
                 else {
                     // image is ok so assign null to image_err value
-                    $data['image_err'] = null;
+                    $data['image_err'] = null; 
                 }
             }
             // the image is not uploaded - instruct user to upload it
