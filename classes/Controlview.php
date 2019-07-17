@@ -112,8 +112,8 @@ class Controlview extends Model
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
                 
-                    /* we are only updating database if the file is uploaded succssfully.
-                     the data is added in the model class method 'addpost' */
+                    /* we are only updating database if the file is uploaded succssfully and if image resize has returned
+                    a true value. The data (from the array above) is added in the model class method 'addpost' */
                     $this->addPost($data);
                   
                 } else {
