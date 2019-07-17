@@ -141,12 +141,19 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+ 
   width: 150px;
   
 }
 
 .thumbnail ul li {
     font-size: 1.5rem;
+}
+
+.title{
+  background-color: #f44336;
+  width: 100%;
 }
 .banner {
   background-image: url("../images/pictures/paris.jpg");
@@ -201,7 +208,7 @@ nav ul {
 
 nav ul li {
   margin-left: 1.5rem;
-  font-size: 1.7rem;
+  font-size: 1.45rem;
   position: relative;
   font-weight: 100;
 }
