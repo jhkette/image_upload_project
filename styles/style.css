@@ -127,7 +127,7 @@ body {
   font-weight: 400;
   font-size: 1.4rem;
 }
-main {
+.main {
   width: 85%;
   margin: auto;
   display: grid;
@@ -135,6 +135,19 @@ main {
   grid-auto-rows: 200px;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
+}
+
+@media (max-width: 900px){
+  .main{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 550px){ 
+  .main{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 .thumbnail {
@@ -155,8 +168,7 @@ main {
   background-color: #bfcfe4;
   display: inline-block;
   text-align: left;
-  width: fit-content;
-  width: -moz-fit-content;
+  align-self: flex-start;
   padding: .2rem
 }
 .banner {
@@ -165,9 +177,19 @@ main {
   overflow: hidden;
   width: 100%;
   background-position: center;
-  height: 5rem;
+  height: 4.75rem;
   position: relative;
-  background-color: #607D8B;
+  background-color: #d8ffd1;
+}
+.container-info{
+  padding: 2rem;
+  background-color: #bfcfe4;
+  width: 30rem;
+  align-self: flex-start;
+}
+
+.container-info li{
+  margin-bottom: 1rem;
 }
 
 .banner:before {
@@ -211,7 +233,7 @@ nav ul {
 
 nav ul li {
   margin-left: 1.5rem;
-  font-size: 1.45rem;
+  font-size: 1.65rem;
   position: relative;
   font-weight: 100;
 }
@@ -231,10 +253,10 @@ nav ul li a:after {
 
   left: 50%;
   position: absolute;
-  background: #0090dc;
+  background: #ffffff;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
-  bottom: -7px;
+  bottom: -4px;
 }
 nav ul li a:hover:after {
   width: 100%;
@@ -271,6 +293,10 @@ h1 a {
 .mainimage-container {
   display: flex;
   margin-top: 4rem;
+ 
+  justify-content: flex-start;
+  width: 90%;
+  margin:  4rem auto 4rem auto;
 }
 
 .mainimage-container img {

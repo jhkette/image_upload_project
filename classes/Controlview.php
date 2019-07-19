@@ -152,7 +152,7 @@ class Controlview extends Model
                 if ($type != IMAGETYPE_JPEG) { //type is from getimagesize array - it is the mime type
                     $data['image_err'] =
                         'This file is not the correct mime type. only jpg file should be uploaded';
-                } elseif ($ext != "jpg") {  // this is from pathinfoextension
+                } elseif (($ext !="jpeg") && ($ext != "jpg")) {  // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
                     $data['image_err'] =
                         'This is not the correct file extension';
                 } elseif (!is_numeric($height)) { // cheking height returns a number - this again helps ensure it is an image. 
