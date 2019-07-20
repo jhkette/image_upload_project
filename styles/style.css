@@ -287,9 +287,15 @@ nav ul li a:hover:after {
 h1 {
  
   font-family: 'Roboto Condensed', sans-serif;
-  text-transform: uppercase;
-  font-size: 4.45rem;
+  /* text-transform: uppercase; */
+  font-size: 2.45rem;
   font-weight: 900;
+}
+.highlight{
+ 
+  font-size: 4rem;
+  display: block;
+  margin-bottom: -1.5rem;
 }
 
 h1 a {
@@ -407,8 +413,8 @@ footer {
 
   width: 75%;
   height: 75%;
-  top: 15%;
-  left: 15%;
+  top: 13%;
+  left: 13%;
 
 }
 
