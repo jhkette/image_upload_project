@@ -123,7 +123,7 @@ ul li {
   list-style: none;
 }
 body {
-  font-family: "Source sans pro", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 1.55rem;
 }
@@ -168,7 +168,7 @@ body {
 }
 
 .title {
-  background-color: #bfcfe4;
+  background-color: #61c06a;
   display: inline-block;
   text-align: left;
   align-self: flex-start;
@@ -186,7 +186,7 @@ body {
 }
 .container-info {
   padding: 2rem;
-  background-color: #bfcfe4;
+  background-color: #61c06a;
   width: 30rem;
   align-self: flex-start;
 }
@@ -225,10 +225,13 @@ body {
   align-content: center;
   /* padding-top: .5rem; */
   align-items: center;
+  color: #1a1a1a;
 }
 header {
-  background-color: #1f1f21;
+  background-color: white;
   padding: 1rem 0;
+  border-bottom: 1px solid #1a1a1a;
+
 }
 
 .nav{
@@ -253,7 +256,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: #1a1a1a;
   text-decoration: none;
 }
 
@@ -267,7 +270,7 @@ nav ul li a:after {
 
   left: 50%;
   position: absolute;
-  background: #ffffff;
+  background: #1a1a1a;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
   bottom: -4px;
@@ -284,14 +287,15 @@ nav ul li a:hover:after {
   min-height: 90vh;
 }
 h1 {
-  color: white;
-  font-family: "Roboto Condensed", sans-serif;
+ 
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
   font-size: 2.45rem;
   font-weight: 900;
 }
 
 h1 a {
-  color: white;
+  color: #1a1a1a;
   text-decoration: none;
 }
 
@@ -299,7 +303,7 @@ h1 a {
   display: flex;
   margin-top: 4rem;
 
-  justify-content: center;
+  justify-content: flex-start;
   width: 90%;
   margin: 4rem auto 4rem auto;
   padding-bottom: 12rem;
@@ -315,7 +319,7 @@ h1 a {
   margin-right: 3rem;
 }
 .bold {
-  font-family: "source sans pro";
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
 }
 
@@ -382,12 +386,12 @@ footer {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  margin-left: .5em;
-  color: white;
+  margin-left: .2rem;
+  color: #1a1a1a;
 }
 
 .rb-text {
-  font-size: 1.65rem
+  font-size: 1.55rem
 }
 
 .rb .rb-field {
@@ -440,5 +444,9 @@ footer {
 }
 input[type="submit"] {
   align-self: flex-start;
-  height: 1.5rem;
+
+  background-color: white;
+  border: 1px solid #1a1a1a;
+  padding: .5rem 2rem;
+  margin-left: 1.8rem;
 }
