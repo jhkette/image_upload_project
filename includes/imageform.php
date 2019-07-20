@@ -1,9 +1,9 @@
  <?php
 
  ?>
- <main>
+
 <h1>Upload a file:</h1>	
-<form enctype="multipart/form-data" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
+<form enctype="multipart/form-data" class="upload-form" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
     <div class="fieldinput">
         <label for="fileinput">Upload a file:</label>
         <!-- "name" of input (userfile) will be the "key" in $_FILES -->
@@ -26,10 +26,12 @@
        </div>
            <!--echo error message if firstname error is set  -->
         <?php if (isset($data['description_err'])) {echo '<p> Please enter a description for the image</p>';} ?>
-    <div>
+</div>
+
     <div class="fieldinput">
         <input type="submit" value="Upload File" name="singlefileupload" />
+</div>
       
-    </div>
+ 
 </form>
 <?php

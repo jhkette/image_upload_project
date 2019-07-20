@@ -43,7 +43,7 @@ class Controlview extends Model
         $content = '';
         $headerhtml = './templates/header.html';
         $content .= file_get_contents($headerhtml);
-        $banner = './templates/banner.html';
+        $banner = './templates/banner1.html';
         $content .= file_get_contents($banner);
         return $content;
     }
