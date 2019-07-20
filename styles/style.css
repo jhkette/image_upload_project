@@ -150,7 +150,7 @@ body {
 }
 
 .heading{
-  width: 85%;
+  margin-top: 2rem;
   margin: auto;
 }
 
@@ -175,14 +175,10 @@ body {
   padding: 0.2rem;
 }
 .banner {
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  width: 100%;
-  background-position: center;
-  height: 4.75rem;
-  position: relative;
-  background-color: #f9fff8;
+  padding: 2rem 0;
+  width: 85%;
+  margin: auto;
+  border-bottom: 1px solid #1a1a1a;
 }
 .container-info {
   padding: 2rem;
@@ -195,21 +191,6 @@ body {
   margin-bottom: 1rem;
 }
 
-.banner:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  opacity: 0.55;
-  z-index: 1;
-}
 
 .lead {
   height: 2.5rem;
@@ -226,11 +207,12 @@ body {
   /* padding-top: .5rem; */
   align-items: center;
   color: #1a1a1a;
+  border-bottom: 2px solid #1a1a1a;
 }
 header {
   background-color: white;
   padding: 1rem 0;
-  border-bottom: 1px solid #1a1a1a;
+ 
 
 }
 
@@ -282,7 +264,6 @@ nav ul li a:hover:after {
 
 .main-container {
   padding-top: 4rem;
-  background-color: #f7f7f7;
   width: 100%;
   min-height: 90vh;
 }
@@ -290,7 +271,7 @@ h1 {
  
   font-family: 'Roboto Condensed', sans-serif;
   text-transform: uppercase;
-  font-size: 2.45rem;
+  font-size: 4.45rem;
   font-weight: 900;
 }
 
@@ -304,7 +285,7 @@ h1 a {
   margin-top: 4rem;
 
   justify-content: flex-start;
-  width: 90%;
+  width: 85%;
   margin: 4rem auto 4rem auto;
   padding-bottom: 12rem;
 }
@@ -343,8 +324,10 @@ h1 a {
 
 footer {
   height: 18rem;
-  background-color: #d5d5d5;
-  width: 100%;
+
+  width: 85%;
+  margin: auto;
+  border-top: 1px solid #1a1a1a;
 }
 
 
@@ -352,6 +335,7 @@ footer {
 .buttons{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .rb-container {
@@ -375,11 +359,11 @@ footer {
 }
 
 .rb .rb-field {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: white;
   position: relative;
-  border: 2px solid #1a1a1a;
+  border: 1px solid #1a1a1a;
 }
 
 .rb .rb-text {
@@ -449,4 +433,10 @@ input[type="submit"] {
   border: 1px solid #1a1a1a;
   padding: .5rem 2rem;
   margin-left: 1.8rem;
+ 
+}
+
+input[type="submit"]:hover {
+  background-color: #1a1a1a;
+  color: white;
 }
