@@ -26,9 +26,10 @@ big things
 - Json web serivce DONE
 - JSON IS DONE BUT CHECK IT CAN BE RECIEVED USING CURL
 - try catch throughout DONE...(double check)
-- Add some css - look at flickr?  
-- add language variables
+- Add some css - look at flickr?  DONE ish (tidy css)
+- add language variables NEED TO DO 
 - look at 500px for styling
+- Add detailed readme
 
 
 // useful for try catch

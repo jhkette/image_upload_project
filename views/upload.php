@@ -1,7 +1,7 @@
 <?php
 
 
-$form = new Controlview($config);
+$form = new Controlview($config, $phrases);
 // instantiate data variable
 $data = [];
 

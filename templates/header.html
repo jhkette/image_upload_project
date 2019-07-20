@@ -8,22 +8,49 @@
       @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|Source+Sans+Pro:400,700&display=swap');
       </style> 
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
-    <title>PicUpload</title>
+    <title>[+title+]</title>
   </head>
   <body>
     <header>
         <div class="header-container">
       <h1><a href="/">PicUpload</a></h1>
-  
+ 
+   <div class="nav">
     <nav>
         <ul>
          <li><a href="/">Home</a></li>
          <li><a href="/index.php?page=upload">Upload</a></li>
        </ul>
     </nav>
+    <form action="index.php" method="post">
+      <fieldset>
+          <div class="buttons">
+
+
+              <label class="rb fill" for="en">
+                <input type="radio" name="language" class="radio" value="en" id="en" />
+                <span class="rb-field"></span>
+                <span class="rb-text">en</span>
+            </label>
+            <label class="rb fill" for="fr">
+                <input type="radio" name="language" class="radio" value="en" id="fr" />
+                <span class="rb-field"></span>
+                <span class="rb-text">fr</span>
+            </label>
+
+
+              <input type="submit" name="submit" value="Go" />
+          </div>
+      </fieldset>
+  </form>
+</div>
 </div>
 
 </header>
+<div>
+  <main>
+   
+
 
     
 

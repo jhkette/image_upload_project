@@ -14,6 +14,7 @@ try {
 
 require  $config_file_path;
 require './includes/cookie.php';
+require_once './lang/'.$lang['language'].'.php';
 
 try {
     // if the config array is empty or it doesn't exist - the programme cannot run - so I am throwing an exception. 

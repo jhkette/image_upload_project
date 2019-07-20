@@ -137,17 +137,21 @@ body {
   grid-row-gap: 3rem;
 }
 
-@media (max-width: 900px){
-  .main{
+@media (max-width: 900px) {
+  .main {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 550px){ 
-  .main{
+@media (max-width: 550px) {
+  .main {
     grid-template-columns: repeat(2, 1fr);
   }
+}
 
+.heading{
+  width: 85%;
+  margin: auto;
 }
 
 .thumbnail {
@@ -155,21 +159,20 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   /* align-items: center; */
- 
+
   width: 150px;
-  
 }
 
 .thumbnail ul li {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-.title{
+.title {
   background-color: #bfcfe4;
   display: inline-block;
   text-align: left;
   align-self: flex-start;
-  padding: .2rem
+  padding: 0.2rem;
 }
 .banner {
   background-repeat: no-repeat;
@@ -179,38 +182,41 @@ body {
   background-position: center;
   height: 4.75rem;
   position: relative;
-  background-color: #d8ffd1;
+  background-color: #f9fff8;
 }
-.container-info{
+.container-info {
   padding: 2rem;
   background-color: #bfcfe4;
   width: 30rem;
   align-self: flex-start;
 }
 
-.container-info li{
+.container-info li {
   margin-bottom: 1rem;
 }
 
 .banner:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(45deg, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 100%);
-    opacity: .55;
-    z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0.55;
+  z-index: 1;
 }
 
-.lead{
-    height: 2.5rem;
-    width: 100%;
-    background-color: white;
-    border-bottom: 1px solid #d5d5d5;
+.lead {
+  height: 2.5rem;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #d5d5d5;
 }
-
 
 .header-container {
   width: 85%;
@@ -223,6 +229,14 @@ body {
 header {
   background-color: #1f1f21;
   padding: 1rem 0;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+nav {align-self: center;
 }
 
 nav ul {
@@ -275,16 +289,7 @@ h1 {
   font-size: 2.45rem;
   font-weight: 900;
 }
-/* 
-h1::first-letter { 
-    
-    color: #8A2BE2;
-}
 
-.second{
-    display: inline-block;
-    color: #c61717;
-} */
 h1 a {
   color: white;
   text-decoration: none;
@@ -293,48 +298,147 @@ h1 a {
 .mainimage-container {
   display: flex;
   margin-top: 4rem;
- 
+
   justify-content: center;
   width: 90%;
-  margin:  4rem auto 4rem auto;
+  margin: 4rem auto 4rem auto;
   padding-bottom: 12rem;
 }
 
-.arrow{
+.mainimage-container .arrow {
   height: 1.5rem;
   width: 1.5rem;
+  margin-right: 0.85rem;
 }
 
 .mainimage-container img {
-    margin-right: 3rem;
+  margin-right: 3rem;
 }
 .bold {
-  font-family: 'source sans pro';
+  font-family: "source sans pro";
   font-weight: 700;
 }
 
-
 .intro {
- 
-    width: 85%;
-    margin: auto;
+  width: 85%;
+  margin: auto;
 }
-.intro h2{
-    font-size: 2rem;
-    color: white;
-    font-size: 2rem;
-    margin-top: 1rem;
-    z-index: 2;
-    position: absolute;
+.intro h2 {
+  font-size: 2rem;
+  color: white;
+  font-size: 2rem;
+  margin-top: 1rem;
+  z-index: 2;
+  position: absolute;
 }
 
-.img-desc{
+.img-desc {
   display: flex;
   flex-direction: column;
 }
 
-footer{
+footer {
   height: 18rem;
   background-color: #d5d5d5;
   width: 100%;
+}
+
+
+/* radio buttons */
+.buttons{
+  display: flex;
+  flex-direction: row;
+}
+
+.rb-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.rb {
+  display: flex;
+  color: #1a1a1a;
+  font-weight: 500;
+
+}
+
+.rb input {
+  width: 0;
+  height: 0;
+  /*I'm changing the opacity so it is still on screen - screen readers can still read this  */
+  opacity: 0;
+}
+
+.rb .rb-field {
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: white;
+  position: relative;
+  border: 2px solid #1a1a1a;
+}
+
+.rb .rb-text {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-left: .5em;
+  color: white;
+}
+
+.rb-text {
+  font-size: 1.65rem
+}
+
+.rb .rb-field {
+  border-radius: 100%;
+}
+
+.rb.fill {
+  position: relative;
+}
+
+.rb.fill input:checked+span:before {
+
+  width: 75%;
+  height: 75%;
+  top: 15%;
+  left: 15%;
+
+}
+
+.rb.fill .rb-field:before {
+  content: '';
+  position: absolute;
+
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+
+  background-color: #1a1a1a;
+  ;
+  border-radius: 100%;
+  transition: all .2s cubic-bezier(.45, .05, 0, 1.98);
+}
+
+.rb.outline .rb-field {
+  background-color: transparent;
+  border: .9em solid #1a1a1a;
+}
+
+.rb.outline .rb-field:before {
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  background-color: black;
+  width: 0;
+  height: 0;
+  top: .5em;
+  left: .5em;
+  transition: all .2s cubic-bezier(.45, .05, 0, 1.98);
+}
+input[type="submit"] {
+  align-self: flex-start;
+  height: 1.5rem;
 }

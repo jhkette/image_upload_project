@@ -2,7 +2,7 @@
 
 
 
-$form = new Controlview($config);
+$form = new Controlview($config, $phrases);
 $form -> printIndex();
 
 
