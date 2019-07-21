@@ -137,6 +137,7 @@ ul li {
   grid-auto-rows: 200px;
   grid-column-gap: 15px;
   grid-row-gap: 8rem;
+  padding-bottom: 15rem;
 }
 
 
@@ -154,7 +155,6 @@ ul li {
   /* padding-top: .5rem; */
   align-items: center;
   color: #1a1a1a;
-  padding-bottom: .25rem;
   border-bottom: 4px solid #1a1a1a;
 }
 .banner {
@@ -210,6 +210,7 @@ ul li {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 1rem;
 }
 nav {align-self: center;
 }
@@ -278,16 +279,10 @@ h1 {
  
   font-family: 'Roboto Condensed', sans-serif;
  
-  font-size: 2.2rem;
+  font-size: 5.5rem;
   font-weight: 900;
 }
 
-.highlight{
- 
-  font-size: 3.2rem;
-  display: block;
-  margin-bottom: -1.5rem;
-}
 
 h2{
   font-size: 3.2rem;

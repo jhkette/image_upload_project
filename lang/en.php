@@ -8,7 +8,7 @@ $phrases = array(
   'index_heading' => "Latest uploads...",
   'upload_heading' => "Upload a photo",
   '404_title' => "404 Error",
-  '404_heading' => "404 Error"
+  '404_heading' => "404 Error - page not found"
 );
 
 ?>
