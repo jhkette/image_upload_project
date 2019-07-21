@@ -48,6 +48,25 @@ class Controlview extends Model
         return $content;
     }
 
+    public function get404()
+    {
+        $content = '';
+        $headerHtml = './templates/header.html';
+        $header = file_get_contents($headerHtml);
+        $v = array('[+title+]');
+        $r = array($this->phrases['404_title']);
+        $content .= printTemplate($v, $r, $header);
+        $values = array('[+heading+]');
+        $replacements = array($this->phrases['404_heading' ]);
+        $bannerfile = './templates/banner.html';
+        $banner = file_get_contents($bannerfile);
+        $content .= printTemplate($values, $replacements, $banner);
+        $footer = './templates/footer.html';
+        $content .= file_get_contents($footer);
+
+        return $content;
+    }
+
     protected function getHeaderForm()
     {
         $content = '';
@@ -244,6 +263,12 @@ class Controlview extends Model
     {
         echo $this->getIndex();
     }
+
+    public function print404()
+    {
+        echo $this->get404();
+    }
+
 
     public function printMainImage($id)
     {

@@ -1,3 +1,4 @@
 <?php
-echo "oh no";
+$notFound = new Controlview($config, $phrases);
+$notFound -> print404();
 ?>
