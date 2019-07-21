@@ -2,7 +2,7 @@
 
  ?>
 
-<h1>Upload a file:</h1>	
+<p>Upload a jpg image</p>	
 <form enctype="multipart/form-data" class="upload-form" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
     <div class="fieldinput">
         <label for="fileinput">Upload a file:</label>

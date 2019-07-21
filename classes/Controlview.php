@@ -8,10 +8,16 @@ class Controlview extends Model
     public function getIndex()
     {
         $content = '';
-        $header = './templates/header.html';
-        $content .= file_get_contents($header);
-        $banner = './templates/banner.html';
-        $content .= file_get_contents($banner);
+        $headerHtml = './templates/header.html';
+        $header = file_get_contents($headerHtml);
+        $v = array('[+title+]');
+        $r = array($this->phrases['index_title']);
+        $content .= printTemplate($v, $r, $header);
+        $values = array('[+heading+]');
+        $replacements = array($this->phrases['index_heading' ]);
+        $bannerfile = './templates/banner.html';
+        $banner = file_get_contents($bannerfile);
+        $content .= printTemplate($values, $replacements, $banner);
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
@@ -26,9 +32,13 @@ class Controlview extends Model
     public function getImage($id)
     {
         $content = '';
-        $header = './templates/header.html';
-        $content .=  file_get_contents($header);
+        $headerHtml = './templates/header.html';
+        $header = file_get_contents($headerHtml);
         $data = $this->getImageData($id);
+        $v = array('[+title+]');
+        $r = array($data[0]['description_p']);
+        $content .= printTemplate($v, $r, $header);
+       
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
         $values = ['[+name+]','[+title+]','[+description+]','[+download+]','[+id+]'];
@@ -41,10 +51,18 @@ class Controlview extends Model
     protected function getHeaderForm()
     {
         $content = '';
-        $headerhtml = './templates/header.html';
-        $content .= file_get_contents($headerhtml);
+        $headerHtml = './templates/header.html';
+        $header = file_get_contents($headerHtml);
+        $v = array('[+title+]');
+        $r = array($this->phrases['upload_title']);
+
+        $content .= printTemplate($v, $r, $header);
         $banner = './templates/banner1.html';
-        $content .= file_get_contents($banner);
+        $values = array('[+heading+]');
+        $replacements = array($this->phrases['upload_heading']);
+        $bannerfile = './templates/banner.html';
+        $banner = file_get_contents($bannerfile);
+        $content .= printTemplate($values, $replacements, $banner);
         return $content;
     }
 
@@ -91,9 +109,6 @@ class Controlview extends Model
                 $updir = $this->config['upload_dir'];
                 $upfilename = basename($_FILES['userfile']['name']);
                 $newname = $updir . $upfilename;
-
-                // https://stackoverflow.com/questions/933081/try-catch-statement-in-php-where-the-file-does-not-upload
-                //try doing above ...
                 $small = img_resize(
                     $uploadedFile,
                     $this->config['thumbs'] .
@@ -108,7 +123,6 @@ class Controlview extends Model
                     600,
                     600
                 );
-                print_r($medium);
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
                 
@@ -126,7 +140,7 @@ class Controlview extends Model
                     } elseif ($error == UPLOAD_ERR_PARTIAL) {
                         echo 'File upload failed - partial uplaod';
                     } elseif ($error == UPLOAD_ERR_NO_FILE) {
-                        echo 'No file uploade';
+                        echo 'No file upload';
                     } else {
                         echo 'Error code' . $error;
                     }

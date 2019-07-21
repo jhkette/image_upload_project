@@ -34,9 +34,6 @@ if ((!isset($_GET['image'])) && (!isset($_GET['json'])))  {
          case 'upload':
              include 'views/upload.php';
              break;
-         case 'test':
-             include 'views/test.php';
-             break;
          default:
              include 'views/404.php';
      }

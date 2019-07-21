@@ -3,12 +3,10 @@
 $phrases = array(
   'error_db' => "Error connecting to database",
   'error_data' => "Error retrieving data",
-  'songs_title' => "W1 Music: All Songs",
-  'artists_title' => "W1 Music: All Artists",
-  'home_title' => "W1 Music",
-  'home_heading' => "Welcome",
-  'songs_heading' => "Our Songs",
-  'artists_heading' => "Our Artists",
+  'index_title' => "PicUpload",
+  'upload_title' => "PicUpload: upload a photo",
+  'index_heading' => "Latest uploads...",
+  'upload_heading' => "Upload a photo",
   '404_title' => "404 Error",
   '404_heading' => "404 Error"
 );
