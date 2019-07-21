@@ -259,6 +259,12 @@ nav ul li a:hover:after {
   min-height: 90vh;
 }
 
+.image-error{
+  width: 85%;
+  padding-top: 5rem;
+  margin: auto;
+}
+
 .form-main{
   width: 85%;
   margin: auto;

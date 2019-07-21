@@ -34,9 +34,29 @@ class Controlview extends Model
         $content = '';
         $headerHtml = './templates/header.html';
         $header = file_get_contents($headerHtml);
+       
         $data = $this->getImageData($id);
+       
         $v = array('[+title+]');
-        $r = array($data[0]['description_p']);
+        if(isset($data[0])){
+            $r = array($data[0]['description_p']);
+        }else{
+            $r = ['Unknown image'];
+        }
+       
+        if(!is_numeric($id)){
+            $content .= printTemplate($v, $r, $header);
+            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
+            echo $content;
+            return;
+        }
+        if(empty($data)){
+            $content .= printTemplate($v, $r, $header);
+            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
+            echo $content;
+            return;
+
+        }
         $content .= printTemplate($v, $r, $header);
        
         $list = './templates/mainimage.html';
