@@ -43,7 +43,10 @@ class Controlview extends Model
         }else{
             $r = ['Unknown image'];
         }
-       
+        /* if the $id is not valid id in the database I am presenting an error. Were this in production
+         I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
+         But as it is I am presenting both. 
+         */
         if(!is_numeric($id)){
             $content .= printTemplate($v, $r, $header);
             $content .= '<p class="image-error">This is not an image we have in our collection<p>';

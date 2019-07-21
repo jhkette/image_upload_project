@@ -322,8 +322,13 @@ h1 a {
   margin-right: 3rem;
 }
 .bold {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
+}
+
+.download{
+  margin-top: 2.5rem;
+  padding: 3rem;
+  background-color:#ededed;
 }
 
 .intro {
