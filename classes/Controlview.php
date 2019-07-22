@@ -11,19 +11,19 @@ class Controlview extends Model
         $headerHtml = './templates/header.html';
         $header = file_get_contents($headerHtml);
         $v = array('[+title+]');
-        $r = array( $this->phrases['index_title']);
+        $r = array($this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
-        if(isset($_SESSION['upload-file'])) {
+        if (isset($_SESSION['upload-file'])) {
             $messageHtml = './templates/upload.html';
             $message = file_get_contents($messageHtml);
             $content .= $message;
         }
         $values = array('[+heading+]');
-        $replacements = array($this->phrases['index_heading' ]);
+        $replacements = array($this->phrases['index_heading']);
         $bannerfile = './templates/banner.html';
         $banner = file_get_contents($bannerfile);
         $content .= printTemplate($values, $replacements, $banner);
-      
+
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
@@ -40,37 +40,44 @@ class Controlview extends Model
         $content = '';
         $headerHtml = './templates/header.html';
         $header = file_get_contents($headerHtml);
-       
+
         $data = $this->getImageData($id);
-       
+
         $v = array('[+title+]');
-        if(isset($data[0])){
-            $r = array('PicUpload: '.$data[0]['description_p']);
-        }else{
+        if (isset($data[0])) {
+            $r = array('PicUpload: ' . $data[0]['description_p']);
+        } else {
             $r = ['PicUpload: Unknown image'];
         }
         /* if the $id is not valid id in the database I am presenting an error. Were this in production
          I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
          But as it is I am presenting both. 
          */
-        if(!is_numeric($id)){
+        if (!is_numeric($id)) {
             $content .= printTemplate($v, $r, $header);
-            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
+            $content .=
+                '<p class="image-error">This is not an image we have in our collection<p>';
             echo $content;
             return;
         }
-        if(empty($data)){
+        if (empty($data)) {
             $content .= printTemplate($v, $r, $header);
-            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
+            $content .=
+                '<p class="image-error">This is not an image we have in our collection<p>';
             echo $content;
             return;
-
         }
         $content .= printTemplate($v, $r, $header);
-       
+
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
-        $values = ['[+name+]','[+title+]','[+description+]','[+download+]','[+id+]'];
+        $values = [
+            '[+name+]',
+            '[+title+]',
+            '[+description+]',
+            '[+download+]',
+            '[+id+]'
+        ];
         $content .= printTemplateArray($values, $data, $tpl);
         $footer = './templates/footer.html';
         $content .= file_get_contents($footer);
@@ -86,7 +93,7 @@ class Controlview extends Model
         $r = array($this->phrases['404_title']);
         $content .= printTemplate($v, $r, $header);
         $values = array('[+heading+]');
-        $replacements = array($this->phrases['404_heading' ]);
+        $replacements = array($this->phrases['404_heading']);
         $bannerfile = './templates/banner.html';
         $banner = file_get_contents($bannerfile);
         $content .= printTemplate($values, $replacements, $banner);
@@ -132,7 +139,6 @@ class Controlview extends Model
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
                 $filename = $_FILES['userfile']['name'];
 
-               
                 // sanitise string
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -142,7 +148,6 @@ class Controlview extends Model
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
 
-             
                 // define data array indexes to send to model method 'addPost'
                 $data = [
                     'filename' => $filename,
@@ -173,13 +178,12 @@ class Controlview extends Model
                 );
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
-
+                    // session variable created for flash messaging - communicates to user file has been uploaded
                     $_SESSION['upload-file'] = true;
-                
+
                     /* we are only updating database if the file is uploaded succssfully and if image resize has returned
-                    a true value. The data (from the array above) is added in the model class method 'addpost' */
+                     a true value. The data (from the array above) is added in the model class method 'addpost' */
                     $this->addPost($data);
-                  
                 } else {
                     echo 'File upload failed';
                     $error = $_FILES['userfile']['error'];
@@ -199,35 +203,41 @@ class Controlview extends Model
         }
     }
 
-   
     public function validateForm()
     {
         if (isset($_POST['singlefileupload'])) {
             $data = [];
             // the file is uploaded - peform checks on it
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-
-                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
+                $ext = pathinfo(
+                    $_FILES['userfile']['name'],
+                    PATHINFO_EXTENSION
+                ); // get extension
                 $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
-                $filename = $_FILES['userfile']['name'];  // get actual file name
+                $filename = $_FILES['userfile']['name']; // get actual file name
                 $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
-                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+                list($width, $height, $type, $attr) = getimagesize(
+                    $uploadedFile
+                );
 
-                if ($type != IMAGETYPE_JPEG) { //type is from getimagesize array - it is the mime type
+                if ($type != IMAGETYPE_JPEG) {
+                    //type is from getimagesize array - it is the mime type
                     $data['image_err'] =
                         'This file is not the correct mime type. only jpg file should be uploaded';
-                } elseif (($ext !="jpeg") && ($ext != "jpg")) {  // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
+                } elseif ($ext != "jpeg" && $ext != "jpg") {
+                    // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
                     $data['image_err'] =
                         'This is not the correct file extension';
-                } elseif (!is_numeric($height)) { // cheking height returns a number - this again helps ensure it is an image. 
+                } elseif (!is_numeric($height)) {
+                    // cheking height returns a number - this again helps ensure it is an image.
                     $data['image_err'] =
                         'This is not a file that can be processed';
-                } elseif(sizeof($fileCheck) != 0){ // checking the filename has not already been used. 
+                } elseif (sizeof($fileCheck) != 0) {
+                    // checking the filename has not already been used.
                     $data['image_err'] = 'This image name is already in use';
-                } 
-                else {
+                } else {
                     // image is ok so assign null to image_err value
-                    $data['image_err'] = null; 
+                    $data['image_err'] = null;
                 }
             }
             // the image is not uploaded - instruct user to upload it
@@ -260,14 +270,16 @@ class Controlview extends Model
                 return 'This photo is not in the database.';
             } else {
                 // I'm using try catch block here in case there is any particular
-                // problem with json_encode -ing the data. 
+                // problem with json_encode -ing the data.
                 try {
                     $newdata = json_encode($data);
                     if (json_last_error() == JSON_ERROR_NONE) {
                         // No errors occurred
                         return $newdata;
                     } else {
-                        throw new Exception(json_last_error() . 'Error encoding JSON');
+                        throw new Exception(
+                            json_last_error() . 'Error encoding JSON'
+                        );
                     }
                 } catch (Exception $e) {
                     $e->getMessage();
@@ -277,8 +289,6 @@ class Controlview extends Model
             return 'This is an invalid parameter.';
         }
     }
-
-
 
     public function header()
     {
@@ -299,7 +309,6 @@ class Controlview extends Model
     {
         echo $this->get404();
     }
-
 
     public function printMainImage($id)
     {

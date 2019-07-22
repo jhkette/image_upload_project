@@ -12,20 +12,18 @@ class Model extends Database
             $sql = "SELECT file_main, title, description_p, file_info, id FROM photos WHERE id = $id";
 
             $results = $this->conn->query($sql);
-            if ($results === false) {
-                echo 'error';
-                $this->disconnect();
-            } else {
-                while ($row = $results->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $results->free();
-                $this->disconnect();
-                return $data;
+
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
             }
+            $results->free();
+            $this->disconnect();
+            return $data;
         } catch (mysqli_sql_exception $ex) {
+            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
+            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
         }
     }
@@ -35,7 +33,10 @@ class Model extends Database
         $this->connect();
 
         $title = mysqli_real_escape_string($this->conn, $data['title']);
-        $description = mysqli_real_escape_string($this->conn,$data['description']);
+        $description = mysqli_real_escape_string(
+            $this->conn,
+            $data['description']
+        );
         $filename = mysqli_real_escape_string($this->conn, $data['filename']);
         $height = mysqli_real_escape_string($this->conn, $data['height']);
         $width = mysqli_real_escape_string($this->conn, $data['width']);
@@ -47,7 +48,6 @@ class Model extends Database
             $insert = $this->conn->query($sql);
             $this->disconnect();
             header('Location: /');
-          
         } catch (mysqli_sql_exception $ex) {
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
@@ -64,16 +64,17 @@ class Model extends Database
             ORDER BY id DESC";
             $data;
             $results = $this->conn->query($sql);
-                while ($row = $results->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $results->free();
-                $this->disconnect();
-                return $data;
-         
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $results->free();
+            $this->disconnect();
+            return $data;
         } catch (mysqli_sql_exception $ex) {
+            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
+            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
         }
     }
@@ -91,19 +92,17 @@ class Model extends Database
             FROM photos 
             WHERE id = $id";
             $results = $this->conn->query($sql);
-            if ($results === false) {
-                $this->disconnect();
-            } else {
-                while ($row = $results->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $results->free();
-                $this->disconnect();
-                return $data;
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
             }
+            $results->free();
+            $this->disconnect();
+            return $data;
         } catch (mysqli_sql_exception $ex) {
+            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
+            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
         }
     }
@@ -116,23 +115,22 @@ class Model extends Database
         $file = mysqli_real_escape_string($this->conn, $file);
 
         try {
-            $sql =  "SELECT file_info as fileI
+            $sql = "SELECT file_info as fileI
             FROM photos 
             WHERE file_info = '$file'";
             $results = $this->conn->query($sql);
-            if ($results === false) {
-                $this->disconnect();
-            } else {
-                while ($row = $results->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $results->free();
-                $this->disconnect();
-                return $data;
+
+            while ($row = $results->fetch_assoc()) {
+                $data[] = $row;
             }
+            $results->free();
+            $this->disconnect();
+            return $data;
         } catch (mysqli_sql_exception $ex) {
+            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
+            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
         }
     }
