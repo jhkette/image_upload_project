@@ -5,9 +5,7 @@ if(isset($_POST['submit'])) {
     if(isset($_POST['language'])) {
         $language = htmlentities(trim($_POST['language']));
         if(( $language == 'fr')||($language == 'en')){
-            $cookie_name = "language";
-            $cookie_value = $language;
-            setcookie($cookie_name,  $language, time() + 3600, '/');
+            $_SESSION['language'] = $language;
             header("Refresh:0");
         }
     }
@@ -46,4 +44,6 @@ if ((!isset($_GET['image'])) && (!isset($_GET['json'])))  {
  if (isset($_GET['json'])) {
     include 'views/json.php';
 }
+
+
  ?> 

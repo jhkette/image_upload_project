@@ -45,13 +45,9 @@ class Model extends Database
             $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
             VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$height',  '$width')";
             $insert = $this->conn->query($sql);
-            if ($insert === false) {
-                $this->disconnect();
-            } else {
-                $this->disconnect();
-
-                header('Location: /');
-            }
+            $this->disconnect();
+            header('Location: /');
+          
         } catch (mysqli_sql_exception $ex) {
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
@@ -68,17 +64,13 @@ class Model extends Database
             ORDER BY id DESC";
             $data;
             $results = $this->conn->query($sql);
-
-            if ($results === false) {
-                $this->disconnect();
-            } else {
                 while ($row = $results->fetch_assoc()) {
                     $data[] = $row;
                 }
                 $results->free();
                 $this->disconnect();
                 return $data;
-            }
+         
         } catch (mysqli_sql_exception $ex) {
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {

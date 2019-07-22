@@ -3,6 +3,6 @@ $id = $_GET['json'];
 $json = new Controlview($config, $phrases);
 $json -> printjson($id);
 
-
+// check this.
 
 ?>

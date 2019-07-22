@@ -1,7 +1,7 @@
 
 tidy css - you prob need to change submit css
 add language
-404
+404 done
 check json
 check cookies are working
 check through controlview in particular

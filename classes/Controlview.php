@@ -11,13 +11,19 @@ class Controlview extends Model
         $headerHtml = './templates/header.html';
         $header = file_get_contents($headerHtml);
         $v = array('[+title+]');
-        $r = array($this->phrases['index_title']);
+        $r = array( $this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
+        if(isset($_SESSION['upload-file'])) {
+            $messageHtml = './templates/upload.html';
+            $message = file_get_contents($messageHtml);
+            $content .= $message;
+        }
         $values = array('[+heading+]');
         $replacements = array($this->phrases['index_heading' ]);
         $bannerfile = './templates/banner.html';
         $banner = file_get_contents($bannerfile);
         $content .= printTemplate($values, $replacements, $banner);
+      
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
@@ -39,9 +45,9 @@ class Controlview extends Model
        
         $v = array('[+title+]');
         if(isset($data[0])){
-            $r = array($data[0]['description_p']);
+            $r = array('PicUpload: '.$data[0]['description_p']);
         }else{
-            $r = ['Unknown image'];
+            $r = ['PicUpload: Unknown image'];
         }
         /* if the $id is not valid id in the database I am presenting an error. Were this in production
          I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
@@ -167,6 +173,8 @@ class Controlview extends Model
                 );
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
+
+                    $_SESSION['upload-file'] = true;
                 
                     /* we are only updating database if the file is uploaded succssfully and if image resize has returned
                     a true value. The data (from the array above) is added in the model class method 'addpost' */

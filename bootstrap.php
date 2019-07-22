@@ -1,4 +1,4 @@
-<?php
+<?php  session_start();
 try {
     // init bootstrapping phase
     $config_file_path = "./includes/config.php";
@@ -13,7 +13,7 @@ try {
 }
 
 require  $config_file_path;
-require './includes/cookie.php';
+require './includes/session.php';
 require_once './lang/'.$lang['language'].'.php';
 
 try {
