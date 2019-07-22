@@ -7,6 +7,7 @@ $phrases = array(
   'upload_title' => "PicUpload: upload a photo",
   'index_heading' => "Latest uploads...",
   'upload_heading' => "Upload a photo",
+  'success' => "Image successfully uploaded",
   '404_title' => "404 Error",
   '404_heading' => "404 Error - page not found"
 );

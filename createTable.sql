@@ -5,6 +5,8 @@ CREATE TABLE `photos3`
 `file_thumb` VARCHAR(150) NOT NULL, 
 `title` TEXT NOT NULL , 
 `description_p` TEXT NOT NULL, 
+`height` INT NOT NULL, 
+`width` INT NOT NULL, 
 PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 -- I am adding the lead images, and thumb images to the table as columns. 

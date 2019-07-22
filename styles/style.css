@@ -287,15 +287,15 @@ nav ul li a:hover:after {
   display: flex;
 }
 
-.upload-form{
-  margin-left: 15rem;
-}
 
 .field{
   display: flex;
+  width: 65rem;
+  margin-bottom: 2rem;
 }
 .fieldinput{
   display: block;
+  margin-right: 4rem;
 }
 h1 {
   font-family: 'Roboto Condensed', sans-serif;

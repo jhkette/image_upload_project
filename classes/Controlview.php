@@ -13,10 +13,13 @@ class Controlview extends Model
         $v = array('[+title+]');
         $r = array($this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
+        // send message if file has just been uploaded
         if (isset($_SESSION['upload-file'])) {
-            $messageHtml = './templates/upload.html';
-            $message = file_get_contents($messageHtml);
-            $content .= $message;
+            $messagefile = './templates/upload.html';
+            $messageHTML = file_get_contents($messagefile);
+            $message = array('[+message+]');
+            $rep = array($this->phrases['success']);
+            $content .= printTemplate($message, $rep,  $messageHTML);
         }
         $values = array('[+heading+]');
         $replacements = array($this->phrases['index_heading']);
