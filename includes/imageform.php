@@ -21,7 +21,7 @@
     </div>
     <div class="field">
        <div class="fieldinput">
-            <label for="description">description</label>
+            <label for="description">Description</label>
             <input type="textarea" value="<?php if (isset($data['description'])) {echo htmlentities($data['description']);} ?>" name="description" id="description" />
        </div>
            <!--echo error message if firstname error is set  -->

@@ -7,10 +7,14 @@ class Model extends Database
         $this->connect();
 
         try {
-           // escape mysqli string
-           $id = mysqli_real_escape_string($this->conn, $id);
-           $sql = "SELECT file_main, title, description_p, file_info, id FROM photos WHERE id = $id";
-           $results = $this->conn->query($sql);
+        
+           $stmt =  $this->conn->prepare("SELECT file_main, title, description_p, file_info, id FROM photos WHERE id = ?");
+           
+           $stmt->bind_param('i', $id);
+
+           $stmt->execute();
+           
+           $results = $stmt->get_result();
          
                while ($row = $results->fetch_assoc()) {
                    $data[] = $row;
@@ -30,23 +34,30 @@ class Model extends Database
     }
 
     protected function addPost($data)
+    // https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
+    // https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
+
+    // USE PREPARED STATEMENTS
     {
         $this->connect();
 
-        $title = mysqli_real_escape_string($this->conn, $data['title']);
-        $description = mysqli_real_escape_string(
-            $this->conn,
-            $data['description']
-        );
-        $filename = mysqli_real_escape_string($this->conn, $data['filename']);
-        $height = mysqli_real_escape_string($this->conn, $data['height']);
-        $width = mysqli_real_escape_string($this->conn, $data['width']);
-        $imgmain = mysqli_real_escape_string($this->conn, $data['file_main']);
-        $imgthumb = mysqli_real_escape_string($this->conn, $data['file_thumb']);
+        $title = $data['title'];
+        $description = $data['description'];
+   
+        $filename = $data['filename'];
+        $height = $data['height'];
+        $width = $data['width'];
+        $imgmain =  $data['file_main'];
+        $imgthumb = $data['file_thumb'];
         try {
-            $sql = "INSERT INTO photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
-            VALUES('$filename', '$imgmain', '$imgthumb', '$title', '$description',  '$width', '$height')";
-            $insert = $this->conn->query($sql);
+            $stmt =  $this->conn->prepare("INSERT INTO 
+            photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
+            VALUES(?, ?, ?, ?, ?, ?, ?)");
+           
+           
+            $stmt->bind_param('sssssii', $filename, $imgmain, $imgthumb, $title , $description,  $width , $height );
+
+            $stmt->execute();
             $this->disconnect();
             header('Location: /');
         } catch (mysqli_sql_exception $ex) {
@@ -87,12 +98,17 @@ class Model extends Database
         $this->connect();
         // escape mysqli string
 
-        $id = mysqli_real_escape_string($this->conn, $id);
+       
+      
         try {
-            $sql = "SELECT file_info, title, description_p, height, width 
-            FROM photos 
-            WHERE id = $id";
-            $results = $this->conn->query($sql);
+            $stmt =  $this->conn->prepare("SELECT file_info, title, description_p, height, width FROM photos 
+            WHERE id = ?");
+            
+            $stmt->bind_param('i', $id);
+
+            $stmt->execute();
+
+            $results = $stmt->get_result();
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
@@ -113,14 +129,17 @@ class Model extends Database
 
         $this->connect();
         // escape mysqli string
-        $file = mysqli_real_escape_string($this->conn, $file);
-
+       
         try {
-            $sql = "SELECT file_info as fileI
-            FROM photos 
-            WHERE file_info = '$file'";
-            $results = $this->conn->query($sql);
 
+            $stmt =  $this->conn->prepare("SELECT file_info as fileI
+            FROM photos 
+            WHERE file_info = ?");
+            
+            $stmt->bind_param('s', $file);
+
+            $stmt->execute();
+            $results = $stmt->get_result();
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }

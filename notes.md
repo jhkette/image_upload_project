@@ -3,8 +3,10 @@ tidy css - you prob need to change submit css
 add language
 404 done
 check json
-check cookies are working
-check through controlview in particular
+
+check through controlview in particular - this is important!
+
+USE Prepared statements for db
 
 
 

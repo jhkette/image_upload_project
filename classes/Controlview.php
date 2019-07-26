@@ -8,12 +8,13 @@ class Controlview extends Model
     public function getIndex()
     {
         $content = '';
+        // print header
         $headerHtml = './templates/header.html';
         $header = file_get_contents($headerHtml);
         $v = array('[+title+]');
         $r = array($this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
-        // send message if file has just been uploaded
+        // send flash success message if file has just been uploaded
         if (isset($_SESSION['upload-file'])) {
             $messagefile = './templates/upload.html';
             $messageHTML = file_get_contents($messagefile);
@@ -21,17 +22,19 @@ class Controlview extends Model
             $rep = array($this->phrases['success']);
             $content .= printTemplate($message, $rep,  $messageHTML);
         }
+        // print banner
         $values = array('[+heading+]');
         $replacements = array($this->phrases['index_heading']);
         $bannerfile = './templates/banner.html';
         $banner = file_get_contents($bannerfile);
         $content .= printTemplate($values, $replacements, $banner);
-
+        // get photos from db and main body content
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
         $tpl = file_get_contents($list);
         $values = ['[+id+]', '[+title+]', '[+description+]', '[+name+]'];
         $content .= printTemplateArray($values, $data, $tpl);
+         // print footer
         $footer = './templates/footer.html';
         $content .= file_get_contents($footer);
 
@@ -48,21 +51,22 @@ class Controlview extends Model
 
         $v = array('[+title+]');
         if (isset($data[0])) {
-            $r = array('PicUpload: ' . $data[0]['description_p']);
+            $r = array('PicUpload: ' . $data[0]['description_p']); // the title will be the image description unless id is not in database
         } else {
             $r = ['PicUpload: Unknown image'];
         }
-        /* if the $id is not valid id in the database I am presenting an error. Were this in production
+        /* if the $id is not valid a id in the database I am presenting an error. Were this in production
          I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
-         But as it is I am presenting both. 
-         */
+         As it is I am presenting both the printed error and catch message. */
         if (!is_numeric($id)) {
             $content .= printTemplate($v, $r, $header);
             $content .=
                 '<p class="image-error">This is not an image we have in our collection<p>';
             echo $content;
-            return;
+            return; 
         }
+        /*If id is a number but not in database - there will not be an sql error - but I am still presenting a message
+        to communicate that this photo is not in the database */
         if (empty($data)) {
             $content .= printTemplate($v, $r, $header);
             $content .=
@@ -74,10 +78,7 @@ class Controlview extends Model
 
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
-        $values = [
-            '[+name+]',
-            '[+title+]',
-            '[+description+]',
+        $values = ['[+name+]','[+title+]','[+description+]',
             '[+download+]',
             '[+id+]'
         ];
@@ -142,12 +143,7 @@ class Controlview extends Model
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
                 $filename = $_FILES['userfile']['name'];
 
-                // sanitise string
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-                list($width, $height, $type, $attr) = getimagesize(
-                    $uploadedFile
-                );
+                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
 
@@ -162,8 +158,8 @@ class Controlview extends Model
                     'file_thumb' => $fileonly['filename'] . '_small.jpg'
                 ];
 
-                $updir = $this->config['upload_dir'];
-                $upfilename = basename($_FILES['userfile']['name']);
+                $updir = $this->config['upload_dir']; //upload directory
+                $upfilename = basename($_FILES['userfile']['name']); // get filename
                 $newname = $updir . $upfilename;
                 $small = img_resize(
                     $uploadedFile,
@@ -243,6 +239,8 @@ class Controlview extends Model
                     $data['image_err'] = null;
                 }
             }
+
+            // FILTER_SANITIZE_STRING USE THIS MB
             // the image is not uploaded - instruct user to upload it
             else {
                 $data['image_err'] = 'Please upload an image';
@@ -267,8 +265,8 @@ class Controlview extends Model
         // check that the id passed as an argument is a number
         if (is_numeric($id)) {
             $data = $this->getPhotoJson($id);
-            // if you query an id that does not exist
-            // it will be a valid query - but will return an empty array so a message is needed
+            /* if you query an id that does not exist
+             it will be a valid query - but will return an empty array so a message is needed */
             if (empty($data)) {
                 return 'This photo is not in the database.';
             } else {
