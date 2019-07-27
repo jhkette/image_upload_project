@@ -157,7 +157,7 @@ class Controlview extends Model
                 $newname = $updir . $upfilename;
                 $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
                 $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
-                
+
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
                     // session variable created for flash messaging - communicates to user file has been uploaded
@@ -191,16 +191,11 @@ class Controlview extends Model
             $data = [];
             // the file is uploaded - peform checks on it
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                $ext = pathinfo(
-                    $_FILES['userfile']['name'],
-                    PATHINFO_EXTENSION
-                ); // get extension
+                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
                 $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
                 $filename = $_FILES['userfile']['name']; // get actual file name
                 $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
-                list($width, $height, $type, $attr) = getimagesize(
-                    $uploadedFile
-                );
+                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
 
                 if ($type != IMAGETYPE_JPEG) {
                     //type is from getimagesize array - it is the mime type
@@ -212,8 +207,7 @@ class Controlview extends Model
                         'This is not the correct file extension';
                 } elseif (!is_numeric($height)) {
                     // cheking height returns a number - this again helps ensure it is an image.
-                    $data['image_err'] =
-                        'This is not a file that can be processed';
+                    $data['image_err'] = 'This is not a file that can be processed';
                 } elseif (sizeof($fileCheck) != 0) {
                     // checking the filename has not already been used.
                     $data['image_err'] = 'This image name is already in use';

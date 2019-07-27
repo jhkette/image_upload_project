@@ -19,8 +19,8 @@ class Model extends Database
                while ($row = $results->fetch_assoc()) {
                    $data[] = $row;
                }
-               $stmt->close(); // frees up memory relating to prepared statement and results
-               $this->disconnect();
+              
+              
                return $data;
            
          
@@ -30,7 +30,7 @@ class Model extends Database
             echo 'General exception raised' . $ex->getMessage();
         }
         finally {
-            $stmt->close();
+            $stmt->close(); // frees up memory relating to prepared statement and results
             $this->disconnect();
         }
     }
@@ -57,8 +57,8 @@ class Model extends Database
             VALUES(?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param('sssssii', $filename, $imgmain, $imgthumb, $title , $description,  $width , $height );
             $stmt->execute();
-            $stmt->close();
-            $this->disconnect();
+           
+           
             header('Location: /');
         } catch (mysqli_sql_exception $ex) {
             echo 'mysql error' . $ex->getMessage();
@@ -114,7 +114,7 @@ class Model extends Database
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
-            $stmt->close(); // frees up memory relating to prepared statement and results
+            
             $this->disconnect();
             return $data;
         } catch (mysqli_sql_exception $ex) {
@@ -123,7 +123,7 @@ class Model extends Database
             echo 'General exception raised' . $ex->getMessage();
         }
         finally {
-            $stmt->close();
+            $stmt->close(); // frees up memory relating to prepared statement and results
             $this->disconnect();
         }
     }
@@ -145,12 +145,11 @@ class Model extends Database
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
+            
             return $data;
         } catch (mysqli_sql_exception $ex) {
-           
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
-           
             echo 'General exception raised' . $ex->getMessage();
         }
         finally {
