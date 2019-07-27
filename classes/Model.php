@@ -19,17 +19,19 @@ class Model extends Database
                while ($row = $results->fetch_assoc()) {
                    $data[] = $row;
                }
-               $results->free();
+               $stmt->close(); // frees up memory relating to prepared statement and results
                $this->disconnect();
                return $data;
            
          
         } catch (mysqli_sql_exception $ex) {
-            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
-            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
+        }
+        finally {
+            $stmt->close();
+            $this->disconnect();
         }
     }
 
@@ -37,7 +39,7 @@ class Model extends Database
     // https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
     // https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
 
-    // USE PREPARED STATEMENTS
+   
     {
         $this->connect();
 
@@ -53,17 +55,19 @@ class Model extends Database
             $stmt =  $this->conn->prepare("INSERT INTO 
             photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
             VALUES(?, ?, ?, ?, ?, ?, ?)");
-           
-           
             $stmt->bind_param('sssssii', $filename, $imgmain, $imgthumb, $title , $description,  $width , $height );
-
             $stmt->execute();
+            $stmt->close();
             $this->disconnect();
             header('Location: /');
         } catch (mysqli_sql_exception $ex) {
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
             echo 'General exception raised' . $ex->getMessage();
+        }
+        finally {
+            $stmt->close();
+            $this->disconnect();
         }
     }
 
@@ -79,15 +83,16 @@ class Model extends Database
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
-            $results->free();
-            $this->disconnect();
+           
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
-            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
+        }
+        finally {
+            $results->free();
+            $this->disconnect();
         }
     }
 
@@ -109,15 +114,17 @@ class Model extends Database
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
-            $results->free();
+            $stmt->close(); // frees up memory relating to prepared statement and results
             $this->disconnect();
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            $this->disconnect();
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
-            $this->disconnect();
             echo 'General exception raised' . $ex->getMessage();
+        }
+        finally {
+            $stmt->close();
+            $this->disconnect();
         }
     }
     protected function checkFileName($file)
@@ -132,23 +139,23 @@ class Model extends Database
             $stmt =  $this->conn->prepare("SELECT file_info as fileI
             FROM photos 
             WHERE file_info = ?");
-            
             $stmt->bind_param('s', $file);
-
             $stmt->execute();
             $results = $stmt->get_result();
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
-            $results->free();
-            $this->disconnect();
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            $this->disconnect();
+           
             echo 'mysql error' . $ex->getMessage();
         } catch (Exception $ex) {
-            $this->disconnect();
+           
             echo 'General exception raised' . $ex->getMessage();
+        }
+        finally {
+            $stmt->close();
+            $this->disconnect();
         }
     }
 }
