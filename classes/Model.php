@@ -96,10 +96,7 @@ class Model extends Database
         $data = [];
 
         $this->connect();
-        // escape mysqli string
-
-       
-      
+    
         try {
             $stmt =  $this->conn->prepare("SELECT file_info, title, description_p, height, width FROM photos 
             WHERE id = ?");

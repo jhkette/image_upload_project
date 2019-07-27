@@ -55,13 +55,12 @@ class Controlview extends Model
         } else {
             $r = ['PicUpload: Unknown image'];
         }
-        /* if the $id is not valid a id in the database I am presenting an error. Were this in production
+        /* if the $id is not a valid id in the database I am presenting an error. Were this in production
          I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
          As it is I am presenting both the printed error and catch message. */
-        if (!is_numeric($id)) {
+        if (!is_numeric($id)){
             $content .= printTemplate($v, $r, $header);
-            $content .=
-                '<p class="image-error">This is not an image we have in our collection<p>';
+            $content .='<p class="image-error">This is not an image we have in our collection<p>';
             echo $content;
             return; 
         }
@@ -69,19 +68,14 @@ class Controlview extends Model
         to communicate that this photo is not in the database */
         if (empty($data)) {
             $content .= printTemplate($v, $r, $header);
-            $content .=
-                '<p class="image-error">This is not an image we have in our collection<p>';
+            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
             echo $content;
             return;
         }
         $content .= printTemplate($v, $r, $header);
-
         $list = './templates/mainimage.html';
         $tpl = file_get_contents($list);
-        $values = ['[+name+]','[+title+]','[+description+]',
-            '[+download+]',
-            '[+id+]'
-        ];
+        $values = ['[+name+]','[+title+]','[+description+]','[+download+]','[+id+]'];
         $content .= printTemplateArray($values, $data, $tpl);
         $footer = './templates/footer.html';
         $content .= file_get_contents($footer);
@@ -161,20 +155,9 @@ class Controlview extends Model
                 $updir = $this->config['upload_dir']; //upload directory
                 $upfilename = basename($_FILES['userfile']['name']); // get filename
                 $newname = $updir . $upfilename;
-                $small = img_resize(
-                    $uploadedFile,
-                    $this->config['thumbs'] .
-                        $fileonly['filename'] .
-                        '_small.jpg',
-                    150,
-                    150
-                );
-                $medium = img_resize(
-                    $uploadedFile,
-                    $this->config['main'] . $fileonly['filename'] . '_main.jpg',
-                    600,
-                    600
-                );
+                $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
+                $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
+                
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium[0] && $small[0]) {
                     // session variable created for flash messaging - communicates to user file has been uploaded
