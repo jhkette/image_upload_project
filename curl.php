@@ -17,11 +17,12 @@
 //step1
 $cSession = curl_init(); 
 //step2
-curl_setopt($cSession,CURLOPT_URL,"http://localhost:8080/index.php?json=67");
+curl_setopt($cSession,CURLOPT_URL,"https://opentdb.com/api.php?amount=10");
 curl_setopt($cSession,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($cSession,CURLOPT_HEADER, false); 
 //step3
 $result=curl_exec($cSession);
+print_r($result);
 
 //step4
 curl_close($cSession);
