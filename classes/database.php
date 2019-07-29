@@ -37,10 +37,10 @@ class Database
                 $this->db
             );
         } catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
             exit();
         } catch (Exception $ex) {
-            echo 'General exception raised' . $ex->getMessage();
+            echo $this->phrases['general-exception'] . $ex->getMessage();
             exit();
         }
     }

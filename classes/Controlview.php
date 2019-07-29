@@ -55,22 +55,19 @@ class Controlview extends Model
         } else {
             $r = ['PicUpload: Unknown image'];
         }
-        /* if the $id is not a valid id in the database I am presenting an error. Were this in production
-         I would just present this message and log the catch error (from the model class method getImageData) to a text file. 
-         As it is I am presenting both the printed error and catch message. */
+        /* if the $id is not a valid id in the database I am presenting an error. */
         if (!is_numeric($id)){
             $content .= printTemplate($v, $r, $header);
-            $content .='<p class="image-error">This is not an image we have in our collection<p>';
-            echo $content;
-            return; 
+            $content .='<p class="image-error">'. $this->phrases['photo-number']. '<p>';
+            return $content;
         }
         /*If id is a number but not in database - there will not be an sql error - but I am still presenting a message
         to communicate that this photo is not in the database */
         if (empty($data)) {
             $content .= printTemplate($v, $r, $header);
-            $content .= '<p class="image-error">This is not an image we have in our collection<p>';
-            echo $content;
-            return;
+            $content .= '<p class="image-error">'. $this->phrases['photo-absent']. '<p>';
+            return $content;
+            
         }
         $content .= printTemplate($v, $r, $header);
         $list = './templates/mainimage.html';
@@ -199,12 +196,10 @@ class Controlview extends Model
 
                 if ($type != IMAGETYPE_JPEG) {
                     //type is from getimagesize array - it is the mime type
-                    $data['image_err'] =
-                        'This file is not the correct mime type. only jpg file should be uploaded';
+                    $data['image_err'] ='This file is not the correct mime type. only jpg file should be uploaded';
                 } elseif ($ext != "jpeg" && $ext != "jpg") {
                     // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
-                    $data['image_err'] =
-                        'This is not the correct file extension';
+                    $data['image_err'] ='This is not the correct file extension';
                 } elseif (!is_numeric($height)) {
                     // cheking height returns a number - this again helps ensure it is an image.
                     $data['image_err'] = 'This is not a file that can be processed';
@@ -227,7 +222,6 @@ class Controlview extends Model
             } else {
                 $data['title'] = htmlentities($_POST['title']);
             }
-
             if (empty($_POST['description'])) {
                 $data['description_err'] = 'Please enter description';
             } else {
@@ -238,8 +232,7 @@ class Controlview extends Model
     }
 
     protected function json($id)
-    {
-        // check that the id passed as an argument is a number
+    { // check that the id passed as an argument is a number
         if (is_numeric($id)) {
             $data = $this->getPhotoJson($id);
             /* if you query an id that does not exist
@@ -247,13 +240,12 @@ class Controlview extends Model
             if (empty($data)) {
                 return 'This photo is not in the database.';
             } else {
-                // I'm using try catch block here in case there is any particular
-                // problem with json_encode -ing the data.
+                /* I'm using try catch block here in case there is any particular
+                 problem with json_encode -ing the data. */
                 try {
                     $newdata = json_encode($data);
                     if (json_last_error() == JSON_ERROR_NONE) {
-                        // No errors occurred
-                        return $newdata;
+                        return $newdata;  // No errors occurred
                     } else {
                         throw new Exception(
                             json_last_error() . 'Error encoding JSON'

@@ -11,7 +11,10 @@
     'upload_heading' => "Télécharger une photo",
     'success' => "Image téléchargée avec succès",
     '404_title' => "404 Erreur",
-    '404_heading' => "404 Erreur - Page non trouvée"
+    '404_heading' => "404 Erreur - Page non trouvée",
+    'config_empty' =>"Config details not found",
+    'mysql-error' =>"There has been a mysql error",
+    'photo-number' =>'This is not a valid photo number'
   );
 
 ?>

@@ -275,7 +275,7 @@ nav ul li {
   margin-left: 1.5rem;
   font-size: 1.65rem;
   position: relative;
-  font-weight: 100;
+  font-weight: 900;
 }
 
 nav ul li a {
@@ -384,6 +384,7 @@ nav ul li a:hover:after {
   color: white;
   font-weight: 500;
   align-items: center;
+  margin-right: .4rem;
 
 }
 
@@ -469,6 +470,7 @@ nav ul li a:hover:after {
   border: 1px solid #232323;
   padding: .5rem 2rem;
   margin-left: 1.8rem;
+  cursor: pointer;
  
 }
 

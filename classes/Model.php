@@ -15,10 +15,9 @@ class Model extends Database
             while ($row = $results->fetch_assoc()) {
                 $data[] = $row;
             }
-
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
         } catch (Exception $ex) {
             echo 'General exception raised' . $ex->getMessage();
         } finally {
@@ -58,9 +57,9 @@ class Model extends Database
 
             header('Location: /');
         } catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
         } catch (Exception $ex) {
-            echo 'General exception raised' . $ex->getMessage();
+            echo  $this->phrases['general-exception'] . $ex->getMessage();
         } finally {
             $stmt->close();
             $this->disconnect();
@@ -81,9 +80,9 @@ class Model extends Database
             }
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
         } catch (Exception $ex) {
-            echo 'General exception raised' . $ex->getMessage();
+            echo $this->phrases['general-exception'] . $ex->getMessage();
         } finally {
             $results->free();
             $this->disconnect();
@@ -95,8 +94,8 @@ class Model extends Database
         $data = [];
         $this->connect();
         try {
-            $stmt = $this->conn
-                ->prepare("SELECT file_info, title, description_p, height, width FROM photos 
+            $stmt = $this->conn->prepare("SELECT file_info, title, description_p, height, width 
+            FROM photos 
             WHERE id = ?");
             $stmt->bind_param('i', $id);
             $stmt->execute();
@@ -106,21 +105,19 @@ class Model extends Database
             }
             return $data;
         } catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
         } catch (Exception $ex) {
-            echo 'General exception raised' . $ex->getMessage();
+            echo $this->phrases['general-exception'] . $ex->getMessage();
         } finally {
             $stmt->close(); // frees up memory relating to prepared statement and results
             $this->disconnect();
         }
     }
+
     protected function checkFileName($file)
     {
         $data = [];
-
         $this->connect();
-        // escape mysqli string
-
         try {
             $stmt = $this->conn->prepare("SELECT file_info as fileI
             FROM photos 
@@ -134,10 +131,10 @@ class Model extends Database
             return $data;
         } 
         catch (mysqli_sql_exception $ex) {
-            echo 'mysql error' . $ex->getMessage();
+            echo $this->phrases['mysql-error'] . $ex->getMessage();
         } 
         catch (Exception $ex) {
-            echo 'General exception raised' . $ex->getMessage();
+            echo $this->phrases['general-exception'] . $ex->getMessage();
         } 
         finally {
             $stmt->close();
