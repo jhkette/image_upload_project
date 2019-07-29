@@ -191,7 +191,6 @@ class Controlview extends Model
                 $filename = $_FILES['userfile']['name']; // get actual file name
                 $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
-
                 if ($type != IMAGETYPE_JPEG) {
                     //type is from getimagesize array - it is the mime type
                     $data['image_err'] = $this->phrases['jpg-error'];
