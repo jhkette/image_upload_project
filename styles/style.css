@@ -130,7 +130,7 @@ body {
 
 h1 {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 4.5rem;
+  font-size: 3.2rem;
   font-weight: 900;
   text-shadow: 1px 2px #505050;
 }
@@ -180,14 +180,19 @@ header{
   width: 85%;
   margin: auto;
 }
+.flash-container {
+  width: 100%;
+  background-color:#ededed;
+  height: auto;
+}
 
 .flash-message p {
   background-color: #327fde;
   border-radius: .2rem;
   display: inline-block;
-  margin-top: 3rem;
+
   padding: 1rem;
-  margin-bottom: -1rem;
+
 }
 
 .banner {
@@ -260,7 +265,6 @@ header{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1rem;
 }
 nav {align-self: center;
 }
@@ -306,7 +310,9 @@ nav ul li a:hover:after {
 .main-container {
   padding-top: 4rem;
   width: 100%;
-  min-height: 90vh;
+  min-height: 80vh;
+  position:relative;
+  overflow:hidden;
 }
 
 .image-error{

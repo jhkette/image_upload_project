@@ -1,6 +1,5 @@
 <?php
 
-
 $form = new Controlview($config, $phrases);
 // instantiate data variable
 $data = [];
@@ -23,7 +22,5 @@ if (empty($data['description_err']) &&
 }
 
 $form->footer();
-
-
 
 ?>

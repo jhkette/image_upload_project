@@ -105,13 +105,11 @@ class Controlview extends Model
         $header = file_get_contents($headerHtml);
         $v = array('[+title+]');
         $r = array($this->phrases['upload_title']);
-
         $content .= printTemplate($v, $r, $header);
-        $banner = './templates/banner1.html';
+        $bannerHtml = './templates/banner1.html';
+        $banner = file_get_contents($bannerHtml);
         $values = array('[+heading+]');
         $replacements = array($this->phrases['upload_heading']);
-        $bannerfile = './templates/banner.html';
-        $banner = file_get_contents($bannerfile);
         $content .= printTemplate($values, $replacements, $banner);
         return $content;
     }
@@ -211,8 +209,6 @@ class Controlview extends Model
                     $data['image_err'] = null;
                 }
             }
-
-            // FILTER_SANITIZE_STRING USE THIS MB
             // the image is not uploaded - instruct user to upload it
             else {
                 $data['image_err'] = 'Please upload an image';
@@ -256,7 +252,7 @@ class Controlview extends Model
                 }
             }
         } else {
-            return 'This is an invalid parameter.';
+            return $this->phrases['json-find'];
         }
     }
 
