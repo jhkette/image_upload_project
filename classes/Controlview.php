@@ -238,7 +238,7 @@ class Controlview extends Model
             /* if you query an id that does not exist
              it will be a valid query - but will return an empty array so a message is needed */
             if (empty($data)) {
-                return 'This photo is not in the database.';
+                return $this->phrases['json-find'];
             } else {
                 /* I'm using try catch block here in case there is any particular
                  problem with json_encode -ing the data. */
@@ -248,7 +248,7 @@ class Controlview extends Model
                         return $newdata;  // No errors occurred
                     } else {
                         throw new Exception(
-                            json_last_error() . 'Error encoding JSON'
+                            json_last_error() . $this->phrases['json-err']
                         );
                     }
                 } catch (Exception $e) {
