@@ -55,7 +55,7 @@ class Model extends Database
             );
             $stmt->execute();
 
-            header('Location: /');
+            header('Location: index.php');
         } catch (mysqli_sql_exception $ex) {
             echo $this->phrases['mysql-error'] . $ex->getMessage();
         } catch (Exception $ex) {
