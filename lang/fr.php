@@ -4,7 +4,6 @@
 
   $phrases = array(
     'error_db' => "Erreur de connexion à base de données",
-    
     'index_title' => "PicUpload",
     'upload_title' => "PicUpload: télécharger une photo",
     'index_heading' => "Derniers téléchargements...",
@@ -21,7 +20,9 @@
   'process-err'=>'This is not a file that can be processed',
   'name-err'=>'This image name is already in use',
   'json-find' => 'This photo is not in the database',
-  'json-err' => 'An error has occured whilst encoing the data to JSON'
+  'json-err' => 'An error has occured whilst encoing the data to JSON',
+  'description-err' => 'Description is empty',
+  'title-err' => 'Title is empty'
   );
 
 ?>

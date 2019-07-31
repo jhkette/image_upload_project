@@ -512,6 +512,7 @@ nav ul li a:hover:after {
   display: flex;
   width: 65rem;
   margin-bottom: 2rem;
+  align-items: flex-end;
 }
 label{
   display: block;
@@ -520,6 +521,24 @@ label{
   margin-top: .3rem;
 }
 
+.fieldinput{
+  margin-right: 3rem;
+}
+
+.title-input{
+  width: 15rem;
+  height: 3rem;
+  outline: none;
+  border: 1px solid #1a1a1a;
+}
+
+.description-input {
+  width: 15rem;
+  height: 6rem;
+  outline: none;
+  border: 1px solid #1a1a1a;
+
+}
 
 /*-----------------------  footer ---------------------*/
 

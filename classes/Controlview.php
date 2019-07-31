@@ -210,15 +210,15 @@ class Controlview extends Model
             }
             // the image is not uploaded - instruct user to upload it
             else {
-                $data['image_err'] = 'Please upload an image';
+                $data['image_err'] = $this->phrases['image-err'];
             }
             if (empty($_POST['title'])) {
-                $data['title_err'] = 'Please enter title';
+                $data['title_err'] = $this->phrases['title-err'];
             } else {
                 $data['title'] = htmlentities($_POST['title']);
             }
             if (empty($_POST['description'])) {
-                $data['description_err'] = 'Please enter description';
+                $data['description_err'] =  $this->phrases['description-err'];
             } else {
                 $data['description'] = htmlentities($_POST['description']);
             }

@@ -14,18 +14,18 @@
     <div class="field">
         <div class="fieldinput">
             <label for="title">Title</label>
-            <input type="text" value="<?php if (isset($data['title'])) {echo htmlentities($data['title']);} ?>" name="title" id="title" />
+            <input class="title-input" type="text" value="<?php if (isset($data['title'])) {echo htmlentities($data['title']);} ?>" name="title" id="title" />
         </div>
            <!--echo error message if firstname error is set  -->
-        <?php if (isset($data['title_err'])) {echo '<p> Please enter a title for the image</p>';} ?>
+        <?php if (isset($data['title_err'])) {echo $data['title_err'];} ?>
     </div>
     <div class="field">
        <div class="fieldinput">
             <label for="description">Description</label>
-            <input type="textarea" value="<?php if (isset($data['description'])) {echo htmlentities($data['description']);} ?>" name="description" id="description" />
+            <textarea class="description-input" type="textarea" name="description" id="description" ><?php if (isset($data['description'])) {echo htmlentities($data['description']);} ?></textarea>
        </div>
            <!--echo error message if firstname error is set  -->
-        <?php if (isset($data['description_err'])) {echo '<p> Please enter a description for the image</p>';} ?>
+        <?php if (isset($data['description_err'])) {echo $data['description_err'];} ?>
 </div>
 
     <div class="fieldinput">

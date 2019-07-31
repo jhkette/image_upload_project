@@ -18,7 +18,10 @@ $phrases = array(
   'process-err'=>'This is not a file that can be processed',
   'name-err'=>'This image name is already in use',
   'json-find' => 'This photo is not in the database',
-  'json-err' => 'An error has occured whilst encoing the data to JSON'
+  'json-err' => 'An error has occured whilst encoing the data to JSON',
+  'image-err' => 'Image not present',
+  'description-err' => 'Description is empty',
+  'title-err' => 'Title is empty'
 );
 
 ?>
