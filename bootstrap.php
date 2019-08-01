@@ -1,4 +1,4 @@
-<?php  session_start();
+<?php session_start();
 /*  I am using sessions here - obviously they would be even more useful if the user needed to login. 
 As it is I'm using it to store a language variable and send a flash message when the user uploads an image*/
 

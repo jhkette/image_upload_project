@@ -21,8 +21,12 @@
   'name-err'=>'This image name is already in use',
   'json-find' => 'This photo is not in the database',
   'json-err' => 'An error has occured whilst encoing the data to JSON',
-  'description-err' => 'Description is empty',
-  'title-err' => 'Title is empty'
+  'image-err' => '<p class="field-error"> Image not present </p>',
+  'description-err' => '<p class="field-error"> Description is empty </p>',
+  'title-err' => '<p class="field-error"> Title is empty </p>',
+  'image_err_long' =>  '<p class ="form-error"> Please add a jpg image </p>',
+  'title_err_long' =>  '<p class ="form-error"> Please add a title to the image </p>',
+  'description_err_long' =>  '<p class ="form-error"> Please add a description of the image </p>',
   );
 
 ?>

@@ -14,20 +14,22 @@ class Controlview extends Model
         $v = array('[+title+]');
         $r = array($this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
+     
+        // print banner
+        $values = array('[+heading+]');
+        $replacements = array($this->phrases['index_heading']);
+        $bannerfile = './templates/bannerthumb.html';
+        $banner = file_get_contents($bannerfile);
+        $content .= printTemplate($values, $replacements, $banner);
         // send flash success message if file has just been uploaded
         if (isset($_SESSION['upload-file'])) {
-            $messagefile = './templates/upload.html';
-            $messageHTML = file_get_contents($messagefile);
+            $messageHTML = file_get_contents('./templates/upload.html');
             $message = array('[+message+]');
             $rep = array($this->phrases['success']);
             $content .= printTemplate($message, $rep,  $messageHTML);
         }
-        // print banner
-        $values = array('[+heading+]');
-        $replacements = array($this->phrases['index_heading']);
-        $bannerfile = './templates/banner.html';
-        $banner = file_get_contents($bannerfile);
-        $content .= printTemplate($values, $replacements, $banner);
+      
+        $content .= file_get_contents('./templates/container.html');
         // get photos from db and main body content
         $data = $this->getAllPhotos();
         $list = './templates/thumbnail.html';
