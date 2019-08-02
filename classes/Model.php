@@ -1,6 +1,16 @@
 <?php
+/* This class that contains methods that either insert or returns data from
+the database. These methods get used in the control view class to add relevant data to each view */
+
 class Model extends Database
-{
+{   
+    /** 
+    * @param Int $id - id of photo
+    * @return array $data - array of data about photo
+    * This function gets the data associated with a particular image. The id is used as a paramater
+    * to locate the entry in the database
+    */
+    
     protected function getImageData($id)
     {
         $data = [];
@@ -25,6 +35,11 @@ class Model extends Database
             $this->disconnect();
         }
     }
+
+    /** 
+    * This function adds data to create an entry for a photo in a database.
+    * @param array $data - an array of data with relevant info about photo
+    */
 
     protected function addPost($data)
     {
@@ -66,6 +81,12 @@ class Model extends Database
         }
     }
 
+    /** 
+    * This function gets relevant data associated with all images in the collection
+    * and returns an associative array
+    * @return array $data - array of data about all photos in collection
+    */
+
     protected function getAllPhotos()
     {
         $this->connect();
@@ -88,6 +109,13 @@ class Model extends Database
             $this->disconnect();
         }
     }
+    
+    /** 
+    * This function gets the data associated with a particular image and is subsequently used
+    * to create a json object.
+    * @param int $id - id of photo
+    * @return array $data - array of data about photo
+    */
 
     protected function getPhotoJson($id)
     {
@@ -113,7 +141,12 @@ class Model extends Database
             $this->disconnect();
         }
     }
-
+    /** 
+    * This method is used to check the file name - to see the file provided
+    * as a parameter exists in the database 
+    * @param string $file - filename of photo
+    * @return array $data - associateive array containing filename
+    */
     protected function checkFileName($file)
     {
         $data = [];

@@ -16,7 +16,8 @@ include './includes/imageform.php';
   data variable which is assigned to the result of validateForm if present */
 if (empty($data['description_err']) &&  
     empty($data['title_err']) &&
-    empty($data['image_err'])){ 
+    empty($data['image_err']) &&
+    empty($data['image_name_err'])){ 
    
     $form->submitForm(); 
 }

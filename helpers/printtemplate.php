@@ -2,24 +2,17 @@
 
 
 /**
- * Resize images
- *
- * Function to resize images to fit area specified when called
+ * This function takes an array of values from templates ,the replacements from the Database and an html file as parameters. It 
+ * replaces template values with data. The data from the database is an array of arrays so needs to be handled with
+ * a foreach loop. Im passing in two array - one of values from templates, one from database. This allows me to map through database
+ * data and escape it using array_map with 'htmlentities'  
  * 
- * @param array $values Input image file
- * @param string $out_img_file Output image filename
- * @param int $req_width Width of area the image should fill
- * @param int $req_height Height of area the image should fill
- * @param int $quality Quality of the thumb
- * @return bool, string $error[, int $new_width, int $new_height] 
- */
+ * @param array $values an array of values from templates
+ * @param array $replacements an array of values from database to replaces template variables
+ * @param string $file html file in templates file 
+ * @return string $new_message, new html with new data present in HTML
+ * */
 
-/* HELPER FUNCTIONS */
-
-/* This function takes an array of values from templates ,the replacements from the Database and an html file as parameters. It 
-replaces template values with data. The data from the database is an array of arrays so needs to be handled with
-a foreach loop. Im passing in two array - one of values from templates, one from database. This allows me to map through database
-data and escape it using array_map with 'htmlentities'  */
 function printTemplateArray($values, $replacements, $file){
   
     $new_message = '';
@@ -33,7 +26,15 @@ function printTemplateArray($values, $replacements, $file){
     }
     return $new_message;
 }
-//  I use this function if data does not come from database.
+
+/**  I use this function if data does not come from database. 
+* We do not need a foreach loop for the replacements, as they are not an array of arrays 
+* @param array $values an array of values from templates
+* @param array $replacements an array of values from method to replaces template variables
+* @param string $file html file in templates file 
+* @return string $new_message, new html with new data present in HTML 
+*/
+
 function printTemplate($values, $replacements, $file){
     $replacements = array_map('htmlentities', $replacements);
     return $new_message = str_replace($values, $replacements, $file);

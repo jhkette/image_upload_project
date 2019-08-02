@@ -4,21 +4,22 @@ require_once './helpers/printtemplate.php';
 
 class Controlview extends Model
 {
-    // Function to get index page information
+    /** 
+    * This function gets all the html and data to display index page - and returns html in form of a string
+    * @return string $content - cotains index page html
+    */
+
     public function getIndex()
     {
         $content = '';
-        // print header
         $header = file_get_contents('./templates/header.html');
         $v = array('[+title+]');
         $r = array($this->phrases['index_title']);
-        $content .= printTemplate($v, $r, $header);
-     
-        // print banner
+        $content .= printTemplate($v, $r, $header); // get header using helper function
         $values = array('[+heading+]');
         $replacements = array($this->phrases['index_heading']);
         $banner = file_get_contents('./templates/bannerthumb.html');
-        $content .= printTemplate($values, $replacements, $banner);
+        $content .= printTemplate($values, $replacements, $banner);   // get banner using helper function
         // send flash success message if file has just been uploaded
         if (isset($_SESSION['upload-file'])) {
             $messageHTML = file_get_contents('./templates/upload.html');
@@ -26,18 +27,22 @@ class Controlview extends Model
             $rep = array($this->phrases['success']);
             $content .= printTemplate($message, $rep,  $messageHTML);
         }
-      
-        $content .= file_get_contents('./templates/container.html');
-        // get photos from db and main body content
-        $data = $this->getAllPhotos();
+        $content .= file_get_contents('./templates/container.html'); 
+        $data = $this->getAllPhotos();  // get photos data from model 
         $tpl = file_get_contents('./templates/thumbnail.html');
         $values = ['[+id+]', '[+title+]', '[+description+]', '[+name+]'];
-        $content .= printTemplateArray($values, $data, $tpl);
-         // print footer
+        $content .= printTemplateArray($values, $data, $tpl);  // get main body content using helper function
+         
         $content .= file_get_contents('./templates/footer.html');
 
         return $content;
     }
+
+    /** 
+    * This function gets all the html and data to display image detail page - and returns html in form of a string
+    * @param int $id - the id of the relevant image
+    * @return string $content - cotains image page html
+    */
 
     public function getImage($id)
     {
@@ -73,6 +78,11 @@ class Controlview extends Model
         return $content;
     }
 
+    /** 
+    * This function gets all the html and data to display the 404 page - and returns html in form of a string
+    * @return string $content - contains 404 page html
+    */
+
     public function get404()
     {
         $content = '';
@@ -88,6 +98,11 @@ class Controlview extends Model
 
         return $content;
     }
+
+    /** 
+    * These two function get all the html and data to display the header and footer - and returns html in form of a string
+    * @return string $content - cotains 404 page html
+    */
 
     protected function getHeaderForm()
     {
@@ -105,24 +120,78 @@ class Controlview extends Model
 
     protected function getFooterForm()
     {
-      
         $content = file_get_contents('./templates/footer.html');
-
         return $content;
     }
+    
+    /** 
+    * This function validates form - validating image and text inputs
+    * @return array $data - data to present errors or represent inputted data
+    * if error errors don't exist submit form is called
+    */
+
+    public function validateForm()
+    {
+        if (isset($_POST['singlefileupload'])) {
+            $data = [];
+            // the file is uploaded - peform checks on it
+            if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
+                $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
+                $filename = $_FILES['userfile']['name']; // get actual file name
+                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
+                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
+                if ($type != IMAGETYPE_JPEG) {
+                    //type is from getimagesize array - it is the mime type
+                    $data['image_err'] = $this->phrases['jpg-error'];
+                } elseif ($ext != "jpeg" && $ext != "jpg") {
+                    // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
+                    $data['image_err'] =$this->phrases['jpg-ext'];
+                } elseif (!is_numeric($height)) {
+                    // cheking height returns a number - this again helps ensure it is an image.
+                    $data['image_err'] = $this->phrases['process-err'];
+                } elseif (sizeof($fileCheck) != 0) {
+                    // checking the filename has not already been used.
+                    $data['image_name_err'] = $this->phrases['name-err'];
+                } else {
+                    // image is ok so assign null to image_err value
+                    $data['image_err'] = null;
+                }
+            }
+            // the image is not uploaded - instruct user to upload it
+            else {
+                $data['image_err'] = $this->phrases['image-err'];
+            }
+            if (empty($_POST['title'])) {
+                $data['title_err'] = $this->phrases['title-err'];
+            } else {
+                $data['title'] = htmlentities($_POST['title']);
+            }
+            if (empty($_POST['description'])) {
+                $data['description_err'] =  $this->phrases['description-err'];
+            } else {
+                $data['description'] = htmlentities($_POST['description']);
+            }
+            return $data;
+        }
+    }
+
+
+    /* Function that submits form and adds data to database by calling addPost($data) method in model */
+    
     public function submitForm()
     {
         if (isset($_POST['singlefileupload'])) {
             // if the file is uploaded
             if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                /* these two variable are used throuout file upload
+                /* these three variable are used throughout file upload
                  and database update method so assigning them to variables here. */
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
                 $filename = basename($_FILES['userfile']['name']); //get filenamse
+                $fileonly = pathinfo($filename);  // this is needed to create new filenames for main and thumb image directory
 
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
-                // this is needed to create new filenames for main and thumb image directo
-                $fileonly = pathinfo($filename);
+              
                 // define data array indexes to send to model method 'addPost'
                 $data = [
                     'filename' => $filename,
@@ -135,12 +204,12 @@ class Controlview extends Model
                 ];
 
                 $updir = $this->config['upload_dir']; //upload directory
-                $newname = $updir . $filename;
+                $newname = $updir . $filename; // concatenate upload director and filename
                 $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
                 $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
 
                 $move = move_uploaded_file($uploadedFile, $newname);
-                if ($move && $medium[0] && $small[0]) {
+                if ($move && $medium && $small) {
                     // session variable created for flash messaging - communicates to user file has been uploaded
                     $_SESSION['upload-file'] = true;
 
@@ -166,57 +235,17 @@ class Controlview extends Model
         }
     }
 
-    public function validateForm()
-    {
-        if (isset($_POST['singlefileupload'])) {
-            $data = [];
-            // the file is uploaded - peform checks on it
-            if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-                $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
-                $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
-                $filename = $_FILES['userfile']['name']; // get actual file name
-                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
-                list($width, $height, $type, $attr) = getimagesize($uploadedFile);
-                if ($type != IMAGETYPE_JPEG) {
-                    //type is from getimagesize array - it is the mime type
-                    $data['image_err'] = $this->phrases['jpg-error'];
-                } elseif ($ext != "jpeg" && $ext != "jpg") {
-                    // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
-                    $data['image_err'] =$this->phrases['jpg-ext'];
-                } elseif (!is_numeric($height)) {
-                    // cheking height returns a number - this again helps ensure it is an image.
-                    $data['image_err'] = $this->phrases['process-err'];
-                } elseif (sizeof($fileCheck) != 0) {
-                    // checking the filename has not already been used.
-                    $data['image_err'] = $this->phrases['name-err'];
-                } else {
-                    // image is ok so assign null to image_err value
-                    $data['image_err'] = null;
-                }
-            }
-            // the image is not uploaded - instruct user to upload it
-            else {
-                $data['image_err'] = $this->phrases['image-err'];
-            }
-            if (empty($_POST['title'])) {
-                $data['title_err'] = $this->phrases['title-err'];
-            } else {
-                $data['title'] = htmlentities($_POST['title']);
-            }
-            if (empty($_POST['description'])) {
-                $data['description_err'] =  $this->phrases['description-err'];
-            } else {
-                $data['description'] = htmlentities($_POST['description']);
-            }
-            return $data;
-        }
-    }
+     /** 
+    * This function gets all the html and data to create a json object. It create the object by creating
+    * a new instance of the Jsondata class. 
+    * @param int $id - the id of the relevant image
+    * @return object $json - object containing image data
+    */
 
     protected function json($id)
     { // check that the id passed as an argument is a number
         if (is_numeric($id)) {
             $data = $this->getPhotoJson($id);
-           
             /* if you query an id that does not exist
              it will be a valid query - but will return an empty array so a message is needed */
             if (empty($data)) {
@@ -243,33 +272,42 @@ class Controlview extends Model
         }
     }
 
+    /* The following methods are public and are called to echo out html in
+    each relevant view */
+
+    // prints header
     public function header()
     {
         echo $this->getHeaderForm();
     }
-
+     // prints footer
     public function footer()
     {
         echo $this->getFooterForm();
     }
-
+    // prints index page
     public function printIndex()
     {
         echo $this->getIndex();
     }
-
+    // prints 404 page
     public function print404()
     {
         echo $this->get404();
     }
-
+    /**
+    * @param int $id - the id of the relevant image
+    * @return string string containing html which is printed
+    */
     public function printMainImage($id)
     {
         echo $this->getImage($id);
     }
-
-  
-    public function printjson($id)
+    /**
+    * @param int $id - the id of the relevant image
+    * @return object $json - object containing image data
+     */
+    public function printJson($id)
     {
         echo $this->json($id);
     }

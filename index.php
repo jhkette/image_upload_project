@@ -12,10 +12,10 @@ if(isset($_POST['submit'])) {
 }
 
  if (!isset($_GET['page']) && !isset($_GET['image']) && !isset($_GET['json'])) {
-     $id = 'home'; // display home page
+     $id = 'home'; // if no get value display home page
  } 
  if (isset($_GET['page'])) {
-     $id = $_GET['page']; // get page if other get variable are not set
+     $id = $_GET['page']; // id = page if  GET value == 'page'. This is then used to control nav
  }
 
 

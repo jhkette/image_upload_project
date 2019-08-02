@@ -5,19 +5,23 @@ the __construct function when the class is instantitated, as are the Database cr
 - as they are sub classes of the database class. I'm creating a connection to the database in this class. 
 It can then be accessed using the protected $conn variable. This is accessed in the Model class - a sub class of the Database
 class. 
-
 */
+
 class Database
 {
     protected $config;
-
     protected $conn;
     protected $phrases;
 
-    // contructor takes language and databse config as parameter
+    /**
+    * @param Array $config
+    * @param Array $phrases
+    * contructor function takes language and database config as parameter
+    * and sets protected variables
+    */
+
     public function __construct($config, $phrases)
     {
-        // $this->phrases = $phrases;
         $this->config = $config;
         $this->phrases = $phrases;
     }

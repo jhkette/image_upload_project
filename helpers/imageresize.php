@@ -4,19 +4,17 @@
  * Resize images
  *
  * Function to resize images to fit area specified when called
+ * All testing for file type, validity is done outside this function - in the validate form method in the 
+ * Controlview class
  * 
  * @param string $in_img_file Input image file
  * @param string $out_img_file Output image filename
  * @param int $req_width Width of area the image should fill
  * @param int $req_height Height of area the image should fill
- * @param int $quality Quality of the thumb
- * @return bool, string $error[, int $new_width, int $new_height] 
+ * @param int $quality Quality of the thumb - i'm adding a default of a 100 - this could be changed
+ * @return bool, 
  */
 
-// CHECK ALL THIS
-
-// thie file type is checked in the control view class so we do not need to check it here. 
-// i'm adding a default parameter of 100 - this could be changed.
 function img_resize($in_img_file, $out_img_file, $req_width, $req_height, $quality=100) {
 
 // Get image file details
@@ -55,8 +53,7 @@ $src = @imagecreatefromjpeg($in_img_file);
     imagedestroy($src);
     imagedestroy($new);
 
-    // Return an array of values, including the new width and height
-    return array(true, "Resize successful", $new_width, $new_height);
+    return true;
 }
 
 ?>

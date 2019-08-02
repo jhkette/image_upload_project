@@ -2,9 +2,10 @@
 
  ?>
  <div class ="container-errors">
- <?php if (isset($data['image_err'])) {echo $phrases['image_err_long'];}  ?> 
- <?php if (isset($data['title_err'])) {echo $phrases['title_err_long'];}  ?>  
- <?php if (isset($data['description_err'])) {echo $phrases['description_err_long'];}  ?>  
+    <?php if (isset($data['image_err'])) {echo $phrases['image_err_long'];}  ?> 
+    <?php if (isset($data['image_name_err'])) {echo $phrases['name-err-long'];}  ?>   
+    <?php if (isset($data['title_err'])) {echo $phrases['title_err_long'];}  ?>  
+    <?php if (isset($data['description_err'])) {echo $phrases['description_err_long'];}  ?> 
 </div> 
 	 
 <form enctype="multipart/form-data" class="upload-form" action="<?php echo htmlentities($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
@@ -15,7 +16,8 @@
             <input name="userfile" type="file"  id="fileinput" />
              
         </div>
-        <?php if (isset($data['image_err'])) {echo $data['image_err'];}  ?>   
+        <?php if (isset($data['image_err'])) {echo $data['image_err'];}  ?>  
+        <?php if (isset($data['image_name_err'])) {echo $data['image_name_err'];}  ?>    
     </div>
    
     <div class="field">
@@ -33,12 +35,10 @@
        </div>
            <!--echo error message if firstname error is set  -->
         <?php if (isset($data['description_err'])) {echo $data['description_err'];} ?>
-</div>
+    </div>
 
     <div class="fieldinput">
         <input type="submit"  class="button file-submit" value="Upload File" name="singlefileupload" />
-</div>
-      
- 
+    </div>
 </form>
 <?php

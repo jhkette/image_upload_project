@@ -7,10 +7,13 @@ $phrases = array(
     'index_heading' => "Latest uploads...",
     'upload_heading' => "Upload a photo",
     'success' => "Image successfully uploaded",
+    // 404 errors
     '404_title' => "404 Error",
     '404_heading' => "404 Error - page not found",
+    // try catch sql model errors
     'mysql-error' => "Error retrieving data",
     'general-e' => "A general exception has been raised",
+    // file uploads
     'ffailed' => 'File upload failed',
     'filesize' => 'file upload failed size exceeded',
     'fileform' => 'file upload failed form size exceeded',
@@ -27,7 +30,8 @@ $phrases = array(
         '<p class="field-error"> This is not the correct file extension </p>',
     'process-err' =>
         '<p class="field-error">This is not a file that can be processed</p>',
-    'name-err' => 'This image name is already in use',
+    'name-err' => '<p class="field-error">This image name is already in use</p>',
+    'name-err-long' => '<p class ="form-error">This image already exists in the database</p>',
     'json-find' => 'This photo is not in the database',
     'json-err' => 'An error has occured whilst encoing the data to JSON',
     'image-err' => '<p class="field-error"> Image not present </p>',

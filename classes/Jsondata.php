@@ -1,15 +1,19 @@
 <?php
+/*This class assigns public variables to values passed in from a 'data
+array. This is class in then instantitated and saved as JSON in the control view 
+method json() */ 
 
 class Jsondata 
 {
-  public $height;
-  public $width;
   public $filename;
   public $title;
-  public $description;
+  public $description;  
+  public $height;
+  public $width;
   
-  /**
+  /** 
   * @param Array $data
+  * The constructor function sets public variables which is used to create a JSON object
   */
 
   public function __construct($data){
