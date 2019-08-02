@@ -1,4 +1,19 @@
 <?php
+
+
+/**
+ * Resize images
+ *
+ * Function to resize images to fit area specified when called
+ * 
+ * @param array $values Input image file
+ * @param string $out_img_file Output image filename
+ * @param int $req_width Width of area the image should fill
+ * @param int $req_height Height of area the image should fill
+ * @param int $quality Quality of the thumb
+ * @return bool, string $error[, int $new_width, int $new_height] 
+ */
+
 /* HELPER FUNCTIONS */
 
 /* This function takes an array of values from templates ,the replacements from the Database and an html file as parameters. It 

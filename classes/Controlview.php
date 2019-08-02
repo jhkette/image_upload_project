@@ -9,8 +9,7 @@ class Controlview extends Model
     {
         $content = '';
         // print header
-        $headerHtml = './templates/header.html';
-        $header = file_get_contents($headerHtml);
+        $header = file_get_contents('./templates/header.html');
         $v = array('[+title+]');
         $r = array($this->phrases['index_title']);
         $content .= printTemplate($v, $r, $header);
@@ -18,8 +17,7 @@ class Controlview extends Model
         // print banner
         $values = array('[+heading+]');
         $replacements = array($this->phrases['index_heading']);
-        $bannerfile = './templates/bannerthumb.html';
-        $banner = file_get_contents($bannerfile);
+        $banner = file_get_contents('./templates/bannerthumb.html');
         $content .= printTemplate($values, $replacements, $banner);
         // send flash success message if file has just been uploaded
         if (isset($_SESSION['upload-file'])) {
@@ -32,13 +30,11 @@ class Controlview extends Model
         $content .= file_get_contents('./templates/container.html');
         // get photos from db and main body content
         $data = $this->getAllPhotos();
-        $list = './templates/thumbnail.html';
-        $tpl = file_get_contents($list);
+        $tpl = file_get_contents('./templates/thumbnail.html');
         $values = ['[+id+]', '[+title+]', '[+description+]', '[+name+]'];
         $content .= printTemplateArray($values, $data, $tpl);
          // print footer
-        $footer = './templates/footer.html';
-        $content .= file_get_contents($footer);
+        $content .= file_get_contents('./templates/footer.html');
 
         return $content;
     }
@@ -46,9 +42,7 @@ class Controlview extends Model
     public function getImage($id)
     {
         $content = '';
-        $headerHtml = './templates/header.html';
-        $header = file_get_contents($headerHtml);
-
+        $header = file_get_contents('./templates/header.html');
         $data = $this->getImageData($id);
 
         $v = array('[+title+]');
@@ -72,30 +66,25 @@ class Controlview extends Model
             
         }
         $content .= printTemplate($v, $r, $header);
-        $list = './templates/mainimage.html';
-        $tpl = file_get_contents($list);
+        $tpl = file_get_contents('./templates/mainimage.html');
         $values = ['[+name+]','[+title+]','[+description+]','[+download+]','[+id+]'];
         $content .= printTemplateArray($values, $data, $tpl);
-        $footer = './templates/footer.html';
-        $content .= file_get_contents($footer);
+        $content .= file_get_contents('./templates/footer.html');
         return $content;
     }
 
     public function get404()
     {
         $content = '';
-        $headerHtml = './templates/header.html';
-        $header = file_get_contents($headerHtml);
+        $header = file_get_contents('./templates/header.html');
         $v = array('[+title+]');
         $r = array($this->phrases['404_title']);
         $content .= printTemplate($v, $r, $header);
         $values = array('[+heading+]');
         $replacements = array($this->phrases['404_heading']);
-        $bannerfile = './templates/banner.html';
-        $banner = file_get_contents($bannerfile);
+        $banner = file_get_contents('./templates/banner.html');
         $content .= printTemplate($values, $replacements, $banner);
-        $footer = './templates/footer.html';
-        $content .= file_get_contents($footer);
+        $content .= file_get_contents('./templates/footer.html');
 
         return $content;
     }
@@ -103,13 +92,11 @@ class Controlview extends Model
     protected function getHeaderForm()
     {
         $content = '';
-        $headerHtml = './templates/header.html';
-        $header = file_get_contents($headerHtml);
+        $header = file_get_contents('./templates/header.html');
         $v = array('[+title+]');
         $r = array($this->phrases['upload_title']);
         $content .= printTemplate($v, $r, $header);
-        $bannerHtml = './templates/banner1.html';
-        $banner = file_get_contents($bannerHtml);
+        $banner = file_get_contents('./templates/banner1.html');
         $values = array('[+heading+]');
         $replacements = array($this->phrases['upload_heading']);
         $content .= printTemplate($values, $replacements, $banner);
@@ -118,9 +105,8 @@ class Controlview extends Model
 
     protected function getFooterForm()
     {
-        $content = '';
-        $footer = './templates/footer.html';
-        $content = file_get_contents($footer);
+      
+        $content = file_get_contents('./templates/footer.html');
 
         return $content;
     }
@@ -132,12 +118,11 @@ class Controlview extends Model
                 /* these two variable are used throuout file upload
                  and database update method so assigning them to variables here. */
                 $uploadedFile = $_FILES['userfile']['tmp_name'];
-                $filename = $_FILES['userfile']['name'];
+                $filename = basename($_FILES['userfile']['name']); //get filenamse
 
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
                 // this is needed to create new filenames for main and thumb image directo
                 $fileonly = pathinfo($filename);
-
                 // define data array indexes to send to model method 'addPost'
                 $data = [
                     'filename' => $filename,
@@ -150,8 +135,7 @@ class Controlview extends Model
                 ];
 
                 $updir = $this->config['upload_dir']; //upload directory
-                $upfilename = basename($_FILES['userfile']['name']); // get filename
-                $newname = $updir . $upfilename;
+                $newname = $updir . $filename;
                 $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
                 $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
 
@@ -164,18 +148,18 @@ class Controlview extends Model
                      a true value. The data (from the array above) is added in the model class method 'addpost' */
                     $this->addPost($data);
                 } else {
-                    echo 'File upload failed';
+                    echo  $this->phrases['ffailed'];
                     $error = $_FILES['userfile']['error'];
                     if ($error == UPLOAD_ERR_INI_SIZE) {
-                        echo 'file upload failed size exceeded';
+                        echo $this->phrases['filesize'];
                     } elseif ($error == UPLOAD_ERR_FORM_SIZE) {
-                        echo 'file upload faoiles form size exceeded';
+                        echo $this->phrases['fileform'];
                     } elseif ($error == UPLOAD_ERR_PARTIAL) {
-                        echo 'File upload failed - partial uplaod';
+                        echo $this->phrases['filepartial'];
                     } elseif ($error == UPLOAD_ERR_NO_FILE) {
-                        echo 'No file upload';
+                        echo $this->phrases['filenofile'];
                     } else {
-                        echo 'Error code' . $error;
+                        echo $this->phrases['filecode'];
                     }
                 }
             }
@@ -232,6 +216,7 @@ class Controlview extends Model
     { // check that the id passed as an argument is a number
         if (is_numeric($id)) {
             $data = $this->getPhotoJson($id);
+           
             /* if you query an id that does not exist
              it will be a valid query - but will return an empty array so a message is needed */
             if (empty($data)) {
@@ -240,9 +225,10 @@ class Controlview extends Model
                 /* I'm using try catch block here in case there is any particular
                  problem with json_encode -ing the data. */
                 try {
-                    $newdata = json_encode($data);
+                    $object = new Jsondata($data);
+                    $json = json_encode($object);
                     if (json_last_error() == JSON_ERROR_NONE) {
-                        return $newdata;  // No errors occurred
+                        return $json;  // No errors occurred
                     } else {
                         throw new Exception(
                             json_last_error() . $this->phrases['json-err']
@@ -282,7 +268,7 @@ class Controlview extends Model
         echo $this->getImage($id);
     }
 
-    // check this do you need to echo
+  
     public function printjson($id)
     {
         echo $this->json($id);

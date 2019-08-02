@@ -194,23 +194,22 @@ color: #1a1a1a;
 background-color: #f2dede;
 border: 1px solid  #ebccd1;
 display: inline-block;
-width: 40%;
 margin-bottom: 1rem;
-padding: .5rem 1rem;
+padding: 1.3rem;
 font-weight: 900;
 border-radius: .2rem;
-
-
+align-self: flex-start;
 -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
 -moz-animation: fadein 1s; /* Firefox < 16 */
  -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
      animation: fadein 1s;
 
+
 }
 
 .field-error{
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: red;
   font-weight: 900;
 }
@@ -227,8 +226,11 @@ border-radius: .2rem;
   display: inline-block;
   margin-top: 1.5rem;
   padding: 1rem;
-
-
+  -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
+-moz-animation: fadein 1.5s; /* Firefox < 16 */
+ -ms-animation: fadein 1.5s; /* Internet Explorer */
+  -o-animation: fadein 1.5s; /* Opera < 12.1 */
+     animation: fadein 1.5s;
 }
 
 .banner {
@@ -259,8 +261,6 @@ border-radius: .2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* align-items: center; */
-
   width: 150px;
 }
 
@@ -274,7 +274,6 @@ border-radius: .2rem;
   text-align: left;
   align-self: flex-start;
   padding: 0.2rem;
-  
 }
 
 .container-info {
@@ -593,6 +592,9 @@ label{
   height: 3rem;
   outline: none;
   border: 1px solid #1a1a1a;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.55rem;
 }
 
 .description-input {
@@ -600,7 +602,9 @@ label{
   height: 6rem;
   outline: none;
   border: 1px solid #1a1a1a;
-
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.55rem;
 }
 
 /*-----------------------  footer ---------------------*/
