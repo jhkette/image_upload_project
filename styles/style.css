@@ -242,7 +242,7 @@ header {
   padding-bottom: 15rem;
 }
 
-/* heading */
+
 
 /* thumbnail css */
 .thumbnail {
@@ -267,7 +267,7 @@ header {
 .container-info {
   padding: 2rem;
   background-color: #d2d0d0;
-  width: 30rem;
+  width: 40rem;
   align-self: flex-start;
   margin-left: 4rem;
   border: 1px solid #828282;
@@ -296,7 +296,7 @@ nav {
 nav ul {
   display: inline;
   display: flex;
-  margin-left: 3rem;
+  margin: 0 0  0 3rem;
 }
 
 nav ul li {
@@ -365,18 +365,10 @@ nav ul li a:hover:after {
   margin-right: 0.85rem;
 }
 
-dl {
-  display: flex;
-  flex-wrap: wrap;
-}
-dt {
-  /* width: 33%; */
-  font-weight: 900;
-}
-dd {
-  margin-left: 1rem;
-  width: 60%;
-}
+
+dt { float: left; clear: left; width: auto; margin-right: 1rem; font-weight: 900;}
+dd {width: auto; float: left;}
+
 
 .download {
   margin-top: 2.5rem;
@@ -428,23 +420,24 @@ dd {
 }
 
 .rb .rb-field {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.85rem;
+  height: 1.85rem;
   background-color: white;
   position: relative;
-  border: 1px solid #232323;
+  border: 1px solid #d8d8d8;
 }
 
 .rb .rb-text {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  margin-left: 0.2rem;
+  margin-left: 0.4rem;
   color: white;
 }
 
 .rb-text {
   font-size: 1.55rem;
+  margin-left: .3rem;
 }
 
 .rb .rb-field {
@@ -459,7 +452,7 @@ dd {
   width: 75%;
   height: 75%;
   top: 15%;
-  left: 11%;
+  left: 14%;
 }
 
 .rb.fill .rb-field:before {
@@ -512,6 +505,7 @@ dd {
 .form-main {
   width: 85%;
   margin: auto;
+  min-height: 80vh;
 }
 
 .upload-form {
@@ -529,6 +523,7 @@ label {
   margin-bottom: 0.4rem;
   margin-top: 0.3rem;
   font-size: 1.55rem;
+  font-weight: 900;
 }
 .button {
   align-self: flex-start;
@@ -548,7 +543,7 @@ label {
 }
 
 .fieldinput.file {
-  width: 16rem;
+  width: 20rem;
 }
 
 .title-input {

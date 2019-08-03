@@ -10,7 +10,7 @@ class Model extends Database
     * This function gets the data associated with a particular image. The id is used as a paramater
     * to locate the entry in the database
     */
-    
+
     protected function getImageData($id)
     {
         $data = [];
@@ -59,7 +59,7 @@ class Model extends Database
             photos (file_info, file_main, file_thumb, title, description_p, width, height ) 
             VALUES(?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param(
-                'sssssii',
+                'sssssdd',
                 $filename,
                 $imgmain,
                 $imgthumb,
@@ -121,11 +121,11 @@ class Model extends Database
     {
         $data = [];
         $this->connect();
-        try {
-            $stmt = $this->conn->prepare("SELECT file_info, title, description_p, height, width 
+        try {   
+            $stmt = $this->conn->prepare("SELECT file_info, title, description_p, height, width  
             FROM photos 
             WHERE id = ?");
-            $stmt->bind_param('i', $id);
+            $stmt->bind_param('d', $id);
             $stmt->execute();
             $results = $stmt->get_result();
             while ($row = $results->fetch_assoc()) {

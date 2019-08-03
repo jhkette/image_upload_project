@@ -33,7 +33,7 @@ class Controlview extends Model
         $values = ['[+id+]', '[+title+]', '[+description+]', '[+name+]'];
         $content .= printTemplateArray($values, $data, $tpl);  // get main body content using helper function
          
-        $content .= file_get_contents('./templates/footer.html');
+        $content .= file_get_contents('./templates/footer-home.html');
 
         return $content;
     }
@@ -52,7 +52,7 @@ class Controlview extends Model
 
         $v = array('[+title+]');
         if (isset($data[0])) {
-            $r = array('PicUpload: ' . $data[0]['description_p']); // the title will be the image description unless id is not in database
+            $r = array('PicUpload: ' . $data[0]['title']); // the title will be the image description unless id is not in database
         } else {
             $r = ['PicUpload: Unknown image'];
         }
@@ -153,7 +153,10 @@ class Controlview extends Model
                 } elseif (sizeof($fileCheck) != 0) {
                     // checking the filename has not already been used.
                     $data['image_name_err'] = $this->phrases['name-err'];
-                } else {
+                } elseif(ctype_space($filename)){
+                    $data['image_err'] = $this->phrases['space-err'];
+                }
+                else {
                     // image is ok so assign null to image_err value
                     $data['image_err'] = null;
                 }
@@ -178,7 +181,7 @@ class Controlview extends Model
 
 
     /* Function that submits form and adds data to database by calling addPost($data) method in model */
-    
+
     public function submitForm()
     {
         if (isset($_POST['singlefileupload'])) {
@@ -235,7 +238,7 @@ class Controlview extends Model
         }
     }
 
-     /** 
+    /** 
     * This function gets all the html and data to create a json object. It create the object by creating
     * a new instance of the Jsondata class. 
     * @param int $id - the id of the relevant image
@@ -303,6 +306,7 @@ class Controlview extends Model
     {
         echo $this->getImage($id);
     }
+
     /**
     * @param int $id - the id of the relevant image
     * @return object $json - object containing image data

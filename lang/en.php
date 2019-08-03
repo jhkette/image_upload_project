@@ -20,10 +20,10 @@ $phrases = array(
     'filepartial' => 'File upload failed - partial uplaod',
     'filenofile' => 'No file upload',
     'filecode' => 'Error code',
-
+    // photo errors
     'photo-number' => 'This is not a valid photo number',
-
     'photo-absent' => 'This is not an image we have in our collection',
+    // form error messages
     'jpg-error' =>
         '<p class="field-error">This file is not the correct file type. Only jpgs file should be uploaded</p>',
     'jpg-ext' =>
@@ -31,17 +31,25 @@ $phrases = array(
     'process-err' =>
         '<p class="field-error">This is not a file that can be processed</p>',
     'name-err' => '<p class="field-error">This image name is already in use</p>',
+    'space-err' => '<p class="field-error">The file name cannot contain a space</p>',
     'name-err-long' => '<p class ="form-error">This image already exists in the database</p>',
-    'json-find' => 'This photo is not in the database',
-    'json-err' => 'An error has occured whilst encoing the data to JSON',
     'image-err' => '<p class="field-error"> Image not present </p>',
     'description-err' => '<p class="field-error"> Description is empty </p>',
     'title-err' => '<p class="field-error"> Title is empty </p>',
-    'image_err_long' => '<p class ="form-error"> Please add a jpg image </p>',
+    'image_err_long' => '<p class ="form-error"> Please add a valid jpg image </p>',
     'title_err_long' =>
         '<p class ="form-error"> Please add a title to the image </p>',
     'description_err_long' =>
-        '<p class ="form-error"> Please add a description of the image </p>'
+        '<p class ="form-error"> Please add a description of the image </p>',
+    // json errors
+    'json-find' => 'This photo is not in the database',
+    'json-err' => 'An error has occured whilst encoing the data to JSON',
+    // form phrases
+    'form-upload' => 'Upload a file:',
+    'form-title' => 'Title:',
+    'form-description' => 'Description:',
+    'form-submit' => 'Upload file'
+   
 );
 
 ?>
