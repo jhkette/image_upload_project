@@ -1,7 +1,7 @@
 # README
 
 ## Pic upload
-[http://titan.dcs.bbk.ac.uk/~jkette01/w1tma/]
+[http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/](http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/)
 
 Author: Joseph Ketterer
 
@@ -37,7 +37,7 @@ For an example of how to access the data in your own php application see below.
 ```php
 
 $my_curl = curl_init();
-$url = 'http://titan.dcs.bbk.ac.uk/~jkette01/upload/index.php?json=2'; 
+$url = 'http://titan.dcs.bbk.ac.uk/~jkette01/w1tma/index.php?json=3'; 
 curl_setopt($my_curl, CURLOPT_URL, $url); 
 curl_setopt($my_curl, CURLOPT_RETURNTRANSFER, true); 
 $result = curl_exec($my_curl);
