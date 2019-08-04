@@ -1,9 +1,11 @@
 # README
 
 ## Pic upload
+Author: Joseph Ketterer
+
 [http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/](http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/)
 
-Author: Joseph Ketterer
+
 
 ## Description
 -----------
