@@ -25,18 +25,14 @@ $config['main'] = $config['app_dir'] . '/images/main/';
 
 
 
+
 /* DB variables */
-/* DB variables */
-// $config['DB_HOST'] = 'mysqlsrv.dcs.bbk.ac.uk';
-// $config['DB_NAME'] = 'jkette01db';
-// $config['DB_USER'] = 'jkette01';
-// $config['DB_PASS'] = 'bbkmysql';
+$config['DB_HOST'] = 'mysqlsrv.dcs.bbk.ac.uk';
+$config['DB_NAME'] = 'jkette01db';
+$config['DB_USER'] = 'jkette01';
+$config['DB_PASS'] = 'bbkmysql';
 
 
-$config['DB_HOST'] = 'localhost';
-$config['DB_USER'] = 'root';
-$config['DB_PASS'] = 'Gue55wh0';
-$config['DB_NAME'] = 'fmaproject';
 
 
 

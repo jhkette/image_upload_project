@@ -24,7 +24,7 @@ local mysql username and password. To set up a  test server run php -S localhost
 
 ## JSON web service
 
-http://titan.dcs.bbk.ac.uk/~jkette01/upload/index.php?json=10'; 
+[http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/index.php?json=3](http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/index.php?json=3) 
 
 The url for the JSON web service is provided above. After the '?json=' the id of the photo should be provided. In
 the example above the url links to a photo with the id of 10.
@@ -32,7 +32,7 @@ the example above the url links to a photo with the id of 10.
 I have added the id on all the main photo listings. This ensure thes user has access to the id 
 of the photo they would like get json data from. 
 
-To access the data in your own php application see below.
+For an example of how to access the data in your own php application see below.
 
 ```php
 
