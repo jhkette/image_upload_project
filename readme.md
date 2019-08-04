@@ -11,19 +11,19 @@ This package contains the files for the Web Applications using MySQL and PHP FMA
 service, that allows the user to upload pictures 
 
 ## Installation
-------------
+
 Set up a database and run the sql commands which can be found in createTable.sql. This will set up a photos
 table with appropriate columns. 
 
 ## Configuration
--------------
+
 All configuration settings for this application can be found in: includes/config.inc.php
 You should change the values to match your current environment before deploying. To run locally use your
 local mysql username and password. To set up a  test server run php -S localhost:8080. 
 
 
 ## JSON web service
--------------
+
 http://titan.dcs.bbk.ac.uk/~jkette01/upload/index.php?json=10'; 
 
 The url for the JSON web service is provided above. After the '?json=' the id of the photo should be provided. In
