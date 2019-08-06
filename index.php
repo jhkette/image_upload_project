@@ -4,6 +4,8 @@
 Building Web Applications using MySQL and PHP 
 */
 
+// this handles the language submit form. It creates a $_SESSION['language'] variable
+// which is checked for in session.php in includes. 
 if(isset($_POST['submit'])) {
     if(isset($_POST['language'])) {
         $language = htmlentities(trim($_POST['language']));

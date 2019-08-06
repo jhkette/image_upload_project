@@ -155,7 +155,8 @@ class Controlview extends Model
                 } elseif (sizeof($fileCheck) != 0) {
                     // checking the filename has not already been used.
                     $data['image_name_err'] = $this->phrases['name-err'];
-                } elseif(ctype_space($filename)){
+                    // check for white space
+                } elseif (preg_match('/\s/',$filename)){
                     $data['image_err'] = $this->phrases['space-err'];
                 }
                 else {
@@ -198,7 +199,7 @@ class Controlview extends Model
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
               
                 $updir = $this->config['upload_dir']; //upload directory
-                $newname = $updir . $fileonly['filename']; // concatenate upload director and filename
+                $newname = $updir . $filename;; // concatenate upload director and filename
                 $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
                 $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
                 
