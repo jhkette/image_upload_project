@@ -83,7 +83,7 @@ class Model extends Database
 
     /** 
     * This method gets relevant data associated with all images in the collection
-    * and returns an associative array
+    * and returns an associative array.
     * @return array $data - array of data about all photos in collection
     */
 
@@ -143,7 +143,7 @@ class Model extends Database
     }
     /** 
     * This method is used to check the file name - to see the file provided
-    * as a parameter exists in the database 
+    * as a parameter exists in the database. 
     * @param string $file - filename of photo
     * @return array $data - associateive array containing filename
     */
@@ -152,7 +152,7 @@ class Model extends Database
         $data = [];
         $this->connect();
         try {
-            $stmt = $this->conn->prepare("SELECT file_info as fileI
+            $stmt = $this->conn->prepare("SELECT file_info 
             FROM photos 
             WHERE file_info = ?");
             $stmt->bind_param('s', $file);

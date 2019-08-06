@@ -23,7 +23,10 @@ $config['thumbs'] = $config['app_dir'] . '/images/thumbs/';
 $config['main'] = $config['app_dir'] . '/images/main/';
 
 
-
+$config['DB_HOST'] = 
+$config['DB_NAME'] = 
+$config['DB_USER'] = 
+$config['DB_PASS'] = 
 
 
 

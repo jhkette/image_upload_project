@@ -5,7 +5,7 @@
  * This function takes an array of values from templates ,the replacements from the Database and an html file as parameters. It 
  * replaces template values with data. The data from the database is an array of arrays so needs to be handled with
  * a foreach loop. Im passing in two array - one of values from templates, one from database. This allows me to map through database
- * data and escape it using array_map with 'htmlentities'  
+ * data and escape it using array_map with 'htmlentities'.  
  * 
  * @param array $values an array of values from templates
  * @param array $replacements an array of values from database to replaces template variables
@@ -28,7 +28,7 @@ function printTemplateArray($values, $replacements, $file){
 }
 
 /**  I use this function if data does not come from database. 
-* We do not need a foreach loop for the replacements, as they are not an array of arrays 
+* We do not need a foreach loop for the replacements, as they are not an array of arrays. 
 * @param array $values an array of values from templates
 * @param array $replacements an array of values from method to replaces template variables
 * @param string $file html file in templates file 

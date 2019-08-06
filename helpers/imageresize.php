@@ -3,9 +3,9 @@
 /**
  * Resize images
  *
- * Function to resize images to fit area specified when called
+ * Function to resize images to fit area specified when called.
  * All testing for file type, validity is done outside this function - in the validate form method in the 
- * Controlview class
+ * Controlview class.
  * 
  * @param string $in_img_file Input image file
  * @param string $out_img_file Output image filename

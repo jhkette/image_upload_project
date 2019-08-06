@@ -8,7 +8,7 @@ the relevant view.
 class Controlview extends Model
 {
     /** 
-    * This method gets all the html and data to display the index page - and returns html in form of a string
+    * This method gets all the html and data to display the index page - and returns html in form of a string.
     * @return string $content - contains index page html
     */
 
@@ -103,7 +103,7 @@ class Controlview extends Model
     }
 
     /** 
-    * These two methods get all the html and data to display the header and footer - and returns html in form of a string
+    * These two methods get all the html and data to display the header and footer - and returns html in form of a string.
     * @return string $content - cotains 404 page html
     */
 
@@ -128,9 +128,9 @@ class Controlview extends Model
     }
     
     /** 
-    * This method validates form - validating image and text inputs
+    * This method validates form - validating image and text inputs.
     * @return array $data - data to present errors or represent inputted data
-    * if error errors don't exist submit form is called
+    * If errors don't exist submit form is called.
     */
 
     public function validateForm()
@@ -142,7 +142,9 @@ class Controlview extends Model
                 $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION); // get extension
                 $uploadedFile = $_FILES['userfile']['tmp_name']; // get tmp file namae
                 $filename = $_FILES['userfile']['name']; // get actual file name
-                $fileCheck = $this->checkFileName($filename); // check database for file name (this is a method in model class)
+                $fileonly = pathinfo($filename);
+                $fileCheck = $this->checkFileName($filename);
+                // check database for file name (this is a method in model class)
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
                 if ($type != IMAGETYPE_JPEG) {
                     //type is from getimagesize array - it is the mime type
@@ -180,7 +182,7 @@ class Controlview extends Model
     }
 
 
-    /* Method that submits form and adds data to database by calling addPost($data) method in model */
+    /* Method that submits form and adds data to database by calling addPost($data) method in model. */
 
     public function submitForm()
     {
@@ -196,17 +198,21 @@ class Controlview extends Model
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
               
                 $updir = $this->config['upload_dir']; //upload directory
-                $newname = $updir . $fileonly['filename'] .'_original.jpg'; // concatenate upload director and filename
+                $newname = $updir . $fileonly['filename']; // concatenate upload director and filename
                 $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
                 $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
                 
+                // This filter removes charecters that are potentially harmful 
+                $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
+                $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
+                
                 // define data array indexes to send to model method 'addPost'
                 $data = [
-                    'filename' => $fileonly['filename'] .'_original.jpg',
+                    'filename' =>  $filename,
                     'width' => $width,
                     'height' => $height,
-                    'description' => trim($_POST['description']),
-                    'title' => trim($_POST['title']),
+                    'description' => $description,
+                    'title' => $title,
                     'file_main' => $fileonly['filename'] . '_main.jpg',
                     'file_thumb' => $fileonly['filename'] . '_small.jpg'
                 ];
