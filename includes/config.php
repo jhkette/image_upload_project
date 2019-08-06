@@ -26,11 +26,7 @@ $config['main'] = $config['app_dir'] . '/images/main/';
 
 
 
-/* DB variables */
-$config['DB_HOST'] = 'mysqlsrv.dcs.bbk.ac.uk';
-$config['DB_NAME'] = 'jkette01db';
-$config['DB_USER'] = 'jkette01';
-$config['DB_PASS'] = 'bbkmysql';
+
 
 
 

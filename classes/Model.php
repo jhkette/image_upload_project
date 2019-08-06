@@ -7,7 +7,7 @@ class Model extends Database
     /** 
     * @param Int $id - id of photo
     * @return array $data - array of data about photo
-    * This function gets the data associated with a particular image. The id is used as a paramater
+    * This method gets the data associated with a particular image. The id is used as a paramater
     * to locate the entry in the database
     */
 
@@ -19,7 +19,7 @@ class Model extends Database
             $stmt = $this->conn->prepare(
                 "SELECT file_main, title, description_p, file_info, id FROM photos WHERE id = ?"
             );
-            $stmt->bind_param('i', $id);
+            $stmt->bind_param('d', $id);
             $stmt->execute();
             $results = $stmt->get_result();
             while ($row = $results->fetch_assoc()) {
@@ -37,13 +37,13 @@ class Model extends Database
     }
 
     /** 
-    * This function adds data to create an entry for a photo in a database.
+    * This method adds data to create an entry for a photo in a database.
     * @param array $data - an array of data with relevant info about photo
     */
 
     protected function addPost($data)
     {
-        // https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
+        
         $this->connect();
 
         $title = $data['title'];
@@ -82,7 +82,7 @@ class Model extends Database
     }
 
     /** 
-    * This function gets relevant data associated with all images in the collection
+    * This method gets relevant data associated with all images in the collection
     * and returns an associative array
     * @return array $data - array of data about all photos in collection
     */
@@ -111,7 +111,7 @@ class Model extends Database
     }
     
     /** 
-    * This function gets the data associated with a particular image and is subsequently used
+    * This method gets the data associated with a particular image and is subsequently used
     * to create a json object.
     * @param int $id - id of photo
     * @return array $data - array of data about photo

@@ -30,8 +30,6 @@ $phrases = array(
       "<p class='field-error'>Ce fichier n'est pas le type de fichier correct. Seul le fichier jpgs doit être téléchargé</p>",
   'jpg-ext' =>
       "<p class='field-error'>Ce n'est pas la bonne extension de fichier </p>",
-  'process-err' =>
-      "<p class='field-error'>Ce n'est pas un fichier qui peut être traité </p>",
   'name-err' => '<p class="field-error">This image name is already in use</p>',
   'name-err-long' => "<p class ='form-error'>Ce nom d'image est déjà utilisé</p>",
   'space-err' => "<p class='field-error'>Le nom du fichier ne peut pas contenir d'espace</p>",

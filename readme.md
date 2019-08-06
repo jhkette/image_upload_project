@@ -6,9 +6,8 @@ Author: Joseph Ketterer
 [http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/](http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/)
 
 
-
 ## Description
------------
+
 This package contains the files for the Web Applications using MySQL and PHP FMA project. It is a picture upload
 service, that allows the user to upload pictures 
 
@@ -19,7 +18,7 @@ table with appropriate columns.
 
 ## Configuration
 
-All configuration settings for this application can be found in: includes/config.inc.php
+All configuration settings for this application can be found in: includes/config.php
 You should change the values to match your current environment before deploying. To run locally use your
 local mysql username and password. To set up a  test server run php -S localhost:8080. 
 
@@ -28,8 +27,8 @@ local mysql username and password. To set up a  test server run php -S localhost
 
 [http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/index.php?json=3](http://titan.dcs.bbk.ac.uk/~jkette01/w1fma/index.php?json=3) 
 
-The url for the JSON web service is provided above. After the '?json=' the id of the photo should be provided. In
-the example above the url links to a photo with the id of 10.
+The url for the JSON web service is provided above. After the '?json=' the id of the photo should be added. In
+the example above the url links to a photo with the id of 3.
 
 I have added the id on all the main photo listings. This ensure thes user has access to the id 
 of the photo they would like get json data from. 

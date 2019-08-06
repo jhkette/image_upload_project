@@ -1,5 +1,8 @@
  <?php require_once './bootstrap.php';
 
+/*  Joseph Ketterer
+Building Web Applications using MySQL and PHP 
+*/
 
 if(isset($_POST['submit'])) {
     if(isset($_POST['language'])) {

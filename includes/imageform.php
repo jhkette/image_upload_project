@@ -11,7 +11,7 @@
         <div class="field">   
                 <div class="fieldinput file">
                     <label for="fileinput"><?php echo $phrases['form-upload']?></label>
-                    <!-- "name" of input (userfile) will be the "key" in $_FILES -->
+                
                     <input name="userfile" type="file"  id="fileinput" />
                     
                 </div>

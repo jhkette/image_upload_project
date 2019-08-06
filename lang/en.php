@@ -28,8 +28,7 @@ $phrases = array(
         '<p class="field-error">This file is not the correct file type. Only jpgs file should be uploaded</p>',
     'jpg-ext' =>
         '<p class="field-error"> This is not the correct file extension </p>',
-    'process-err' =>
-        '<p class="field-error">This is not a file that can be processed</p>',
+   
     'name-err' => '<p class="field-error">This image name is already in use</p>',
     'space-err' => '<p class="field-error">The file name cannot contain a space</p>',
     'name-err-long' => '<p class ="form-error">This image already exists in the database</p>',

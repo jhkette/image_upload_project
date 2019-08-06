@@ -2,11 +2,14 @@
 require_once './helpers/imageresize.php';
 require_once './helpers/printtemplate.php';
 
+/* The control view class call the model class to fetch data, adds the data to html files and prints out the html to
+the relevant view.
+*/
 class Controlview extends Model
 {
     /** 
-    * This function gets all the html and data to display index page - and returns html in form of a string
-    * @return string $content - cotains index page html
+    * This method gets all the html and data to display the index page - and returns html in form of a string
+    * @return string $content - contains index page html
     */
 
     public function getIndex()
@@ -39,7 +42,7 @@ class Controlview extends Model
     }
 
     /** 
-    * This function gets all the html and data to display image detail page - and returns html in form of a string
+    * This method gets all the html and data to display image detail page - and returns html in form of a string
     * @param int $id - the id of the relevant image
     * @return string $content - cotains image page html
     */
@@ -79,7 +82,7 @@ class Controlview extends Model
     }
 
     /** 
-    * This function gets all the html and data to display the 404 page - and returns html in form of a string
+    * This method gets all the html and data to display the 404 page - and returns html in form of a string
     * @return string $content - contains 404 page html
     */
 
@@ -100,7 +103,7 @@ class Controlview extends Model
     }
 
     /** 
-    * These two function get all the html and data to display the header and footer - and returns html in form of a string
+    * These two methods get all the html and data to display the header and footer - and returns html in form of a string
     * @return string $content - cotains 404 page html
     */
 
@@ -125,7 +128,7 @@ class Controlview extends Model
     }
     
     /** 
-    * This function validates form - validating image and text inputs
+    * This method validates form - validating image and text inputs
     * @return array $data - data to present errors or represent inputted data
     * if error errors don't exist submit form is called
     */
@@ -147,9 +150,6 @@ class Controlview extends Model
                 } elseif ($ext != "jpeg" && $ext != "jpg") {
                     // this is from pathinfoextension. 'jpg' files can also have an extension 'jpeg'
                     $data['image_err'] =$this->phrases['jpg-ext'];
-                } elseif (!is_numeric($height)) {
-                    // cheking height returns a number - this again helps ensure it is an image.
-                    $data['image_err'] = $this->phrases['process-err'];
                 } elseif (sizeof($fileCheck) != 0) {
                     // checking the filename has not already been used.
                     $data['image_name_err'] = $this->phrases['name-err'];
@@ -180,7 +180,7 @@ class Controlview extends Model
     }
 
 
-    /* Function that submits form and adds data to database by calling addPost($data) method in model */
+    /* Method that submits form and adds data to database by calling addPost($data) method in model */
 
     public function submitForm()
     {
@@ -195,9 +195,14 @@ class Controlview extends Model
 
                 list($width, $height, $type, $attr) = getimagesize($uploadedFile);
               
+                $updir = $this->config['upload_dir']; //upload directory
+                $newname = $updir . $fileonly['filename'] .'_original.jpg'; // concatenate upload director and filename
+                $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
+                $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
+                
                 // define data array indexes to send to model method 'addPost'
                 $data = [
-                    'filename' => $filename,
+                    'filename' => $fileonly['filename'] .'_original.jpg',
                     'width' => $width,
                     'height' => $height,
                     'description' => trim($_POST['description']),
@@ -205,11 +210,6 @@ class Controlview extends Model
                     'file_main' => $fileonly['filename'] . '_main.jpg',
                     'file_thumb' => $fileonly['filename'] . '_small.jpg'
                 ];
-
-                $updir = $this->config['upload_dir']; //upload directory
-                $newname = $updir . $filename; // concatenate upload director and filename
-                $small = img_resize($uploadedFile,$this->config['thumbs'] . $fileonly['filename'] . '_small.jpg',150,150);
-                $medium = img_resize($uploadedFile,$this->config['main'] . $fileonly['filename'] . '_main.jpg',600,600);
 
                 $move = move_uploaded_file($uploadedFile, $newname);
                 if ($move && $medium && $small) {
